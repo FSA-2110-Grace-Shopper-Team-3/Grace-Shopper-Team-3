@@ -1,17 +1,31 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { STRING, INTEGER } = Sequelize;
+const { STRING, INTEGER, TEXT } = Sequelize;
 
 const Product = db.define('product', {
-  name: {
+  brand: {
     type: STRING,
     unique: true,
+    allowNull: false,
+  },
+  model: {
+    type: STRING,
     allowNull: false,
   },
   price: {
     type: INTEGER,
     allowNull: false,
+  },
+  img: {
+    type: STRING,
+    defaultValue: '',
+  },
+  description: {
+    type: TEXT,
+  },
+  category: {
+    type: STRING,
   },
 });
 
