@@ -20,7 +20,7 @@ async function seed() {
   ]);
 
   const products = await Promise.all([
-    Product.create({ name: 'acoustic guitar' }),
+    Product.create({ name: 'acoustic guitar', price: 100 }),
   ]);
 
   console.log(`seeded ${users.length} users`);
