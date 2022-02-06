@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 
 const SingleProduct = () => {
 
-  const { id }= useParams();
+  const { id } = useParams();
   const singleProduct = useSelector((state) => state.products.find((product) => product.id === id * 1)) || {};
 
   return (
