@@ -32,99 +32,11 @@ const cellos = [
     category: 'Cello',
   },
   {
-    brand: 'Knilling11',
-    model: '154S',
-    price: 1299,
+    brand: 'D Z Strad',
+    model: '150',
+    price: 2650,
     description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling111',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling1111',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling11111',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling2',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling3',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling4',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling5',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling6',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling7',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling8',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-    category: 'Cello',
-  },
-  {
-    brand: 'Knilling9',
-    model: '154S',
-    price: 1299,
-    description:
-      "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
+      'Meticulous workmanship, and expert varnish work. This model captures the essence of the great Italian master, and gives us the tonal qualities.',
     category: 'Cello',
   },
 ];
