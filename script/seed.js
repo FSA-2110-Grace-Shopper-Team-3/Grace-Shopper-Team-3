@@ -8,6 +8,8 @@ const {
 const guitars = require('./guitarData');
 const percussion = require('./percData');
 const cellos = require('./celloData');
+const pianos = require('./pianoData');
+const accesories = require('./accData');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -57,6 +59,13 @@ async function seed() {
     cellos.map((cello) => Product.create(cello))
   );
 
+  const pianoProducts = await Promise.all(
+    pianos.map((piano) => Product.create(piano))
+  );
+
+  const accesoryProducts = await Promise.all(
+    accesories.map((accesory) => Product.create(accesory))
+  );
   // const products = await Promise.all([
   //   Product.create({
   //     brand: 'Fender',
@@ -111,6 +120,8 @@ async function seed() {
     guitarProducts,
     percProducts,
     celloProducts,
+    pianoProducts,
+    accesoryProducts,
   };
 }
 
