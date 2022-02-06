@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Cart = () => {
+const Order = () => {
   return (
     <div>
       Hello world!
@@ -8,4 +8,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default Order
