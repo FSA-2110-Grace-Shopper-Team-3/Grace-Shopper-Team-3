@@ -7,6 +7,7 @@ const {
 
 const guitars = require('./guitarData');
 const percussion = require('./percData');
+const cellos = require('./celloData');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -50,6 +51,10 @@ async function seed() {
 
   const percProducts = await Promise.all(
     percussion.map((perc) => Product.create(perc))
+  );
+
+  const celloProducts = await Promise.all(
+    cellos.map((cello) => Product.create(cello))
   );
 
   // const products = await Promise.all([
@@ -105,6 +110,7 @@ async function seed() {
     },
     guitarProducts,
     percProducts,
+    celloProducts,
   };
 }
 
