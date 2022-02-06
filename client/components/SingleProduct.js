@@ -10,13 +10,16 @@ const SingleProduct = () => {
     ) || {};
 
   return (
-    <div>
+    <div className="single-prod">
       <ul>
-        <li>{singleProduct.brand}</li>
-        <li>{singleProduct.model}</li>
-        <li>{singleProduct.price}</li>
-        <li>{singleProduct.description}</li>
-        <li>{singleProduct.category}</li>
+        <li>
+          <img className="prod-img" src={singleProduct.img} />
+        </li>
+        <li>Brand: {singleProduct.brand}</li>
+        <li>Model: {singleProduct.model}</li>
+        <li>Price: ${singleProduct.price}</li>
+        <li>Description: {singleProduct.description}</li>
+        {/* <li>{singleProduct.category}</li> BACKEND ONLY? */}
       </ul>
     </div>
   );

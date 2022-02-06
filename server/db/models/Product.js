@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { STRING, INTEGER, TEXT } = Sequelize;
+const { STRING, DECIMAL, TEXT } = Sequelize;
 
 const Product = db.define('product', {
   brand: {
@@ -14,7 +14,7 @@ const Product = db.define('product', {
     allowNull: false,
   },
   price: {
-    type: INTEGER,
+    type: DECIMAL,
     allowNull: false,
   },
   img: {

@@ -19,3 +19,19 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.single-prod {
+  display: flex;
+  justify-content: center;
+}
+
+.prod-img {
+  height: auto;
+  width: 400px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
