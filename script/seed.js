@@ -5,6 +5,9 @@ const {
   models: { User, Product },
 } = require('../server/db');
 
+const guitars = require('./guitarData');
+const percussion = require('./percData');
+
 /**
  * seed - this function clears the database, updates tables to
  *      match the models, and populates the database.
@@ -15,52 +18,83 @@ async function seed() {
 
   // Creating Users
   const users = await Promise.all([
-    User.create({ username: 'cody', password: '123' }),
-    User.create({ username: 'murphy', password: '123' }),
+    User.create({
+      username: 'louis',
+      password: '123',
+      email: 'louis@gmail.com',
+      address: '123 louis lane',
+      phoneNumber: '555-555-5555',
+      paymentInfo: '1234 6789 0191 7474',
+    }),
+    User.create({
+      username: 'david',
+      password: '123',
+      email: 'david@gmail.com',
+      address: '456 david street',
+      phoneNumber: '123-123-1234',
+      paymentInfo: '1234 6675 0861 4747',
+    }),
+    User.create({
+      username: 'kenny',
+      password: '123',
+      email: 'kenny@gmail.com',
+      address: '789 kenny court',
+      phoneNumber: '222-234-2323',
+      paymentInfo: '1234 6655 5656 5656',
+    }),
   ]);
 
-  const products = await Promise.all([
-    Product.create({
-      brand: 'Fender',
-      model: 'Acoustasonic',
-      price: 2000,
-      description:
-        'Guitarists of diverse styles and tastes are finding their voice in the new Fender Acoustasonic Telecaster.',
-      category: 'Guitar',
-    }),
-    Product.create({
-      brand: 'Gibson',
-      model: 'J-45',
-      price: 2849,
-      description:
-        'The J-45 has been a staple and top-seller for Gibson since its debut in 1942.',
-      category: 'Guitar',
-    }),
-    Product.create({
-      brand: 'Scherl & Roth',
-      model: 'SR55E4H',
-      price: 2709,
-      description:
-        'More than an amazing instrument, the Scherl & Roth SR55E4H 4/4-size Galliard Student Cello Outfit represents amazing value.',
-      category: 'Cello',
-    }),
-    Product.create({
-      brand: 'Knilling',
-      model: '154S',
-      price: 1299,
-      description:
-        "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-      category: 'Cello',
-    }),
-    Product.create({
-      brand: 'Ludwig',
-      model: 'Breakbeats',
-      price: 429,
-      description:
-        'Breakbeats by Ludwig marks the return of Ahmir "Questlove" Thompson to the drums of his youth.',
-      category: 'Drums',
-    }),
-  ]);
+  const guitarProducts = await Promise.all(
+    guitars.map((guitar) => Product.create(guitar))
+  );
+
+  const percProducts = await Promise.all(
+    percussion.map((perc) => Product.create(perc))
+  );
+
+  // const products = await Promise.all([
+  //   Product.create({
+  //     brand: 'Fender',
+  //     model: 'Acoustasonic',
+  //     price: 1999.99,
+  //     description:
+  //       'Guitarists of diverse styles and tastes are finding their voice in the new Fender Acoustasonic Telecaster.',
+  //     category: 'Guitar',
+  //     img: 'https://sc1.musik-produktiv.com/pic-010128323xxl/fender-acoustasonic-jazzmaster-arctic-white.jpg',
+  //   }),
+  //   Product.create({
+  //     brand: 'Gibson',
+  //     model: 'J-45',
+  //     price: 2849.99,
+  //     description:
+  //       'The J-45 has been a staple and top-seller for Gibson since its debut in 1942.',
+  //     category: 'Guitar',
+  //   }),
+  //   Product.create({
+  //     brand: 'Scherl & Roth',
+  //     model: 'SR55E4H',
+  //     price: 2709,
+  //     description:
+  //       'More than an amazing instrument, the Scherl & Roth SR55E4H 4/4-size Galliard Student Cello Outfit represents amazing value.',
+  //     category: 'Cello',
+  //   }),
+  //   Product.create({
+  //     brand: 'Knilling',
+  //     model: '154S',
+  //     price: 1299,
+  //     description:
+  //       "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
+  //     category: 'Cello',
+  //   }),
+  //   Product.create({
+  //     brand: 'Ludwig',
+  //     model: 'Breakbeats',
+  //     price: 429,
+  //     description:
+  //       'Breakbeats by Ludwig marks the return of Ahmir "Questlove" Thompson to the drums of his youth.',
+  //     category: 'Drums',
+  //   }),
+  // ]);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
@@ -69,7 +103,8 @@ async function seed() {
       cody: users[0],
       murphy: users[1],
     },
-    products,
+    guitarProducts,
+    percProducts,
   };
 }
 

@@ -1,11 +1,14 @@
-import React from 'react'
+const Sequelize = require('sequelize');
+const db = require('../db');
 
-const Order = () => {
-  return (
-    <div>
-      Hello world!
-    </div>
-  )
-}
+const { STRING, INTEGER, TEXT, UUID, UUIDV4 } = Sequelize;
 
-export default Order
+const Order = db.define('order', {
+  id: {
+    type: UUID,
+    primaryKey: true,
+    defaultValue: UUIDV4,
+  },
+});
+
+module.exports = Order;
