@@ -1,12 +1,11 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { STRING, DECIMAL, TEXT } = Sequelize;
+const { STRING, DECIMAL, TEXT, INTEGER } = Sequelize;
 
 const Product = db.define('product', {
   brand: {
     type: STRING,
-    unique: true,
     allowNull: false,
   },
   model: {
@@ -26,6 +25,9 @@ const Product = db.define('product', {
   },
   category: {
     type: STRING,
+  },
+  quantity: {
+    type: INTEGER,
   },
 });
 
