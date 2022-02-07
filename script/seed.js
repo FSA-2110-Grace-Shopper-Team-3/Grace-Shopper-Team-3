@@ -66,49 +66,6 @@ async function seed() {
   const accesoryProducts = await Promise.all(
     accesories.map((accesory) => Product.create(accesory))
   );
-  // const products = await Promise.all([
-  //   Product.create({
-  //     brand: 'Fender',
-  //     model: 'Acoustasonic',
-  //     price: 1999.99,
-  //     description:
-  //       'Guitarists of diverse styles and tastes are finding their voice in the new Fender Acoustasonic Telecaster.',
-  //     category: 'Guitar',
-  //     img: 'https://sc1.musik-produktiv.com/pic-010128323xxl/fender-acoustasonic-jazzmaster-arctic-white.jpg',
-  //   }),
-  //   Product.create({
-  //     brand: 'Gibson',
-  //     model: 'J-45',
-  //     price: 2849.99,
-  //     description:
-  //       'The J-45 has been a staple and top-seller for Gibson since its debut in 1942.',
-  //     category: 'Guitar',
-  //   }),
-  //   Product.create({
-  //     brand: 'Scherl & Roth',
-  //     model: 'SR55E4H',
-  //     price: 2709,
-  //     description:
-  //       'More than an amazing instrument, the Scherl & Roth SR55E4H 4/4-size Galliard Student Cello Outfit represents amazing value.',
-  //     category: 'Cello',
-  //   }),
-  //   Product.create({
-  //     brand: 'Knilling',
-  //     model: '154S',
-  //     price: 1299,
-  //     description:
-  //       "As part of Knilling's value-rich Sebastian series, the 154S Sebastian Student Cello Outfit stands out among student models with its exceptional craftsmanship and quality components.",
-  //     category: 'Cello',
-  //   }),
-  //   Product.create({
-  //     brand: 'Ludwig',
-  //     model: 'Breakbeats',
-  //     price: 429,
-  //     description:
-  //       'Breakbeats by Ludwig marks the return of Ahmir "Questlove" Thompson to the drums of his youth.',
-  //     category: 'Drums',
-  //   }),
-  // ]);
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
