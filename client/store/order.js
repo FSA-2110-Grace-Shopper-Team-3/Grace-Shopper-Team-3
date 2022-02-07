@@ -51,7 +51,7 @@ export const deleteOrder = (order) => {
  * REDUCER
  */
 
-export const products = (state = [], action) => {
+export const orders = (state = [], action) => {
   switch (action.type) {
     case GET_ORDERS:
       return action.orders;
