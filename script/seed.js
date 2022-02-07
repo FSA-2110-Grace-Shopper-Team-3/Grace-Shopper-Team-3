@@ -10,6 +10,7 @@ const percussion = require('./percData');
 const cellos = require('./celloData');
 const pianos = require('./pianoData');
 const accesories = require('./accData');
+const users = require('./userData');
 
 /**
  * seed - this function clears the database, updates tables to
@@ -20,32 +21,7 @@ async function seed() {
   console.log('db synced!');
 
   // Creating Users
-  const users = await Promise.all([
-    User.create({
-      username: 'louis',
-      password: '123',
-      email: 'louis@gmail.com',
-      address: '123 louis lane',
-      phoneNumber: '555-555-5555',
-      paymentInfo: '1234 6789 0191 7474',
-    }),
-    User.create({
-      username: 'david',
-      password: '123',
-      email: 'david@gmail.com',
-      address: '456 david street',
-      phoneNumber: '123-123-1234',
-      paymentInfo: '1234 6675 0861 4747',
-    }),
-    User.create({
-      username: 'kenny',
-      password: '123',
-      email: 'kenny@gmail.com',
-      address: '789 kenny court',
-      phoneNumber: '222-234-2323',
-      paymentInfo: '1234 6655 5656 5656',
-    }),
-  ]);
+  await Promise.all(users.map((user) => User.create(user)));
 
   const guitarProducts = await Promise.all(
     guitars.map((guitar) => Product.create(guitar))
@@ -69,17 +45,6 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
-  return {
-    users: {
-      cody: users[0],
-      murphy: users[1],
-    },
-    guitarProducts,
-    percProducts,
-    celloProducts,
-    pianoProducts,
-    accesoryProducts,
-  };
 }
 
 /*

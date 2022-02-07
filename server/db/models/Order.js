@@ -9,6 +9,12 @@ const Order = db.define('order', {
     primaryKey: true,
     defaultValue: UUIDV4,
   },
+  status: {
+    type: STRING,
+    validate: {
+      isIn: [['ordered', 'pending', 'cancelled']],
+    },
+  },
 });
 
 module.exports = Order;

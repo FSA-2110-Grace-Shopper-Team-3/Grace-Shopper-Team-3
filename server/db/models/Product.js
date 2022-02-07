@@ -1,9 +1,14 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { STRING, DECIMAL, TEXT, INTEGER } = Sequelize;
+const { STRING, DECIMAL, TEXT, INTEGER, UUID, UUIDV4 } = Sequelize;
 
 const Product = db.define('product', {
+  id: {
+    type: UUID,
+    primaryKey: true,
+    defaultValue: UUIDV4,
+  },
   brand: {
     type: STRING,
     allowNull: false,
@@ -28,6 +33,7 @@ const Product = db.define('product', {
   },
   quantity: {
     type: INTEGER,
+    defaultValue: 10,
   },
 });
 

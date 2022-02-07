@@ -6,7 +6,7 @@ const SingleProduct = () => {
   const { id } = useParams();
   const singleProduct =
     useSelector((state) =>
-      state.products.find((product) => product.id === id * 1)
+      state.products.find((product) => product.id === id)
     ) || {};
 
   return (
