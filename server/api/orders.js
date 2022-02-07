@@ -1,36 +1,36 @@
 const router = require('express').Router();
 const {
-  models: { Product },
+  models: { Order },
 } = require('../db');
 module.exports = router;
 
-// GET ALL PRODUCTS
+// GET ALL ORDERS
 router.get('/', async (req, res, next) => {
   try {
-    const products = await Product.findAll({});
-    res.json(products);
+    const orders = await Order.findAll({});
+    res.json(orders);
   } catch (err) {
     next(err);
   }
 });
 
-// CREATE NEW PRODUCT
+// CREATE AN ORDER
 router.post('/', async (req, res, next) => {
   try {
-    res.status(201).send(await Product.create(req.body));
+    res.status(201).send(await Order.create(req.body));
   } catch (error) {
     next(error);
   }
 });
 
-// DELETE A PRODUCT
+// DELETE AN ORDER
 router.delete('/:id', async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.id);
-    if (!product) {
+    const order = await Order.findByPk(req.params.id);
+    if (!order) {
       res.sendStatus(404);
     } else {
-      await product.destroy();
+      await order.destroy();
       res.sendStatus(204);
     }
   } catch (error) {
@@ -38,11 +38,11 @@ router.delete('/:id', async (req, res, next) => {
   }
 });
 
-// EDIT A PRODUCT
+// EDIT AN ORDER
 router.put('/:id', async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.id);
-    res.send(await product.update(req.body));
+    const order = await Order.findByPk(req.params.id);
+    res.send(await order.update(req.body));
   } catch (error) {
     next(error);
   }
