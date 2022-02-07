@@ -5,11 +5,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import { products } from './products';
 import { users } from './users';
+import { orders } from './order';
 
 const reducer = combineReducers({
   auth,
   products,
   users,
+  orders,
 });
 
 const middleware = composeWithDevTools(
@@ -21,3 +23,4 @@ export default store;
 export * from './auth';
 export * from './products';
 export * from './users';
+export * from './order';
