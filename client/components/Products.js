@@ -15,7 +15,7 @@ const Products = () => {
   return (
     <div>
       <div>
-        <h3>Welcome, {username}</h3>
+        <h3>Welcome, {username ? username : 'Guest!'}</h3>
       </div>
       {products.map((product) => {
         return (
