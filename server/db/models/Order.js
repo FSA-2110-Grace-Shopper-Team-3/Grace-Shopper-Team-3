@@ -14,6 +14,7 @@ const Order = db.define('order', {
     validate: {
       isIn: [['ordered', 'pending', 'cancelled']],
     },
+    defaultValue: 'pending',
   },
 });
 

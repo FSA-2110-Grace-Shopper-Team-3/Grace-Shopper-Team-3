@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product },
+  models: { User, Product, Order, OrderProduct },
 } = require('../server/db');
 
 const guitars = require('./guitarData');
@@ -42,6 +42,39 @@ async function seed() {
   const accesoryProducts = await Promise.all(
     accesories.map((accesory) => Product.create(accesory))
   );
+
+  const david = await User.findOne({
+    where: {
+      username: 'david',
+    },
+  });
+
+  const gibson = await Product.findOne({
+    where: {
+      model: 'J-45',
+    },
+  });
+
+  const arias = await Product.findOne({
+    where: {
+      model: 'Arias',
+    },
+  });
+
+  const firstOrder = await Order.create({
+    userId: david.id,
+    status: 'pending',
+  });
+
+  const orderProd = await OrderProduct.create({
+    productId: gibson.id,
+    orderId: firstOrder.id,
+  });
+
+  const orderProd2 = await OrderProduct.create({
+    productId: arias.id,
+    orderId: firstOrder.id,
+  });
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);
