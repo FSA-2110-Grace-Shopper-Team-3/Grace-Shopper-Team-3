@@ -1,5 +1,5 @@
-import React from 'react'
-import {useSelector, useDispatch} from 'react-redux'
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 /**
  * COMPONENT
@@ -7,16 +7,12 @@ import {useSelector, useDispatch} from 'react-redux'
 export const Home = () => {
   // const {username} = props
 
-  const username = useSelector((state) => state.auth.username)
-  const products = useSelector((state) => state.products)
-  console.log(products)
-  
-  return (
-    <div>
-      <h3>Welcome, {username}</h3>
-    </div>
-  )
-}
+  const username = useSelector((state) => state.auth.username);
+  const products = useSelector((state) => state.products);
+  console.log(products);
+
+  return <div>{/* <h3>Welcome, {username}</h3> */}</div>;
+};
 
 /**
  * CONTAINER
@@ -28,4 +24,4 @@ export const Home = () => {
 //   }
 // }
 
-export default Home
+export default Home;

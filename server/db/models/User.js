@@ -22,32 +22,32 @@ const User = db.define('user', {
     type: STRING,
     allowNull: false,
   },
-  isAdmin: {
-    type: BOOLEAN,
-    defaultValue: false,
-  },
-  isLoggedIn: {
-    type: BOOLEAN,
-    defaultValue: false,
-  },
-  email: {
-    type: STRING,
-    validate: {
-      isEmail: true,
-    },
-    allowNull: false,
-  },
-  address: {
-    type: STRING,
-    allowNull: false,
-  },
-  phoneNumber: {
-    type: STRING,
-  },
-  paymentInfo: {
-    type: STRING,
-    allowNull: false,
-  },
+  // isAdmin: {
+  //   type: BOOLEAN,
+  //   defaultValue: false,
+  // },
+  // isLoggedIn: {
+  //   type: BOOLEAN,
+  //   defaultValue: false,
+  // },
+  // email: {
+  //   type: STRING,
+  //   validate: {
+  //     isEmail: true,
+  //   },
+  //   allowNull: false,
+  // },
+  // address: {
+  //   type: STRING,
+  //   allowNull: false,
+  // },
+  // phoneNumber: {
+  //   type: STRING,
+  // },
+  // paymentInfo: {
+  //   type: STRING,
+  //   allowNull: false,
+  // },
 });
 
 module.exports = User;
