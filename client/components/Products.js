@@ -8,8 +8,15 @@ const Products = () => {
   const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
+  const id = useSelector((state) => state.auth.id);
+
+  const orders = useSelector((state) => state.orders);
+  const matchOrder = orders.find((order) => order.userId === id);
   return (
     <div>
+      <div>
+        <h3>Welcome, {username}</h3>
+      </div>
       {products.map((product) => {
         return (
           <div key={product.id}>
@@ -23,7 +30,7 @@ const Products = () => {
                 dispatch(
                   addOrderProd({
                     productId: product.id,
-                    orderId: '45eadede-ed48-4971-91e6-e1056f357778',
+                    orderId: matchOrder.id,
                   })
                 )
               }
