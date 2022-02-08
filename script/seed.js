@@ -21,7 +21,9 @@ async function seed() {
   console.log('db synced!');
 
   // Creating Users
-  await Promise.all(users.map((user) => User.create(user)));
+  const allUsers = await Promise.all(users.map((user) => User.create(user)));
+
+  allUsers.forEach((user) => Order.create({ userId: user.id }));
 
   const guitarProducts = await Promise.all(
     guitars.map((guitar) => Product.create(guitar))
@@ -43,38 +45,49 @@ async function seed() {
     accesories.map((accesory) => Product.create(accesory))
   );
 
-  const david = await User.findOne({
-    where: {
-      username: 'david',
-    },
-  });
+  // const david = await User.findOne({
+  //   where: {
+  //     username: 'david',
+  //   },
+  // });
 
-  const gibson = await Product.findOne({
-    where: {
-      model: 'J-45',
-    },
-  });
+  // const louis = await User.findOne({
+  //   where: {
+  //     username: 'louis',
+  //   },
+  // });
 
-  const arias = await Product.findOne({
-    where: {
-      model: 'Arias',
-    },
-  });
+  // const gibson = await Product.findOne({
+  //   where: {
+  //     model: 'J-45',
+  //   },
+  // });
 
-  const firstOrder = await Order.create({
-    userId: david.id,
-    status: 'pending',
-  });
+  // const arias = await Product.findOne({
+  //   where: {
+  //     model: 'Arias',
+  //   },
+  // });
 
-  const orderProd = await OrderItem.create({
-    productId: gibson.id,
-    orderId: firstOrder.id,
-  });
+  // const firstOrder = await Order.create({
+  //   userId: david.id,
+  //   status: 'pending',
+  // });
 
-  const orderProd2 = await OrderItem.create({
-    productId: arias.id,
-    orderId: firstOrder.id,
-  });
+  // const secondOrder = await Order.create({
+  //   userId: louis.id,
+  //   status: 'pending',
+  // });
+
+  // const orderProd = await OrderItem.create({
+  //   productId: gibson.id,
+  //   orderId: firstOrder.id,
+  // });
+
+  // const orderProd2 = await OrderItem.create({
+  //   productId: arias.id,
+  //   orderId: firstOrder.id,
+  // });
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
-const Navbar = ({ handleClick, isLoggedIn, orderProds }) => {
+const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   return (
     <div>
       <h1>FS-App-Template</h1>
@@ -26,7 +26,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderProds }) => {
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/cart">
-            {/* Cart ({orderProds.length ? orderProds.length : 0}) */}
+            Cart ({orderItems.length ? orderItems.length : 0})
           </Link>
         </div>
       </nav>
@@ -39,10 +39,10 @@ const Navbar = ({ handleClick, isLoggedIn, orderProds }) => {
  * CONTAINER
  */
 const mapState = (state) => {
-  const orderProds = state.orderProducts;
+  const orderItems = state.orderItems;
   return {
     isLoggedIn: !!state.auth.id,
-    orderProds,
+    orderItems,
   };
 };
 

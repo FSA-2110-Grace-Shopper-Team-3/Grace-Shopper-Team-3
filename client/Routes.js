@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/Cart';
-import { me, getProd, getOrderProds } from './store';
+import { me, getProd, getOrderProds, getOrders } from './store';
 
 /**
  * COMPONENT
@@ -23,8 +23,8 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/home" component={Home} />
-            <Redirect to="/home" />
+            <Route path="/products" component={Products} />
+            <Redirect to="/products" />
           </Switch>
         ) : (
           <Switch>
@@ -58,6 +58,7 @@ const mapDispatch = (dispatch) => {
       dispatch(getProd());
       dispatch(getOrderProds());
       dispatch(me());
+      dispatch(getOrders());
     },
   };
 };
