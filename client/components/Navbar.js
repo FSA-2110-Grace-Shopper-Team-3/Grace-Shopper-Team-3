@@ -7,7 +7,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   return (
     <div>
       <h1>FS-App-Template</h1>
-      <nav>
+      <nav className="navbar">
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
@@ -23,6 +23,10 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <Link to="/signup">Sign Up</Link>
           </div>
         )}
+        <div>
+          {/* The navbar will show these links before you log in */}
+          <Link to="/Products">Products</Link>
+        </div>
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/cart">
