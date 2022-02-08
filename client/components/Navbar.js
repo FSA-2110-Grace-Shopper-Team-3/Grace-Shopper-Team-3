@@ -26,7 +26,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderProds }) => {
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/cart">
-            Cart ({orderProds.length ? orderProds.length : 0})
+            {/* Cart ({orderProds.length ? orderProds.length : 0}) */}
           </Link>
         </div>
       </nav>

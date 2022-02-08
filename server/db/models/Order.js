@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { STRING, INTEGER, TEXT, UUID, UUIDV4 } = Sequelize;
+const { STRING, INTEGER, TEXT, UUID, UUIDV4, BOOLEAN } = Sequelize;
 
 const Order = db.define('order', {
   id: {
@@ -9,12 +9,9 @@ const Order = db.define('order', {
     primaryKey: true,
     defaultValue: UUIDV4,
   },
-  status: {
-    type: STRING,
-    validate: {
-      isIn: [['ordered', 'pending', 'cancelled']],
-    },
-    defaultValue: 'pending',
+  isOrdered: {
+    type: BOOLEAN,
+    defaultValue: false,
   },
 });
 
