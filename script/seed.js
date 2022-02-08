@@ -2,7 +2,7 @@
 
 const {
   db,
-  models: { User, Product, Order, OrderProduct },
+  models: { User, Product, Order, OrderItem },
 } = require('../server/db');
 
 const guitars = require('./guitarData');
@@ -66,12 +66,12 @@ async function seed() {
     status: 'pending',
   });
 
-  const orderProd = await OrderProduct.create({
+  const orderProd = await OrderItem.create({
     productId: gibson.id,
     orderId: firstOrder.id,
   });
 
-  const orderProd2 = await OrderProduct.create({
+  const orderProd2 = await OrderItem.create({
     productId: arias.id,
     orderId: firstOrder.id,
   });

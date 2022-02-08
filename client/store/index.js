@@ -6,14 +6,14 @@ import auth from './auth';
 import { products } from './products';
 import { users } from './users';
 import { orders } from './order';
-import { orderProducts } from './orderProducts';
+import { orderItems } from './orderItems';
 
 const reducer = combineReducers({
   auth,
   products,
   users,
   orders,
-  orderProducts,
+  orderItems,
 });
 
 const middleware = composeWithDevTools(
@@ -26,4 +26,4 @@ export * from './auth';
 export * from './products';
 export * from './users';
 export * from './order';
-export * from './orderProducts';
+export * from './orderItems';

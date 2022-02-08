@@ -26,6 +26,10 @@ const User = db.define('user', {
     type: BOOLEAN,
     defaultValue: false,
   },
+  isLoggedIn: {
+    type: BOOLEAN,
+    defaultValue: false,
+  },
   email: {
     type: STRING,
     validate: {

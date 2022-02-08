@@ -24,30 +24,29 @@ const _deleteOrderProd = (orderProdId) => ({
  */
 export const getOrderProds = () => {
   return async (dispatch) => {
-    const orderProds = (await axios.get('/api/orderProducts')).data;
+    const orderProds = (await axios.get('/api/orderitems')).data;
     dispatch(_getOrderProds(orderProds));
   };
 };
 
 export const addOrderProd = (order) => {
   return async (dispatch) => {
-    order = (await axios.post('/api/orderProducts', order)).data;
+    order = (await axios.post('/api/orderitems', order)).data;
     dispatch(_addOrderProd(order));
   };
 };
 
 export const editOrderProd = (orderProd) => {
   return async (dispatch) => {
-    orderProd = (
-      await axios.put(`/api/orderProducts/${orderProd.id}`, orderProd)
-    ).data;
+    orderProd = (await axios.put(`/api/orderitems/${orderProd.id}`, orderProd))
+      .data;
     dispatch(_editOrderProd(orderProd));
   };
 };
 
 export const deleteOrderProd = (orderProd) => {
   return async (dispatch) => {
-    await axios.delete(`/api/orderProducts/${orderProd.id}`);
+    await axios.delete(`/api/orderitems/${orderProd.id}`);
     dispatch(_deleteOrderProd(orderProd.id));
   };
 };
@@ -56,7 +55,7 @@ export const deleteOrderProd = (orderProd) => {
  * REDUCER
  */
 
-export const orderProducts = (state = [], action) => {
+export const orderItems = (state = [], action) => {
   switch (action.type) {
     case GET_ORDER_PROD:
       return action.orderProds;
