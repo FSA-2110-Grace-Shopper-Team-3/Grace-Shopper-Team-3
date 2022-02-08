@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { addOrderProd } from '../store';
 
 const Products = () => {
+  const username = useSelector((state) => state.auth.username);
   const products = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
