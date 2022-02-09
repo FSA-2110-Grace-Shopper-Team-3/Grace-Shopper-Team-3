@@ -6,7 +6,7 @@ import Home from './components/Home';
 import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
 import Cart from './components/Cart';
-import { me, getProd, getOrderProds, getOrders } from './store';
+import { me, getProd, getOrderItems, getOrders } from './store';
 
 /**
  * COMPONENT
@@ -57,7 +57,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData() {
       dispatch(getProd());
-      dispatch(getOrderProds());
+      dispatch(getOrderItems());
       dispatch(me());
       dispatch(getOrders());
     },

@@ -1,5 +1,6 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteOrderItem } from '../store';
 
 const Cart = () => {
   const orderItems = useSelector((state) => state.orderItems);
@@ -10,11 +11,12 @@ const Cart = () => {
     useSelector((state) =>
       state.orders.find((order) => order.userId === userId)
     ) || {};
+
   const matchingOrderItems = orderItems.filter(
     (orderItem) => orderItem.orderId === matchingOrder.id
   );
-  // console.log(matchingOrderItems);
 
+  const dispatch = useDispatch();
   return (
     <div>
       <ul>
@@ -26,6 +28,9 @@ const Cart = () => {
             <li key={orderItem.id}>
               {cartItem.brand} - {cartItem.model}
               Quantity:{orderItem.quantity}
+              <button onClick={() => dispatch(deleteOrderItem(orderItem.id))}>
+                x
+              </button>
             </li>
           );
         })}
