@@ -14,7 +14,6 @@ const Products = () => {
 
   const orders = useSelector((state) => state.orders);
   const matchOrder = orders.find((order) => order.userId === id);
-  console.log('ORDER ITEMS', orderItems);
 
   return (
     <div>

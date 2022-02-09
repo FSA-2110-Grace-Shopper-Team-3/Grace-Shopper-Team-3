@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteOrderItem } from '../store';
+import { deleteOrderItem, editOrderItem } from '../store';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const orderItems = useSelector((state) => state.orderItems);
@@ -26,10 +27,37 @@ const Cart = () => {
             {};
           return (
             <li key={orderItem.id}>
-              {cartItem.brand} - {cartItem.model}
-              Quantity:{orderItem.quantity}
               <button onClick={() => dispatch(deleteOrderItem(orderItem.id))}>
                 x
+              </button>
+              <Link to={`/products/${orderItem.productId}`}>
+                {cartItem.brand} - {cartItem.model}
+              </Link>{' '}
+              Quantity:{orderItem.quantity}
+              <button
+                onClick={() =>
+                  dispatch(
+                    editOrderItem({
+                      id: orderItem.id,
+                      quantity: orderItem.quantity + 1,
+                    })
+                  )
+                }
+              >
+                +
+              </button>
+              <button
+                onClick={() =>
+                  dispatch(
+                    editOrderItem({
+                      id: orderItem.id,
+                      quantity: orderItem.quantity - 1,
+                    })
+                  )
+                }
+                disabled={orderItem.quantity === 1}
+              >
+                -
               </button>
             </li>
           );

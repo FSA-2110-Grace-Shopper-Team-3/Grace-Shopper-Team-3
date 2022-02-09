@@ -23,13 +23,14 @@ class Routes extends Component {
       <div>
         {isLoggedIn ? (
           <Switch>
-            <Route path="/products" component={Products} />
+            <Route exact path="/products" component={Products} />
             <Route exact path="/cart" component={Cart} />
+            <Route path="/products/:id" component={SingleProduct} />
             <Redirect to="/products" />
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/" exact component={Login} />
+            <Route exact path="/" component={Login} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
