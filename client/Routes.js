@@ -7,7 +7,8 @@ import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
 import OrderPlaced from './components/OrderPlaced';
 import Cart from './components/Cart';
-import { me, getProd, getOrderItems, getOrders } from './store';
+import AdminPanel from './components/AdminPanel';
+import { me, getProd, getOrderItems, getOrders, getUsers } from './store';
 
 /**
  * COMPONENT
@@ -18,7 +19,9 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, users } = this.props;
+
+    const admin = users.find((user) => user.isAdmin === true) || {};
 
     return (
       <div>
@@ -26,8 +29,10 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/products" component={Products} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/orderPlaced" component={OrderPlaced} />
+            <Route exact path="/orderplaced" component={OrderPlaced} />
             <Route path="/products/:id" component={SingleProduct} />
+            {/* ADDED THIS TO TEST ADMIN PAGE */}
+            <Route path="/admin" component={AdminPanel} />
             <Redirect to="/products" />
           </Switch>
         ) : (
@@ -53,6 +58,7 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
     // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
+    ...state,
   };
 };
 
@@ -63,6 +69,7 @@ const mapDispatch = (dispatch) => {
       dispatch(getOrderItems());
       dispatch(me());
       dispatch(getOrders());
+      dispatch(getUsers());
     },
   };
 };
