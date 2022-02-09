@@ -2,8 +2,8 @@ const Sequelize = require('sequelize');
 const db = require('../db');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const axios = require('axios');
-const { STRING, INTEGER, BOOLEAN, UUID, UUIDV4 } = Sequelize;
+
+const { STRING, BOOLEAN, UUID, UUIDV4 } = Sequelize;
 
 const SALT_ROUNDS = 5;
 
@@ -22,10 +22,10 @@ const User = db.define('user', {
     type: STRING,
     allowNull: false,
   },
-  // isAdmin: {
-  //   type: BOOLEAN,
-  //   defaultValue: false,
-  // },
+  isAdmin: {
+    type: BOOLEAN,
+    defaultValue: false,
+  },
   // isLoggedIn: {
   //   type: BOOLEAN,
   //   defaultValue: false,

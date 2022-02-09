@@ -6,6 +6,10 @@ import { logout } from '../store';
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   const userId = useSelector((state) => state.auth.id);
 
+  const admin =
+    useSelector((state) => state.users.find((user) => user.isAdmin === true)) ||
+    {};
+
   const matchingOrder =
     useSelector((state) =>
       state.orders.find((order) => order.userId === userId)
@@ -20,7 +24,8 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     return acc;
   }, 0);
 
-  console.log('TOTaLLL', cartTotal);
+  console.log('ADMIN FROM NAV', admin.isAdmin);
+
   return (
     <div>
       <h1>FS-App-Template</h1>
@@ -40,9 +45,20 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <Link to="/signup">Sign Up</Link>
           </div>
         )}
+
+        {/* ADDED THIS TO TEST ADMIN PAGE, WILL FIX -KENNY */}
+
+        {isLoggedIn && admin.isAdmin === true ? (
+          <div>
+            <Link to="/admin">Admin Panel</Link>
+          </div>
+        ) : (
+          ''
+        )}
+
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/Products">Products</Link>
+          <Link to="/products">Products</Link>
         </div>
         <div>
           {/* The navbar will show these links before you log in */}

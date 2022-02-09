@@ -42,7 +42,7 @@ const _updateUser = (user) => {
 /**
  * THUNK CREATORS
  */
-export const getUser = () => {
+export const getUsers = () => {
   return async (dispatch) => {
     const users = (await axios.get('/api/users')).data;
     dispatch(_getUsers(users));
