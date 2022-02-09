@@ -1,9 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
+  const userId = useSelector((state) => state.auth.id);
+
+  const matchingOrder =
+    useSelector((state) =>
+      state.orders.find((order) => order.userId === userId)
+    ) || {};
+
+  const matchingOrderItems = orderItems.filter(
+    (orderItem) => orderItem.orderId === matchingOrder.id
+  );
   return (
     <div>
       <h1>FS-App-Template</h1>
@@ -30,7 +40,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
         <div>
           {/* The navbar will show these links before you log in */}
           <Link to="/cart">
-            Cart ({orderItems.length ? orderItems.length : 0})
+            Cart ({matchingOrderItems.length ? matchingOrderItems.length : 0})
           </Link>
         </div>
       </nav>
