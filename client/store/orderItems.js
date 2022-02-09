@@ -3,51 +3,51 @@ import axios from 'axios';
 /**
  * ACTION TYPES
  */
-const GET_ORDER_PROD = 'GET_ORDER_PROD';
-const ADD_ORDER_PROD = 'ADD_ORDER_PROD';
-const DELETE_ORDER_PROD = 'DELETE_ORDER_PROD';
-const EDIT_ORDER_PROD = 'EDIT_ORDER_PROD';
+const GET_ORDER_ITEM = 'GET_ORDER_ITEM';
+const ADD_ORDER_ITEM = 'ADD_ORDER_ITEM';
+const DELETE_ORDER_ITEM = 'DELETE_ORDER_ITEM';
+const EDIT_ORDER_ITEM = 'EDIT_ORDER_ITEM';
 
 /**
  * ACTION CREATORS
  */
-const _getOrderProds = (orderProds) => ({ type: GET_ORDER_PROD, orderProds });
-const _addOrderProd = (orderProd) => ({ type: ADD_ORDER_PROD, orderProd });
-const _editOrderProd = (orderProd) => ({ type: DELETE_ORDER_PROD, orderProd });
-const _deleteOrderProd = (orderProdId) => ({
-  type: EDIT_ORDER_PROD,
-  orderProdId,
+const _getOrderItems = (orderItems) => ({ type: GET_ORDER_ITEM, orderItems });
+const _addOrderItem = (orderItem) => ({ type: ADD_ORDER_ITEM, orderItem });
+const _editOrderItem = (orderItem) => ({ type: EDIT_ORDER_ITEM, orderItem });
+const _deleteOrderItem = (orderItemId) => ({
+  type: DELETE_ORDER_ITEM,
+  orderItemId,
 });
 
 /**
  * THUNK CREATORS
  */
-export const getOrderProds = () => {
+export const getOrderItems = () => {
   return async (dispatch) => {
-    const orderProds = (await axios.get('/api/orderitems')).data;
-    dispatch(_getOrderProds(orderProds));
+    const orderItems = (await axios.get('/api/orderitems')).data;
+    dispatch(_getOrderItems(orderItems));
   };
 };
 
-export const addOrderProd = (order) => {
+export const addOrderItem = (order) => {
   return async (dispatch) => {
     order = (await axios.post('/api/orderitems', order)).data;
-    dispatch(_addOrderProd(order));
+    dispatch(_addOrderItem(order));
   };
 };
 
-export const editOrderProd = (orderProd) => {
+export const editOrderItem = (orderItem) => {
   return async (dispatch) => {
-    orderProd = (await axios.put(`/api/orderitems/${orderProd.id}`, orderProd))
+    orderItem = (await axios.put(`/api/orderitems/${orderItem.id}`, orderItem))
       .data;
-    dispatch(_editOrderProd(orderProd));
+    dispatch(_editOrderItem(orderItem));
   };
 };
 
-export const deleteOrderProd = (orderProd) => {
+export const deleteOrderItem = (orderItemId) => {
   return async (dispatch) => {
-    await axios.delete(`/api/orderitems/${orderProd.id}`);
-    dispatch(_deleteOrderProd(orderProd.id));
+    await axios.delete(`/api/orderitems/${orderItemId}`);
+    dispatch(_deleteOrderItem(orderItemId));
   };
 };
 
@@ -57,15 +57,15 @@ export const deleteOrderProd = (orderProd) => {
 
 export const orderItems = (state = [], action) => {
   switch (action.type) {
-    case GET_ORDER_PROD:
-      return action.orderProds;
-    case ADD_ORDER_PROD:
-      return [...state, action.orderProd];
-    case DELETE_ORDER_PROD:
-      return state.filter((order) => order.id !== action.orderProdId);
-    case EDIT_ORDER_PROD:
+    case GET_ORDER_ITEM:
+      return action.orderItems;
+    case ADD_ORDER_ITEM:
+      return [...state, action.orderItem];
+    case DELETE_ORDER_ITEM:
+      return state.filter((order) => order.id !== action.orderItemId);
+    case EDIT_ORDER_ITEM:
       return state.map((order) =>
-        order.id === action.order.id ? action.orderProd : order
+        order.id === action.orderItem.id ? action.orderItem : order
       );
     default:
       return state;

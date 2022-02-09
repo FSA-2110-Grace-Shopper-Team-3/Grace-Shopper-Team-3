@@ -14,6 +14,13 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   const matchingOrderItems = orderItems.filter(
     (orderItem) => orderItem.orderId === matchingOrder.id
   );
+
+  const cartTotal = matchingOrderItems.reduce((acc, item) => {
+    acc += item.quantity;
+    return acc;
+  }, 0);
+
+  console.log('TOTaLLL', cartTotal);
   return (
     <div>
       <h1>FS-App-Template</h1>
@@ -39,9 +46,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
         </div>
         <div>
           {/* The navbar will show these links before you log in */}
-          <Link to="/cart">
-            Cart ({matchingOrderItems.length ? matchingOrderItems.length : 0})
-          </Link>
+          <Link to="/cart">Cart ({cartTotal})</Link>
         </div>
       </nav>
       <hr />
