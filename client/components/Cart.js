@@ -2,20 +2,30 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const Cart = () => {
-  const orderProducts = useSelector((state) => state.orderProducts);
+  const orderItems = useSelector((state) => state.orderItems);
   const products = useSelector((state) => state.products);
+  const userId = useSelector((state) => state.auth.id);
+
+  const matchingOrder =
+    useSelector((state) =>
+      state.orders.find((order) => order.userId === userId)
+    ) || {};
+  const matchingOrderItems = orderItems.filter(
+    (orderItem) => orderItem.orderId === matchingOrder.id
+  );
+  // console.log(matchingOrderItems);
 
   return (
     <div>
       <ul>
-        {orderProducts.map((orderProduct, idx) => {
+        {matchingOrderItems.map((orderItem) => {
           const cartItem =
-            products.find((product) => product.id === orderProduct.productId) ||
+            products.find((product) => product.id === orderItem.productId) ||
             {};
           return (
-            <li key={idx}>
+            <li key={orderItem.id}>
               {cartItem.brand} - {cartItem.model}
-              Quantity:{orderProduct.quantity}
+              Quantity:{orderItem.quantity}
             </li>
           );
         })}
