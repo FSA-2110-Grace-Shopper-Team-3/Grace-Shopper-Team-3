@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteOrderItem, editOrderItem } from '../store';
-import { Link } from 'react-router-dom';
+import { deleteOrderItem, editOrderItem, addOrder } from '../store';
+import { Link, useHistory } from 'react-router-dom';
 
 const Cart = () => {
   const orderItems = useSelector((state) => state.orderItems);
@@ -16,8 +16,10 @@ const Cart = () => {
   const matchingOrderItems = orderItems.filter(
     (orderItem) => orderItem.orderId === matchingOrder.id
   );
+  console.log(matchingOrder);
 
   const dispatch = useDispatch();
+  const history = useHistory();
   return (
     <div>
       <ul>
@@ -63,6 +65,15 @@ const Cart = () => {
           );
         })}
       </ul>
+      <button
+        onClick={() => {
+          dispatch(addOrder({ userId: userId }));
+          history.push('/orderPlaced');
+        }}
+      >
+        Submit Order
+      </button>
+      <Link>View Order History</Link>
     </div>
   );
 };
