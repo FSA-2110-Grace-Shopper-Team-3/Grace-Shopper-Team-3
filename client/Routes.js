@@ -5,6 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
+import OrderPlaced from './components/OrderPlaced';
 import Cart from './components/Cart';
 import { me, getProd, getOrderItems, getOrders } from './store';
 
@@ -25,6 +26,7 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/products" component={Products} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/orderPlaced" component={OrderPlaced} />
             <Route path="/products/:id" component={SingleProduct} />
             <Redirect to="/products" />
           </Switch>

@@ -31,19 +31,23 @@ const Products = () => {
             <button
               onClick={() => {
                 const orderItem = orderItems.find(
-                  (orderItem) => orderItem.productId === product.id
+                  (orderItem) =>
+                    orderItem.productId === product.id &&
+                    orderItem.userId === id
                 );
                 orderItem
                   ? dispatch(
                       editOrderItem({
                         id: orderItem.id,
                         quantity: orderItem.quantity + 1,
+                        userId: id,
                       })
                     )
                   : dispatch(
                       addOrderItem({
                         productId: product.id,
                         orderId: matchOrder.id,
+                        userId: id,
                       })
                     );
               }}
