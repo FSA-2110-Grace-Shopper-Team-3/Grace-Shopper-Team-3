@@ -19,15 +19,27 @@ const Products = () => {
   const match = useRouteMatch();
 
   if (match.params.sortBy) {
-    products = [...products].sort((a, b) => a.price - b.price);
+    const field = match.params.sortBy;
+    products = [...products].sort((a, b) => {
+      if (field === 'lowtohighprice') {
+        return a.price - b.price;
+      }
+      if (field === 'hightolowprice') {
+        return b.price - a.price;
+      }
+      return a[field].localeCompare(b[field]);
+    });
   }
   return (
     <div>
       <div>
         <h3>Welcome, {username ? username : 'Guest!'}</h3>
-        <Link to={`/products/sort/lowToHighPrice`}>
-          sort by price - low to high
+        <Link to={`/products/sort/brand`}>sort by brand </Link>
+        <Link to={`/products/sort/model`}>sort by model</Link>
+        <Link to={`/products/sort/lowtohighprice`}>
+          sort by price low to high
         </Link>
+        <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
       </div>
       {products.map((product) => {
         return (
