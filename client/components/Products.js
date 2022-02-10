@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import { addOrderItem, editOrderItem } from '../store';
 
 const Products = () => {
   const username = useSelector((state) => state.auth.username);
-  const products = useSelector((state) => state.products);
+  let products = useSelector((state) => state.products);
   const orderItems = useSelector((state) => state.orderItems);
 
   const dispatch = useDispatch();
@@ -16,11 +16,18 @@ const Products = () => {
   const matchOrder = orders.find(
     (order) => order.userId === id && order.isOrdered === false
   );
+  const match = useRouteMatch();
 
+  if (match.params.sortBy) {
+    products = [...products].sort((a, b) => a.price - b.price);
+  }
   return (
     <div>
       <div>
         <h3>Welcome, {username ? username : 'Guest!'}</h3>
+        <Link to={`/products/sort/lowToHighPrice`}>
+          sort by price - low to high
+        </Link>
       </div>
       {products.map((product) => {
         return (

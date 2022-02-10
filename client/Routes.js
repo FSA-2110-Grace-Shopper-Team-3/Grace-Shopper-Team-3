@@ -44,6 +44,7 @@ class Routes extends Component {
             <Route exact path="/products" component={Products} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/orderplaced" component={OrderPlaced} />
+            <Route exact path="/products/sort/:sortBy" component={Products} />
             <Route path="/products/:id" component={SingleProduct} />
             <Redirect to="/products" />
           </Switch>
