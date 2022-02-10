@@ -37,6 +37,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             </a>
             <Link to="/admin/inventory">Product Inventory</Link>
             <Link to="/admin/users">Users</Link>
+            <Link to="/admin/orders">Orders</Link>
             <Link to="/admin/settings">Settings</Link>
             <Link to="/admin/analytics">Analytics</Link>
           </div>

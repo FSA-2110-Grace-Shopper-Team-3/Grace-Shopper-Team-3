@@ -3,13 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Users = () => {
-  const dispatch = useDispatch();
-
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) =>
+    state.users.filter((user) => user.isAdmin === false)
+  );
 
   return (
     <div>
-      <h1>VIEW / EDIT USERS</h1>
+      {users.map((user) => (
+        <div key={user.id}>{user.username}</div>
+      ))}
     </div>
   );
 };
