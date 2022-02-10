@@ -12,6 +12,7 @@ import Users from './components/Users';
 import AdminSettings from './components/AdminSettings';
 import ProductInventory from './components/ProductInventory';
 import Analytics from './components/Analytics';
+import Orders from './components/Orders';
 import { me, getProd, getOrderItems, getOrders, getUsers } from './store';
 
 /**
@@ -37,6 +38,7 @@ class Routes extends Component {
             <Route exact path="/admin/settings" component={AdminSettings} />
             <Route exact path="/admin/inventory" component={ProductInventory} />
             <Route exact path="/admin/analytics" component={Analytics} />
+            <Route exact path="/admin/orders" component={Orders} />
             <Redirect to="/admin" />
           </Switch>
         ) : isLoggedIn && currUser.isAdmin === false ? (
