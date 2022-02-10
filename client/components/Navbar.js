@@ -30,41 +30,35 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     <div>
       <h1>FS-App-Template</h1>
       <nav className="navbar">
-        {isLoggedIn && currUser.isAdmin === false ? (
+        {isLoggedIn && currUser.isAdmin === true ? (
+          <div>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+            <Link to="/admin/inventory">Product Inventory</Link>
+            <Link to="/admin/users">Users</Link>
+            <Link to="/admin/settings">Settings</Link>
+            <Link to="/admin/analytics">Analytics</Link>
+          </div>
+        ) : isLoggedIn && currUser.isAdmin === false ? (
           <div>
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
+            <Link to="/products">Products</Link>
+            <Link to="/cart">Cart ({cartTotal})</Link>
           </div>
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
+            <Link to="/products">Products</Link>
+            <Link to="/cart">Cart ({cartTotal})</Link>
           </div>
         )}
-
-        {/* {isLoggedIn && currUser.isAdmin === true ? (
-          <div>
-            <Link to="/admin">Admin Panel</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </div>
-        ) : (
-          ''
-        )} */}
-
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/products">Products</Link>
-        </div>
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/cart">Cart ({cartTotal})</Link>
-        </div>
       </nav>
       <hr />
     </div>
