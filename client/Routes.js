@@ -8,11 +8,16 @@ import SingleProduct from './components/SingleProduct';
 import OrderPlaced from './components/OrderPlaced';
 import Cart from './components/Cart';
 import AdminPanel from './components/AdminPanel';
+import Users from './components/Users';
+import AdminSettings from './components/AdminSettings';
+import ProductInventory from './components/ProductInventory';
+import Analytics from './components/Analytics';
 import { me, getProd, getOrderItems, getOrders, getUsers } from './store';
 
 /**
  * COMPONENT
  */
+
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -21,17 +26,18 @@ class Routes extends Component {
   render() {
     const { isLoggedIn, users } = this.props;
 
-    const admin = users.find((user) => user.isAdmin === true) || {};
-
     const currUser = users.find((user) => user.id === this.props.auth.id) || {};
-
-    console.log('CURR', currUser);
 
     return (
       <div>
         {isLoggedIn && currUser.isAdmin === true ? (
           <Switch>
             <Route exact path="/admin" component={AdminPanel} />
+            <Route exact path="/admin/users" component={Users} />
+            <Route exact path="/admin/settings" component={AdminSettings} />
+            <Route exact path="/admin/inventory" component={ProductInventory} />
+            <Route exact path="/admin/analytics" component={Analytics} />
+            <Redirect to="/admin" />
           </Switch>
         ) : isLoggedIn && currUser.isAdmin === false ? (
           <Switch>

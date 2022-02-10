@@ -25,7 +25,7 @@ const users = [
   },
   {
     username: 'admin',
-    password: 'admin',
+    password: '123',
     email: 'admin@gmail.com',
     address: '789 admin court',
     phoneNumber: '911-119-9191',
