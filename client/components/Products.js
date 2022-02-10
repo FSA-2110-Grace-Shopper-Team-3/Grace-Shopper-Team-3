@@ -13,7 +13,9 @@ const Products = () => {
   const id = useSelector((state) => state.auth.id);
 
   const orders = useSelector((state) => state.orders);
-  const matchOrder = orders.find((order) => order.userId === id);
+  const matchOrder = orders.find(
+    (order) => order.userId === id && order.isOrdered === false
+  );
 
   return (
     <div>
@@ -33,7 +35,7 @@ const Products = () => {
                 const orderItem = orderItems.find(
                   (orderItem) =>
                     orderItem.productId === product.id &&
-                    orderItem.userId === id
+                    orderItem.orderId === matchOrder.id
                 );
                 orderItem
                   ? dispatch(

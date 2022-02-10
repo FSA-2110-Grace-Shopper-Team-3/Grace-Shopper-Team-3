@@ -12,7 +12,9 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
 
   const matchingOrder =
     useSelector((state) =>
-      state.orders.find((order) => order.userId === userId)
+      state.orders.find(
+        (order) => order.userId === userId && order.isOrdered === false
+      )
     ) || {};
 
   const matchingOrderItems = orderItems.filter(
