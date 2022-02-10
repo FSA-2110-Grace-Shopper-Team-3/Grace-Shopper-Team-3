@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteOrderItem, editOrderItem, addOrder } from '../store';
+import { deleteOrderItem, editOrderItem, addOrder, editOrder } from '../store';
 import { Link, useHistory } from 'react-router-dom';
 
 const Cart = () => {
@@ -10,7 +10,9 @@ const Cart = () => {
 
   const matchingOrder =
     useSelector((state) =>
-      state.orders.find((order) => order.userId === userId)
+      state.orders.find(
+        (order) => order.userId === userId && order.isOrdered === false
+      )
     ) || {};
 
   const matchingOrderItems = orderItems.filter(
@@ -67,6 +69,7 @@ const Cart = () => {
       </ul>
       <button
         onClick={() => {
+          dispatch(editOrder({ id: matchingOrder.id, isOrdered: true }));
           dispatch(addOrder({ userId: userId }));
           history.push('/orderPlaced');
         }}
