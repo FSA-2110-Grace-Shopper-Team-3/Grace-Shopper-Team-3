@@ -23,16 +23,22 @@ class Routes extends Component {
 
     const admin = users.find((user) => user.isAdmin === true) || {};
 
+    const currUser = users.find((user) => user.id === this.props.auth.id) || {};
+
+    console.log('CURR', currUser);
+
     return (
       <div>
-        {isLoggedIn ? (
+        {isLoggedIn && currUser.isAdmin === true ? (
+          <Switch>
+            <Route exact path="/admin" component={AdminPanel} />
+          </Switch>
+        ) : isLoggedIn && currUser.isAdmin === false ? (
           <Switch>
             <Route exact path="/products" component={Products} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/orderplaced" component={OrderPlaced} />
             <Route path="/products/:id" component={SingleProduct} />
-            {/* ADDED THIS TO TEST ADMIN PAGE */}
-            <Route path="/admin" component={AdminPanel} />
             <Redirect to="/products" />
           </Switch>
         ) : (
