@@ -76,7 +76,7 @@ const Cart = () => {
       >
         Submit Order
       </button>
-      <Link>View Order History</Link>
+      <Link to="/orderhistory">View Order History</Link>
     </div>
   );
 };
