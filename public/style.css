@@ -36,6 +36,12 @@ ul {
   margin: 0;
 }
 
+.sortinglinks {
+  display: flex;
+  justify-content: space-around;
+  padding: 15px;
+}
+
 /* ---------------Navbar.js CSS--------------- */
 
 .navbar {

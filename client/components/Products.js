@@ -34,12 +34,14 @@ const Products = () => {
     <div>
       <div>
         <h3>Welcome, {username ? username : 'Guest!'}</h3>
-        <Link to={`/products/sort/brand`}>sort by brand </Link>
-        <Link to={`/products/sort/model`}>sort by model</Link>
-        <Link to={`/products/sort/lowtohighprice`}>
-          sort by price low to high
-        </Link>
-        <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
+        <div className="sortinglinks">
+          <Link to={`/products/sort/brand`}>sort by brand </Link>
+          <Link to={`/products/sort/model`}>sort by model</Link>
+          <Link to={`/products/sort/lowtohighprice`}>
+            sort by price low to high
+          </Link>
+          <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
+        </div>
       </div>
       {products.map((product) => {
         return (
