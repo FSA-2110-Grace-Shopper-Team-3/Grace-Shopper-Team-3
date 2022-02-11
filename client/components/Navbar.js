@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
 
@@ -25,6 +25,8 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     acc += item.quantity;
     return acc;
   }, 0);
+
+  const dispatch = useDispatch();
 
   return (
     <div>

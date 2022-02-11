@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { addOrderItem, editOrderItem } from '../store';
+import { addOrderItem, editOrderItem, createGuestOrder } from '../store';
 
 const Products = () => {
   const username = useSelector((state) => state.auth.username);
@@ -13,9 +13,15 @@ const Products = () => {
   const id = useSelector((state) => state.auth.id);
 
   const orders = useSelector((state) => state.orders);
+
   const matchOrder = orders.find(
     (order) => order.userId === id && order.isOrdered === false
   );
+
+  const guestOrder = orders.find(
+    (order) => order.userId === null && order.isOrdered === false
+  );
+
   const match = useRouteMatch();
 
   if (match.params.sortBy) {
@@ -30,6 +36,9 @@ const Products = () => {
       return a[field].localeCompare(b[field]);
     });
   }
+
+  console.log('GUEST ORDER', guestOrder);
+
   return (
     <div>
       <div>
@@ -58,6 +67,7 @@ const Products = () => {
                     orderItem.productId === product.id &&
                     orderItem.orderId === matchOrder.id
                 );
+
                 orderItem
                   ? dispatch(
                       editOrderItem({
@@ -73,6 +83,28 @@ const Products = () => {
                         userId: id,
                       })
                     );
+
+                // const guestOrderItem = orderItems.find(
+                //   (orderItem) =>
+                //     orderItem.productId === product.id &&
+                //     orderItem.orderId === guestOrder.id
+                // );
+
+                // guestOrderItem
+                //   ? dispatch(
+                //       editOrderItem({
+                //         id: orderItem.id,
+                //         quantity: orderItem.quantity + 1,
+                //         userId: null,
+                //       })
+                //     )
+                //   : dispatch(
+                //       addOrderItem({
+                //         productId: product.id,
+                //         orderId: guestOrder.id,
+                //         userId: null,
+                //       })
+                //     );
               }}
             >
               Add to Cart
