@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteOrderItem, editOrderItem, addOrder, editOrder } from '../store';
 import { Link, useHistory } from 'react-router-dom';
@@ -18,10 +18,10 @@ const Cart = () => {
   const matchingOrderItems = orderItems.filter(
     (orderItem) => orderItem.orderId === matchingOrder.id
   );
-  console.log(matchingOrder);
 
   const dispatch = useDispatch();
   const history = useHistory();
+
   return (
     <div>
       <ul>

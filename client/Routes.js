@@ -13,7 +13,14 @@ import AdminSettings from './components/AdminSettings';
 import ProductInventory from './components/ProductInventory';
 import Analytics from './components/Analytics';
 import Orders from './components/Orders';
-import { me, getProd, getOrderItems, getOrders, getUsers } from './store';
+import {
+  me,
+  getProd,
+  getOrderItems,
+  getOrders,
+  getUsers,
+  createGuestOrder,
+} from './store';
 
 /**
  * COMPONENT
@@ -28,6 +35,8 @@ class Routes extends Component {
     const { isLoggedIn, users } = this.props;
 
     const currUser = users.find((user) => user.id === this.props.auth.id) || {};
+
+    console.log('PROPS', this.props);
 
     return (
       <div>
@@ -85,6 +94,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me());
       dispatch(getOrders());
       dispatch(getUsers());
+      dispatch(createGuestOrder());
     },
   };
 };
