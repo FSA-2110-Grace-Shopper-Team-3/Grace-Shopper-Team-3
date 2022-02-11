@@ -19,6 +19,15 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+button {
+  height: 2rem;
+}
 
 .single-prod {
   display: flex;
@@ -46,4 +55,12 @@ ul {
 
 .navbar {
   display: flex;
+}
+
+/* ---------------Admin CSS--------------- */
+
+.inventory {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

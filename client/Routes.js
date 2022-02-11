@@ -13,6 +13,8 @@ import AdminSettings from './components/AdminSettings';
 import ProductInventory from './components/ProductInventory';
 import Analytics from './components/Analytics';
 import Orders from './components/Orders';
+import EditUser from './components/EditUser';
+import EditProduct from './components/EditProduct';
 
 import {
   me,
@@ -47,8 +49,10 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/admin" component={AdminPanel} />
             <Route exact path="/admin/users" component={Users} />
+            <Route exact path="/admin/users/:id" component={EditUser} />
             <Route exact path="/admin/settings" component={AdminSettings} />
             <Route exact path="/admin/inventory" component={ProductInventory} />
+            <Route exact path="/admin/inventory/:id" component={EditProduct} />
             <Route exact path="/admin/analytics" component={Analytics} />
             <Route exact path="/admin/orders" component={Orders} />
             <Redirect to="/admin" />

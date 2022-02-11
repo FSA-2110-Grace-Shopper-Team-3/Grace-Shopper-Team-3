@@ -10,7 +10,9 @@ const Users = () => {
   return (
     <div>
       {users.map((user) => (
-        <div key={user.id}>{user.username}</div>
+        <div key={user.id}>
+          <Link to={`/admin/users/${user.id}`}>{user.username} </Link>
+        </div>
       ))}
     </div>
   );
