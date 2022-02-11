@@ -13,6 +13,7 @@ import AdminSettings from './components/AdminSettings';
 import ProductInventory from './components/ProductInventory';
 import Analytics from './components/Analytics';
 import Orders from './components/Orders';
+
 import {
   me,
   getProd,
@@ -21,6 +22,10 @@ import {
   getUsers,
   createGuestOrder,
 } from './store';
+
+import OrderHistory from './components/OrderHistory';
+
+
 
 /**
  * COMPONENT
@@ -55,6 +60,7 @@ class Routes extends Component {
             <Route exact path="/products" component={Products} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/orderplaced" component={OrderPlaced} />
+            <Route exact path="/orderhistory" component={OrderHistory} />
             <Route exact path="/products/sort/:sortBy" component={Products} />
             <Route path="/products/:id" component={SingleProduct} />
             <Redirect to="/products" />
