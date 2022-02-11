@@ -17,7 +17,7 @@ const _getOrders = (orders) => ({ type: GET_ORDERS, orders });
 const _addOrder = (order) => ({ type: ADD_ORDER, order });
 const _editOrder = (order) => ({ type: EDIT_ORDER, order });
 const _deleteOrder = (orderId) => ({ type: DELETE_ORDER, orderId });
-const _createGuestOrder = (order) => ({ type: CREATE_GUEST_ORDER, order });
+// const _createGuestOrder = (order) => ({ type: CREATE_GUEST_ORDER, order });
 
 /**
  * THUNK CREATORS
@@ -50,17 +50,17 @@ export const deleteOrder = (order) => {
   };
 };
 
-export const createGuestOrder = (newGuestOrder) => {
-  return (dispatch) => {
-    newGuestOrder = {
-      id: uuidv4(),
-      isOrdered: false,
-      userId: null,
-      orderItems: [],
-    };
-    dispatch(_createGuestOrder(newGuestOrder));
-  };
-};
+// export const createGuestOrder = (newGuestOrder) => {
+//   return (dispatch) => {
+//     newGuestOrder = {
+//       id: uuidv4(),
+//       isOrdered: false,
+//       userId: null,
+//       orderItems: [],
+//     };
+//     dispatch(_createGuestOrder(newGuestOrder));
+//   };
+// };
 
 /**
  * REDUCER
@@ -69,7 +69,8 @@ export const createGuestOrder = (newGuestOrder) => {
 export const orders = (state = [], action) => {
   switch (action.type) {
     case GET_ORDERS:
-      return [...state].concat(action.orders);
+      return action.orders;
+    // return [...state].concat(action.orders);
     case ADD_ORDER:
       return [...state, action.order];
     case DELETE_ORDER:
@@ -78,8 +79,8 @@ export const orders = (state = [], action) => {
       return state.map((order) =>
         order.id === action.order.id ? action.order : order
       );
-    case CREATE_GUEST_ORDER:
-      return [...state, action.order];
+    // case CREATE_GUEST_ORDER:
+    //   return [...state, action.order];
     default:
       return state;
   }
