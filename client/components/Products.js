@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { addOrderItem, editOrderItem, createGuestOrder } from '../store';
+import { addOrderItem, editOrderItem } from '../store';
+import { v4 as uuidv4 } from 'uuid';
+
+const currentGuestItemsFromLocal = JSON.parse(
+  localStorage.getItem('orderitems') || '[]'
+);
 
 const Products = () => {
   const username = useSelector((state) => state.auth.username);
@@ -18,9 +23,10 @@ const Products = () => {
     (order) => order.userId === id && order.isOrdered === false
   );
 
-  const guestOrder = orders.find(
-    (order) => order.userId === null && order.isOrdered === false
-  );
+  // const guestOrder =
+  //   orders.find(
+  //     (order) => order.userId === null && order.isOrdered === false
+  //   ) || {};
 
   const match = useRouteMatch();
 
@@ -36,9 +42,22 @@ const Products = () => {
       return a[field].localeCompare(b[field]);
     });
   }
+  //-------------------Guest Cart Functionality---------------------//
+  const [guestOrderItems, setGuestOrderItems] = useState(
+    currentGuestItemsFromLocal
+  );
+  console.log(guestOrderItems);
+  // let currentGuessOrderItems = myStorage.getItem('orderitems');
 
-  console.log('GUEST ORDER', guestOrder);
+  useEffect(() => {
+    localStorage.setItem('orderitems', JSON.stringify(guestOrderItems));
+  }, [guestOrderItems]);
 
+  // console.log('products rendered!!');
+  // console.log(typeof guestOrderItems);
+  // myStorage.setItem('guestOrder', JSON.stringify(guestOrder));
+  // const parsedNewGuestOrder = JSON.parse(myStorage.guestOrder);
+  // console.log(JSON.parse(myStorage.guestOrder));
   return (
     <div>
       <div>
@@ -60,36 +79,83 @@ const Products = () => {
                 {product.category} - {product.brand} - {product.model}
               </Link>
             }
+
             <button
               onClick={() => {
-                const orderItem = orderItems.find(
-                  (orderItem) =>
-                    orderItem.productId === product.id &&
-                    orderItem.orderId === matchOrder.id
+                const guestOrderItem = guestOrderItems.find(
+                  (guestItem) => guestItem.productId === product.id
                 );
 
-                orderItem
-                  ? dispatch(
-                      editOrderItem({
-                        id: orderItem.id,
-                        quantity: orderItem.quantity + 1,
-                        userId: id,
-                      })
+                guestOrderItem
+                  ? setGuestOrderItems(
+                      guestOrderItems.map((guestItem) =>
+                        guestItem.id === guestOrderItem.id
+                          ? {
+                              ...guestOrderItem,
+                              quantity: guestOrderItem.quantity + 1,
+                            }
+                          : guestItem
+                      )
                     )
-                  : dispatch(
-                      addOrderItem({
+                  : setGuestOrderItems([
+                      ...guestOrderItems,
+                      {
                         productId: product.id,
-                        orderId: matchOrder.id,
-                        userId: id,
-                      })
-                    );
-
+                        userId: null,
+                        id: uuidv4(),
+                        quantity: 1,
+                      },
+                    ]);
+                // console.log(JSON.parse(myStorage));
+                // const guestOrderItem = parsedNewGuestOrder.orderItems.find(
+                //   (orderItem) => orderItem.productId === product.id
+                // );
+                // if (guestOrderItem) {
+                //   guestOrderItem.quantity += 1;
+                // } else {
+                //   parsedNewGuestOrder.orderItems.push({
+                //     productId: product.id,
+                //     orderId: parsedNewGuestOrder.id,
+                //     userId: null,
+                //   });
+                //   myStorage.setItem(
+                //     'guestOrder',
+                //     JSON.stringify(parsedNewGuestOrder)
+                //   );
+                //   console.log(myStorage.guestOrder);
+                // }
+                // const orderItem = orderItems.find(
+                //   (orderItem) =>
+                //     orderItem.productId === product.id &&
+                //     orderItem.orderId === matchOrder.id
+                // );
+                // orderItem
+                //   ? dispatch(
+                //       editOrderItem({
+                //         id: orderItem.id,
+                //         quantity: orderItem.quantity + 1,
+                //         userId: id,
+                //       })
+                //     )
+                //   : dispatch(
+                //       addOrderItem({
+                //         productId: product.id,
+                //         orderId: matchOrder.id,
+                //         userId: id,
+                //       })
+                //     );
                 // const guestOrderItem = orderItems.find(
                 //   (orderItem) =>
                 //     orderItem.productId === product.id &&
                 //     orderItem.orderId === guestOrder.id
                 // );
-
+                // dispatch(
+                //   addOrderItem({
+                //     productId: product.id,
+                //     orderId: guestOrder.id,
+                //     userId: null,
+                //   })
+                // );
                 // guestOrderItem
                 //   ? dispatch(
                 //       editOrderItem({

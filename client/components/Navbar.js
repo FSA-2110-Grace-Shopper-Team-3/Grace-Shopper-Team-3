@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout } from '../store';
@@ -25,9 +25,19 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     acc += item.quantity;
     return acc;
   }, 0);
+  //-------------------Guest Cart Functionality---------------------//
 
-  const dispatch = useDispatch();
+  const guestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
 
+  // useEffect(() => {}, [guestOrderItems]);
+
+  const GuestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
+  const guestCartTotal = GuestOrderItems.reduce((acc, item) => {
+    acc += item.quantity;
+    return acc;
+  }, 0);
+
+  console.log('navbar rendered!');
   return (
     <div>
       <h1>FS-App-Template</h1>
@@ -59,7 +69,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <Link to="/login">Login</Link>
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
-            <Link to="/cart">Cart ({cartTotal})</Link>
+            <Link to="/cart">Cart ({guestCartTotal})</Link>
           </div>
         )}
       </nav>

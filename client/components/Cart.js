@@ -22,23 +22,27 @@ const Cart = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const guestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
+
   return (
     <div>
       <ul>
-        {matchingOrderItems.map((orderItem) => {
-          const cartItem =
-            products.find((product) => product.id === orderItem.productId) ||
-            {};
-          return (
-            <li key={orderItem.id}>
-              <button onClick={() => dispatch(deleteOrderItem(orderItem.id))}>
+        {!userId
+          ? guestOrderItems.map((orderItem) => {
+              const cartItem =
+                products.find(
+                  (product) => product.id === orderItem.productId
+                ) || {};
+              return (
+                <li key={orderItem.id}>
+                  {/* <button onClick={() => dispatch(deleteOrderItem(orderItem.id))}>
                 x
-              </button>
-              <Link to={`/products/${orderItem.productId}`}>
-                {cartItem.brand} - {cartItem.model}
-              </Link>{' '}
-              Quantity:{orderItem.quantity}
-              <button
+              </button> */}
+                  <Link to={`/products/${orderItem.productId}`}>
+                    {cartItem.brand} - {cartItem.model}
+                  </Link>{' '}
+                  Quantity:{orderItem.quantity}
+                  {/* <button
                 onClick={() =>
                   dispatch(
                     editOrderItem({
@@ -62,10 +66,54 @@ const Cart = () => {
                 disabled={orderItem.quantity === 1}
               >
                 -
-              </button>
-            </li>
-          );
-        })}
+              </button> */}
+                </li>
+              );
+            })
+          : matchingOrderItems.map((orderItem) => {
+              const cartItem =
+                products.find(
+                  (product) => product.id === orderItem.productId
+                ) || {};
+              return (
+                <li key={orderItem.id}>
+                  <button
+                    onClick={() => dispatch(deleteOrderItem(orderItem.id))}
+                  >
+                    x
+                  </button>
+                  <Link to={`/products/${orderItem.productId}`}>
+                    {cartItem.brand} - {cartItem.model}
+                  </Link>{' '}
+                  Quantity:{orderItem.quantity}
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        editOrderItem({
+                          id: orderItem.id,
+                          quantity: orderItem.quantity + 1,
+                        })
+                      )
+                    }
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        editOrderItem({
+                          id: orderItem.id,
+                          quantity: orderItem.quantity - 1,
+                        })
+                      )
+                    }
+                    disabled={orderItem.quantity === 1}
+                  >
+                    -
+                  </button>
+                </li>
+              );
+            })}
       </ul>
       <button
         onClick={() => {

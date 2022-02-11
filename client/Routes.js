@@ -20,12 +20,10 @@ import {
   getOrderItems,
   getOrders,
   getUsers,
-  createGuestOrder,
+  // createGuestOrder,
 } from './store';
 
 import OrderHistory from './components/OrderHistory';
-
-
 
 /**
  * COMPONENT
@@ -41,7 +39,7 @@ class Routes extends Component {
 
     const currUser = users.find((user) => user.id === this.props.auth.id) || {};
 
-    console.log('PROPS', this.props);
+    // console.log('PROPS', this.props);
 
     return (
       <div>
@@ -100,7 +98,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me());
       dispatch(getOrders());
       dispatch(getUsers());
-      dispatch(createGuestOrder());
+      // dispatch(createGuestOrder());
     },
   };
 };
