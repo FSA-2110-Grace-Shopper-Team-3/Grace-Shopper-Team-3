@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteOrderItem, editOrderItem, addOrder, editOrder } from '../store';
+import {
+  deleteOrderItem,
+  editOrderItem,
+  addOrder,
+  editOrder,
+  deleteGuestOrderItem,
+  editGuestOrderItem,
+} from '../store';
 import { Link, useHistory } from 'react-router-dom';
 
 const Cart = () => {
@@ -22,50 +29,57 @@ const Cart = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  console.log(JSON.parse(localStorage.getItem('orderitems')));
+  const guestCart = useSelector((state) => state.guestOrderItems);
+  // console.log(JSON.parse(localStorage.getItem('orderitems')));
+
+  useEffect(() => {
+    localStorage.setItem('orderitems', JSON.stringify(guestCart));
+  }, [guestCart]);
   return (
     <div>
       <ul>
         {!userId
-          ? guestOrderItems.map((orderItem) => {
+          ? guestCart.map((orderItem) => {
               const cartItem =
                 products.find(
                   (product) => product.id === orderItem.productId
                 ) || {};
               return (
                 <li key={orderItem.id}>
-                  {/* <button onClick={() => dispatch(deleteOrderItem(orderItem.id))}>
-                x
-              </button> */}
+                  <button
+                    onClick={() => dispatch(deleteGuestOrderItem(orderItem.id))}
+                  >
+                    x
+                  </button>
                   <Link to={`/products/${orderItem.productId}`}>
                     {cartItem.brand} - {cartItem.model}
                   </Link>{' '}
                   Quantity:{orderItem.quantity}
-                  {/* <button
-                onClick={() =>
-                  dispatch(
-                    editOrderItem({
-                      id: orderItem.id,
-                      quantity: orderItem.quantity + 1,
-                    })
-                  )
-                }
-              >
-                +
-              </button>
-              <button
-                onClick={() =>
-                  dispatch(
-                    editOrderItem({
-                      id: orderItem.id,
-                      quantity: orderItem.quantity - 1,
-                    })
-                  )
-                }
-                disabled={orderItem.quantity === 1}
-              >
-                -
-              </button> */}
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        editGuestOrderItem({
+                          ...orderItem,
+                          quantity: orderItem.quantity + 1,
+                        })
+                      )
+                    }
+                  >
+                    +
+                  </button>
+                  <button
+                    onClick={() =>
+                      dispatch(
+                        editGuestOrderItem({
+                          ...orderItem,
+                          quantity: orderItem.quantity - 1,
+                        })
+                      )
+                    }
+                    disabled={orderItem.quantity === 1}
+                  >
+                    -
+                  </button>
                 </li>
               );
             })
