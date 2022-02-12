@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { addOrderItem, editOrderItem } from '../store';
+import { addOrderItem, editOrderItem, addGuestOrderItem } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 
 const currentGuestItemsFromLocal = JSON.parse(
@@ -23,11 +23,6 @@ const Products = () => {
     (order) => order.userId === id && order.isOrdered === false
   );
 
-  // const guestOrder =
-  //   orders.find(
-  //     (order) => order.userId === null && order.isOrdered === false
-  //   ) || {};
-
   const match = useRouteMatch();
 
   if (match.params.sortBy) {
@@ -43,16 +38,20 @@ const Products = () => {
     });
   }
   //-------------------Guest Cart Functionality---------------------//
-  const [guestOrderItems, setGuestOrderItems] = useState(
-    currentGuestItemsFromLocal
-  );
+  // const [guestOrderItems, setGuestOrderItems] = useState(
+  //   currentGuestItemsFromLocal
+  // );
 
   // localStorage.removeItem('orderitems');
   // let currentGuessOrderItems = myStorage.getItem('orderitems');
 
+  const guestCart = useSelector((state) => state.guestOrderItems);
+
   useEffect(() => {
-    localStorage.setItem('orderitems', JSON.stringify(guestOrderItems));
-  }, [guestOrderItems]);
+    localStorage.setItem('orderitems', JSON.stringify(guestCart));
+  }, [guestCart]);
+
+  console.log('GUEST CART', guestCart);
 
   // console.log('products rendered!!');
   // console.log(typeof guestOrderItems);
@@ -83,31 +82,44 @@ const Products = () => {
             }
 
             <button
-              onClick={() => {
-                const guestOrderItem = guestOrderItems.find(
-                  (guestItem) => guestItem.productId === product.id
-                );
+              onClick={
+                () =>
+                  dispatch(
+                    addGuestOrderItem({
+                      productId: product.id,
+                      userId: null,
+                      id: uuidv4(),
+                      quantity: 1,
+                    })
+                  )
 
-                guestOrderItem
-                  ? setGuestOrderItems(
-                      guestOrderItems.map((guestItem) =>
-                        guestItem.id === guestOrderItem.id
-                          ? {
-                              ...guestOrderItem,
-                              quantity: guestOrderItem.quantity + 1,
-                            }
-                          : guestItem
-                      )
-                    )
-                  : setGuestOrderItems([
-                      ...guestOrderItems,
-                      {
-                        productId: product.id,
-                        userId: null,
-                        id: uuidv4(),
-                        quantity: 1,
-                      },
-                    ]);
+                // () => console.log('BUTTON CLICKED')
+
+                // () => {
+                // const guestOrderItem = guestOrderItems.find(
+                //   (guestItem) => guestItem.productId === product.id
+                // );
+
+                // guestOrderItem
+                //   ? setGuestOrderItems(
+                //       guestOrderItems.map((guestItem) =>
+                //         guestItem.id === guestOrderItem.id
+                //           ? {
+                //               ...guestOrderItem,
+                //               quantity: guestOrderItem.quantity + 1,
+                //             }
+                //           : guestItem
+                //       )
+                //     )
+                //   : setGuestOrderItems([
+                //       ...guestOrderItems,
+                //       {
+                //         productId: product.id,
+                //         userId: null,
+                //         id: uuidv4(),
+                //         quantity: 1,
+                //       },
+                //     ]);
                 // console.log(JSON.parse(myStorage));
                 // const guestOrderItem = parsedNewGuestOrder.orderItems.find(
                 //   (orderItem) => orderItem.productId === product.id
@@ -173,7 +185,8 @@ const Products = () => {
                 //         userId: null,
                 //       })
                 //     );
-              }}
+                // }
+              }
             >
               Add to Cart
             </button>
