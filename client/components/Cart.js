@@ -22,7 +22,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const guestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
+  const guestOrderItems = JSON.parse(localStorage.getItem('orderitems')) || [];
 
   return (
     <div>

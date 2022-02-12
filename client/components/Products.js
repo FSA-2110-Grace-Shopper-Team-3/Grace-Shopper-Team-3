@@ -13,8 +13,6 @@ const Products = () => {
   let products = useSelector((state) => state.products);
   const orderItems = useSelector((state) => state.orderItems);
 
-  const dispatch = useDispatch();
-
   const id = useSelector((state) => state.auth.id);
 
   const orders = useSelector((state) => state.orders);
@@ -46,8 +44,6 @@ const Products = () => {
   const [guestOrderItems, setGuestOrderItems] = useState(
     currentGuestItemsFromLocal
   );
-  console.log(guestOrderItems);
-  // let currentGuessOrderItems = myStorage.getItem('orderitems');
 
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestOrderItems));

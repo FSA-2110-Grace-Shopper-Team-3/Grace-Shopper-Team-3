@@ -25,17 +25,22 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     acc += item.quantity;
     return acc;
   }, 0);
+
+  const dispatch = useDispatch();
   //-------------------Guest Cart Functionality---------------------//
 
-  const guestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
+  // const guestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
 
-  // useEffect(() => {}, [guestOrderItems]);
+  const GuestOrderItems = JSON.parse(localStorage.getItem('orderitems')) || [];
 
-  const GuestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
   const guestCartTotal = GuestOrderItems.reduce((acc, item) => {
     acc += item.quantity;
     return acc;
   }, 0);
+
+  useEffect(() => {
+    console.log('CHANGED!');
+  }, [guestCartTotal]);
 
   console.log('navbar rendered!');
   return (
