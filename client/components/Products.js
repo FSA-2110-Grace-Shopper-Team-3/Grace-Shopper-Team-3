@@ -46,7 +46,8 @@ const Products = () => {
   const [guestOrderItems, setGuestOrderItems] = useState(
     currentGuestItemsFromLocal
   );
-  console.log(guestOrderItems);
+
+  // localStorage.removeItem('orderitems');
   // let currentGuessOrderItems = myStorage.getItem('orderitems');
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const Products = () => {
   // myStorage.setItem('guestOrder', JSON.stringify(guestOrder));
   // const parsedNewGuestOrder = JSON.parse(myStorage.guestOrder);
   // console.log(JSON.parse(myStorage.guestOrder));
+  // console.log(JSON.parse(localStorage.orderitems));
   return (
     <div>
       <div>
