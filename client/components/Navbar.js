@@ -31,7 +31,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
 
   // useEffect(() => {}, [guestOrderItems]);
 
-  const GuestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
+  const GuestOrderItems = JSON.parse(localStorage.getItem('orderitems')) || [];
   const guestCartTotal = GuestOrderItems.reduce((acc, item) => {
     acc += item.quantity;
     return acc;

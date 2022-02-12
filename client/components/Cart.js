@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteOrderItem, editOrderItem, addOrder, editOrder } from '../store';
 import { Link, useHistory } from 'react-router-dom';
@@ -22,8 +22,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const guestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
-
+  console.log(JSON.parse(localStorage.getItem('orderitems')));
   return (
     <div>
       <ul>
@@ -124,6 +123,9 @@ const Cart = () => {
       >
         Submit Order
       </button>
+      <form action="/api/create-checkout-session" method="POST">
+        <button type="submit">Checkout</button>
+      </form>
       <Link to="/orderhistory">View Order History</Link>
     </div>
   );
