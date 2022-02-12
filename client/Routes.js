@@ -22,7 +22,7 @@ import {
   getOrderItems,
   getOrders,
   getUsers,
-  // createGuestOrder,
+  guestOrderItems,
 } from './store';
 
 import OrderHistory from './components/OrderHistory';
@@ -36,12 +36,20 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (
+  //     prevProps.guestOrderItems.length !== this.props.guestOrderItems.length
+  //   ) {
+  //     this.props.guestOrderItems;
+  //   }
+  // }
+
   render() {
     const { isLoggedIn, users } = this.props;
 
     const currUser = users.find((user) => user.id === this.props.auth.id) || {};
 
-    // console.log('PROPS', this.props);
+    // console.log('PROPS FROM ROUTES', this.props);
 
     return (
       <div>
@@ -102,7 +110,6 @@ const mapDispatch = (dispatch) => {
       dispatch(me());
       dispatch(getOrders());
       dispatch(getUsers());
-      // dispatch(createGuestOrder());
     },
   };
 };
