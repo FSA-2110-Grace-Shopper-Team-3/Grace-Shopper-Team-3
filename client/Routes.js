@@ -15,6 +15,8 @@ import Analytics from './components/Analytics';
 import Orders from './components/Orders';
 import EditUser from './components/EditUser';
 import EditProduct from './components/EditProduct';
+// import { getGuestOrderItems } from './store/guestOrderItems';
+import OrderHistory from './components/OrderHistory';
 
 import {
   me,
@@ -22,10 +24,8 @@ import {
   getOrderItems,
   getOrders,
   getUsers,
-  guestOrderItems,
+  getGuestOrderItems,
 } from './store';
-
-import OrderHistory from './components/OrderHistory';
 
 /**
  * COMPONENT
@@ -36,20 +36,10 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (
-  //     prevProps.guestOrderItems.length !== this.props.guestOrderItems.length
-  //   ) {
-  //     this.props.guestOrderItems;
-  //   }
-  // }
-
   render() {
     const { isLoggedIn, users } = this.props;
 
     const currUser = users.find((user) => user.id === this.props.auth.id) || {};
-
-    // console.log('PROPS FROM ROUTES', this.props);
 
     return (
       <div>
@@ -110,6 +100,7 @@ const mapDispatch = (dispatch) => {
       dispatch(me());
       dispatch(getOrders());
       dispatch(getUsers());
+      dispatch(getGuestOrderItems());
     },
   };
 };

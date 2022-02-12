@@ -27,17 +27,13 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   }, 0);
   //-------------------Guest Cart Functionality---------------------//
 
-  const guestOrderItems = JSON.parse(localStorage.getItem('orderitems'));
+  const guestCart = useSelector((state) => state.guestOrderItems);
 
-  // useEffect(() => {}, [guestOrderItems]);
-
-  const GuestOrderItems = JSON.parse(localStorage.getItem('orderitems')) || [];
-  const guestCartTotal = GuestOrderItems.reduce((acc, item) => {
+  const guestCartTotal = guestCart.reduce((acc, item) => {
     acc += item.quantity;
     return acc;
   }, 0);
 
-  console.log('navbar rendered!');
   return (
     <div>
       <h1>FS-App-Template</h1>
