@@ -24,9 +24,9 @@ const Products = () => {
 
   const orders = useSelector((state) => state.orders);
 
-  const matchOrder = orders.find(
-    (order) => order.userId === id && order.isOrdered === false
-  );
+  const matchOrder =
+    orders.find((order) => order.userId === id && order.isOrdered === false) ||
+    {};
 
   const match = useRouteMatch();
 
@@ -49,6 +49,8 @@ const Products = () => {
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
+
+  useEffect(() => {}, [orders]);
 
   return (
     <div>

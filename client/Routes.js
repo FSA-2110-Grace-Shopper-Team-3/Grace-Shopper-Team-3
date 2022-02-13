@@ -36,6 +36,12 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.auth.id !== this.props.auth.id) {
+      this.props.loadInitialData();
+    }
+  }
+
   render() {
     const { isLoggedIn, users } = this.props;
 
@@ -73,6 +79,7 @@ class Routes extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/products" component={Products} />
             <Route exact path="/products/:id" component={SingleProduct} />
+            <Redirect to="/products" />
           </Switch>
         )}
       </div>
