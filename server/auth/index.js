@@ -17,6 +17,7 @@ router.post('/signup', async (req, res, next) => {
     const user = await User.create({
       username: req.body.username,
       password: req.body.password,
+      email: req.body.email,
     });
 
     const order = await Order.create({
@@ -24,6 +25,7 @@ router.post('/signup', async (req, res, next) => {
     });
 
     res.send({ token: await user.generateToken() });
+    // res.redirect('http://localhost:8080/products');
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
       res.status(401).send('User already exists');

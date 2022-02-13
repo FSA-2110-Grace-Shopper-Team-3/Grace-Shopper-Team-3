@@ -39,6 +39,22 @@ export const authenticate =
     }
   };
 
+export const authenticateNewUser =
+  (username, password, email, method) => async (dispatch) => {
+    try {
+      const res = await axios.post(`/auth/${method}`, {
+        username,
+        password,
+        email,
+      });
+      window.localStorage.setItem(TOKEN, res.data.token);
+      dispatch(me());
+      // history.push('/login');
+    } catch (authError) {
+      return dispatch(setAuth({ error: authError }));
+    }
+  };
+
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
   history.push('/login');
