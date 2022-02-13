@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
-const { STRING, INTEGER, TEXT, UUID, UUIDV4, BOOLEAN } = Sequelize;
+const { DECIMAL, UUID, UUIDV4, BOOLEAN } = Sequelize;
 
 const Order = db.define('order', {
   id: {
@@ -12,6 +12,10 @@ const Order = db.define('order', {
   isOrdered: {
     type: BOOLEAN,
     defaultValue: false,
+  },
+  totalPrice: {
+    type: DECIMAL,
+    defaultValue: 0,
   },
 });
 

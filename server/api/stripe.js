@@ -1,17 +1,22 @@
 const router = require('express').Router();
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+const { Op } = require('sequelize');
+const {
+  models: { Order },
+} = require('../db');
+const cors = require('cors');
 
 module.exports = router;
 const DOMAIN = 'http:/localhost/8080';
 
 // CREATE AN ORDER
-router.post('/', async (req, res, next) => {
+router.post('/', cors(), async (req, res, next) => {
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
-          name: 'Apple',
-          amount: 200,
+          name: 'Total Items',
+          amount: 100,
           currency: 'usd',
           quantity: 1,
         },

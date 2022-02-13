@@ -9,6 +9,7 @@ import {
   editGuestOrderItem,
 } from '../store';
 import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const Cart = () => {
   const orderItems = useSelector((state) => state.orderItems);
@@ -26,20 +27,37 @@ const Cart = () => {
     (orderItem) => orderItem.orderId === matchingOrder.id
   );
 
+  const userCartPriceTotal = matchingOrderItems.reduce((acc, curr) => {
+    const currentProduct =
+      products.find((product) => product.id === curr.productId) || {};
+    acc += currentProduct.price * curr.quantity;
+    return acc;
+  }, 0);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
+  //-------------------Guest Cart Functionality---------------------//
+
   const guestCart = useSelector((state) => state.guestOrderItems);
-  // console.log(JSON.parse(localStorage.getItem('orderitems')));
+
+  const guestCartPriceTotal = guestCart.reduce((acc, curr) => {
+    const currentProduct =
+      products.find((product) => product.id === curr.productId) || {};
+    acc += currentProduct.price * curr.quantity;
+    return acc;
+  }, 0);
 
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
+
   return (
     <div>
       <ul>
-        {!userId
-          ? guestCart.map((orderItem) => {
+        {!userId ? (
+          <div>
+            {guestCart.map((orderItem) => {
               const cartItem =
                 products.find(
                   (product) => product.id === orderItem.productId
@@ -82,8 +100,12 @@ const Cart = () => {
                   </button>
                 </li>
               );
-            })
-          : matchingOrderItems.map((orderItem) => {
+            })}
+            <h2>Total Price: {guestCartPriceTotal.toFixed(2)}</h2>
+          </div>
+        ) : (
+          <div>
+            {matchingOrderItems.map((orderItem) => {
               const cartItem =
                 products.find(
                   (product) => product.id === orderItem.productId
@@ -127,10 +149,19 @@ const Cart = () => {
                 </li>
               );
             })}
+            <h2>Total Price: {userCartPriceTotal.toFixed(2)}</h2>
+          </div>
+        )}
       </ul>
       <button
         onClick={() => {
-          dispatch(editOrder({ id: matchingOrder.id, isOrdered: true }));
+          dispatch(
+            editOrder({
+              id: matchingOrder.id,
+              isOrdered: true,
+              totalPrice: userCartPriceTotal.toFixed(2),
+            })
+          );
           dispatch(addOrder({ userId: userId }));
           history.push('/orderPlaced');
         }}
