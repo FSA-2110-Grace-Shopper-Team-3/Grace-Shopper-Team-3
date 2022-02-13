@@ -32,16 +32,37 @@ const Products = () => {
 
   if (match.params.sortBy) {
     const field = match.params.sortBy;
-    products = [...products].sort((a, b) => {
-      if (field === 'lowtohighprice') {
-        return a.price - b.price;
-      }
-      if (field === 'hightolowprice') {
-        return b.price - a.price;
-      }
-      return a[field].localeCompare(b[field]);
-    });
+    if (field === 'guitars') {
+      products = [...products].filter(
+        (product) => product.category === 'Guitar'
+      );
+    } else if (field === 'drums') {
+      products = [...products].filter((product) => product.category === 'Drum');
+    } else if (field === 'cellos') {
+      products = [...products].filter(
+        (product) => product.category === 'Cello'
+      );
+    } else if (field === 'accesories') {
+      products = [...products].filter(
+        (product) => product.category === 'Accesory'
+      );
+    } else if (field === 'pianos') {
+      products = [...products].filter(
+        (product) => product.category === 'Piano'
+      );
+    } else {
+      products = [...products].sort((a, b) => {
+        if (field === 'lowtohighprice') {
+          return a.price - b.price;
+        }
+        if (field === 'hightolowprice') {
+          return b.price - a.price;
+        }
+        return a[field].localeCompare(b[field]);
+      });
+    }
   }
+
   //-------------------Guest Cart Functionality---------------------//
 
   const guestCart = useSelector((state) => state.guestOrderItems);
@@ -57,6 +78,11 @@ const Products = () => {
       <div>
         <h3>Welcome, {username ? username : 'Guest!'}</h3>
         <div className="sortinglinks">
+          <Link to={`/products/sort/guitars`}>Guitars </Link>
+          <Link to={`/products/sort/drums`}>Drums </Link>
+          <Link to={`/products/sort/cellos`}>Cellos </Link>
+          <Link to={`/products/sort/pianos`}>Pianos </Link>
+          <Link to={`/products/sort/accesories`}>Accesories </Link>
           <Link to={`/products/sort/brand`}>sort by brand </Link>
           <Link to={`/products/sort/model`}>sort by model</Link>
           <Link to={`/products/sort/lowtohighprice`}>

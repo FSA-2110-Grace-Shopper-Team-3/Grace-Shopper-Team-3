@@ -56,6 +56,11 @@ class Routes extends Component {
             <Route exact path="/admin/users/:id" component={EditUser} />
             <Route exact path="/admin/settings" component={AdminSettings} />
             <Route exact path="/admin/inventory" component={ProductInventory} />
+            <Route
+              exact
+              path="/admin/inventory/sort/:sortBy"
+              component={ProductInventory}
+            />
             <Route exact path="/admin/inventory/:id" component={EditProduct} />
             <Route exact path="/admin/analytics" component={Analytics} />
             <Route exact path="/admin/orders" component={Orders} />
@@ -78,6 +83,7 @@ class Routes extends Component {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/products" component={Products} />
+            <Route exact path="/products/sort/:sortBy" component={Products} />
             <Route exact path="/products/:id" component={SingleProduct} />
             <Redirect to="/products" />
           </Switch>
