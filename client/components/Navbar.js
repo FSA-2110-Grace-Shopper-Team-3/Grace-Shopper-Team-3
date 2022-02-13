@@ -25,9 +25,10 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     acc += item.quantity;
     return acc;
   }, 0);
+
   //-------------------Guest Cart Functionality---------------------//
 
-  const guestCart = useSelector((state) => state.guestOrderItems);
+  const guestCart = useSelector((state) => state.guestOrderItems) || [];
 
   const guestCartTotal = guestCart.reduce((acc, item) => {
     acc += item.quantity;

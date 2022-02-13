@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { addOrderItem, editOrderItem, addGuestOrderItem } from '../store';
+import {
+  addOrderItem,
+  editOrderItem,
+  addGuestOrderItem,
+  editGuestOrderItem,
+} from '../store';
 import { v4 as uuidv4 } from 'uuid';
 
 const currentGuestItemsFromLocal = JSON.parse(
@@ -38,12 +43,6 @@ const Products = () => {
     });
   }
   //-------------------Guest Cart Functionality---------------------//
-  // const [guestOrderItems, setGuestOrderItems] = useState(
-  //   currentGuestItemsFromLocal
-  // );
-
-  // localStorage.removeItem('orderitems');
-  // let currentGuessOrderItems = myStorage.getItem('orderitems');
 
   const guestCart = useSelector((state) => state.guestOrderItems);
 
@@ -51,14 +50,6 @@ const Products = () => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
 
-  console.log('GUEST CART', guestCart);
-
-  // console.log('products rendered!!');
-  // console.log(typeof guestOrderItems);
-  // myStorage.setItem('guestOrder', JSON.stringify(guestOrder));
-  // const parsedNewGuestOrder = JSON.parse(myStorage.guestOrder);
-  // console.log(JSON.parse(myStorage.guestOrder));
-  // console.log(JSON.parse(localStorage.orderitems));
   return (
     <div>
       <div>
@@ -82,8 +73,8 @@ const Products = () => {
             }
 
             <button
-              onClick={
-                () =>
+              onClick={() => {
+                if (!id)
                   dispatch(
                     addGuestOrderItem({
                       productId: product.id,
@@ -91,102 +82,30 @@ const Products = () => {
                       id: uuidv4(),
                       quantity: 1,
                     })
-                  )
-
-                // () => console.log('BUTTON CLICKED')
-
-                // () => {
-                // const guestOrderItem = guestOrderItems.find(
-                //   (guestItem) => guestItem.productId === product.id
-                // );
-
-                // guestOrderItem
-                //   ? setGuestOrderItems(
-                //       guestOrderItems.map((guestItem) =>
-                //         guestItem.id === guestOrderItem.id
-                //           ? {
-                //               ...guestOrderItem,
-                //               quantity: guestOrderItem.quantity + 1,
-                //             }
-                //           : guestItem
-                //       )
-                //     )
-                //   : setGuestOrderItems([
-                //       ...guestOrderItems,
-                //       {
-                //         productId: product.id,
-                //         userId: null,
-                //         id: uuidv4(),
-                //         quantity: 1,
-                //       },
-                //     ]);
-                // console.log(JSON.parse(myStorage));
-                // const guestOrderItem = parsedNewGuestOrder.orderItems.find(
-                //   (orderItem) => orderItem.productId === product.id
-                // );
-                // if (guestOrderItem) {
-                //   guestOrderItem.quantity += 1;
-                // } else {
-                //   parsedNewGuestOrder.orderItems.push({
-                //     productId: product.id,
-                //     orderId: parsedNewGuestOrder.id,
-                //     userId: null,
-                //   });
-                //   myStorage.setItem(
-                //     'guestOrder',
-                //     JSON.stringify(parsedNewGuestOrder)
-                //   );
-                //   console.log(myStorage.guestOrder);
-                // }
-                // const orderItem = orderItems.find(
-                //   (orderItem) =>
-                //     orderItem.productId === product.id &&
-                //     orderItem.orderId === matchOrder.id
-                // );
-                // orderItem
-                //   ? dispatch(
-                //       editOrderItem({
-                //         id: orderItem.id,
-                //         quantity: orderItem.quantity + 1,
-                //         userId: id,
-                //       })
-                //     )
-                //   : dispatch(
-                //       addOrderItem({
-                //         productId: product.id,
-                //         orderId: matchOrder.id,
-                //         userId: id,
-                //       })
-                //     );
-                // const guestOrderItem = orderItems.find(
-                //   (orderItem) =>
-                //     orderItem.productId === product.id &&
-                //     orderItem.orderId === guestOrder.id
-                // );
-                // dispatch(
-                //   addOrderItem({
-                //     productId: product.id,
-                //     orderId: guestOrder.id,
-                //     userId: null,
-                //   })
-                // );
-                // guestOrderItem
-                //   ? dispatch(
-                //       editOrderItem({
-                //         id: orderItem.id,
-                //         quantity: orderItem.quantity + 1,
-                //         userId: null,
-                //       })
-                //     )
-                //   : dispatch(
-                //       addOrderItem({
-                //         productId: product.id,
-                //         orderId: guestOrder.id,
-                //         userId: null,
-                //       })
-                //     );
-                // }
-              }
+                  );
+                else {
+                  const orderItem = orderItems.find(
+                    (orderItem) =>
+                      orderItem.productId === product.id &&
+                      orderItem.orderId === matchOrder.id
+                  );
+                  orderItem
+                    ? dispatch(
+                        editOrderItem({
+                          id: orderItem.id,
+                          quantity: orderItem.quantity + 1,
+                          userId: id,
+                        })
+                      )
+                    : dispatch(
+                        addOrderItem({
+                          productId: product.id,
+                          orderId: matchOrder.id,
+                          userId: id,
+                        })
+                      );
+                }
+              }}
             >
               Add to Cart
             </button>
