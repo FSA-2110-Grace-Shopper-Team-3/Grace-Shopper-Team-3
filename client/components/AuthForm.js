@@ -19,22 +19,22 @@ const AuthForm = (props) => {
             <label htmlFor="username">
               <small>Username</small>
             </label>
-            <input name="username" type="text" />
+            <input name="username" type="text" required />
           </div>
           <div>
             <label htmlFor="password">
               <small>Password</small>
             </label>
-            <input name="password" type="password" />
+            <input name="password" type="password" required />
           </div>
           <div>
             <label htmlFor="email">
               <small>e-mail</small>
             </label>
-            <input name="email" type="email" />
+            <input name="email" type="email" required />
           </div>
           <div>
-            <button type="submit">{displayName}</button>
+            <button type="submit">{displayName} </button>
           </div>
           {error && error.response && <div> {error.response.data} </div>}
         </form>
@@ -85,7 +85,7 @@ const mapSignup = (state) => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: state.auth.error,
+    email: state.auth.email,
   };
 };
 
