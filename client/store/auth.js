@@ -49,7 +49,6 @@ export const authenticateNewUser =
       });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
-      // history.push('/login');
     } catch (authError) {
       return dispatch(setAuth({ error: authError }));
     }

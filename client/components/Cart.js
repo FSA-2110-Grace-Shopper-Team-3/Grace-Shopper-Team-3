@@ -9,7 +9,6 @@ import {
   editGuestOrderItem,
 } from '../store';
 import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
 
 const Cart = () => {
   const orderItems = useSelector((state) => state.orderItems);
@@ -101,7 +100,7 @@ const Cart = () => {
                 </li>
               );
             })}
-            <h2>Total Price: {guestCartPriceTotal.toFixed(2)}</h2>
+            <h2>Total Price: ${guestCartPriceTotal.toFixed(2)}</h2>
           </div>
         ) : (
           <div>
@@ -149,7 +148,7 @@ const Cart = () => {
                 </li>
               );
             })}
-            <h2>Total Price: {userCartPriceTotal.toFixed(2)}</h2>
+            <h2>Total Price: ${userCartPriceTotal.toFixed(2)}</h2>
           </div>
         )}
       </ul>

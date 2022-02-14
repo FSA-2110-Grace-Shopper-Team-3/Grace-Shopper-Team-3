@@ -15,7 +15,6 @@ import Analytics from './components/Analytics';
 import Orders from './components/Orders';
 import EditUser from './components/EditUser';
 import EditProduct from './components/EditProduct';
-// import { getGuestOrderItems } from './store/guestOrderItems';
 import OrderHistory from './components/OrderHistory';
 
 import {

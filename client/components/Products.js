@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import {
@@ -6,12 +6,9 @@ import {
   editOrderItem,
   addGuestOrderItem,
   editGuestOrderItem,
+  editOrder,
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
-
-const currentGuestItemsFromLocal = JSON.parse(
-  localStorage.getItem('orderitems') || '[]'
-);
 
 const Products = () => {
   const username = useSelector((state) => state.auth.username);
@@ -66,12 +63,16 @@ const Products = () => {
   //-------------------Guest Cart Functionality---------------------//
 
   const guestCart = useSelector((state) => state.guestOrderItems);
+  const users = useSelector((state) => state.users);
 
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
 
-  useEffect(() => {}, [orders]);
+  //TRYING TO UPDATE CURRENT USER ORDER WITH GUEST CART ITEMS
+  useEffect(() => {
+    dispatch(editOrder({ ...matchOrder, orderItems: [...guestCart] }) || '');
+  }, [users]);
 
   return (
     <div>
@@ -99,19 +100,31 @@ const Products = () => {
                 {product.category} - {product.brand} - {product.model}
               </Link>
             }
-
             <button
               onClick={() => {
-                if (!id)
-                  dispatch(
-                    addGuestOrderItem({
-                      productId: product.id,
-                      userId: null,
-                      id: uuidv4(),
-                      quantity: 1,
-                    })
+                if (!id) {
+                  const guestOrderItem = guestCart.find(
+                    (orderItem) =>
+                      orderItem.productId === product.id &&
+                      orderItem.userId === null
                   );
-                else {
+                  guestOrderItem
+                    ? dispatch(
+                        editGuestOrderItem({
+                          ...guestOrderItem,
+                          id: guestOrderItem.id,
+                          quantity: guestOrderItem.quantity + 1,
+                        })
+                      )
+                    : dispatch(
+                        addGuestOrderItem({
+                          productId: product.id,
+                          userId: null,
+                          id: uuidv4(),
+                          quantity: 1,
+                        })
+                      );
+                } else {
                   const orderItem = orderItems.find(
                     (orderItem) =>
                       orderItem.productId === product.id &&
