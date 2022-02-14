@@ -56,6 +56,7 @@ export const authenticateNewUser =
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
+  window.localStorage.removeItem('orderitems');
   history.push('/login');
   return {
     type: SET_AUTH,

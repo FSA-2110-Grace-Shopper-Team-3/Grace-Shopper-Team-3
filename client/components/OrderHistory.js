@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const OrderHistory = () => {
-  const currentUserId = useSelector((state) => state.auth.id);
-  const orderItems = useSelector((state) => state.orderItems);
-  const products = useSelector((state) => state.products);
+  const currentUserId = useSelector((state) => state.auth.id) || '';
+  const orderItems = useSelector((state) => state.orderItems) || [];
+  const products = useSelector((state) => state.products) || [];
   const matchingOrders =
     useSelector((state) =>
       state.orders.filter(

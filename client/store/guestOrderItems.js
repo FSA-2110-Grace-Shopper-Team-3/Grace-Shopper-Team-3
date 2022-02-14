@@ -5,6 +5,7 @@ const GET_GUEST_ORDER_ITEMS = 'GET_GUEST_ORDER_ITEMS';
 const ADD_GUEST_ORDER_ITEM = 'ADD_GUEST_ORDER_ITEM';
 const DELETE_GUEST_ORDER_ITEM = 'DELETE_GUEST_ORDER_ITEM';
 const EDIT_GUEST_ORDER_ITEM = 'EDIT_GUEST_ORDER_ITEM';
+const EMPTY_GUEST_ORDER_ITEMS = 'EMPTY_GUEST_ORDER_ITEMS';
 
 /**
  * ACTION CREATORS
@@ -29,12 +30,17 @@ const _editGuestOrderItem = (orderItem) => ({
   orderItem,
 });
 
+const _emptyGuestOrderItem = () => ({
+  type: EMPTY_GUEST_ORDER_ITEMS,
+  // emptyArray,
+});
+
 /**
  * THUNK CREATORS
  */
 export const getGuestOrderItems = () => {
   return (dispatch) => {
-    const orderItems = JSON.parse(localStorage.getItem('orderitems'));
+    const orderItems = JSON.parse(localStorage.getItem('orderitems')) || [];
     dispatch(_getGuestOrderItems(orderItems));
   };
 };
@@ -62,6 +68,12 @@ export const editGuestOrderItem = (orderItem) => {
   };
 };
 
+export const emptyGuestOrderItem = () => {
+  return (dispatch) => {
+    dispatch(_emptyGuestOrderItem([]));
+  };
+};
+
 /**
  * REDUCER
  */
@@ -78,6 +90,8 @@ export const guestOrderItems = (state = [], action) => {
       return state.map((item) =>
         item.id === action.orderItem.id ? action.orderItem : item
       );
+    case EMPTY_GUEST_ORDER_ITEMS:
+      return [];
     default:
       return state;
   }

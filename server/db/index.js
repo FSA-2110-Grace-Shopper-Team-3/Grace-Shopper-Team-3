@@ -10,8 +10,8 @@ const OrderItem = require('./models/OrderItem');
 //associations
 User.hasMany(Order);
 Order.belongsTo(User);
-OrderItem.belongsTo(Order);
-OrderItem.belongsTo(Product);
+OrderItem.belongsTo(Order, { constraints: false });
+OrderItem.belongsTo(Product, { constraints: false });
 Order.hasMany(OrderItem);
 Product.hasMany(OrderItem);
 User.hasMany(OrderItem);

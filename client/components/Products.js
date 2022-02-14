@@ -11,15 +11,15 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 
 const Products = () => {
-  const username = useSelector((state) => state.auth.username);
-  let products = useSelector((state) => state.products);
-  const orderItems = useSelector((state) => state.orderItems);
+  const username = useSelector((state) => state.auth.username) || '';
+  let products = useSelector((state) => state.products) || [];
+  const orderItems = useSelector((state) => state.orderItems) || [];
 
   const dispatch = useDispatch();
 
-  const id = useSelector((state) => state.auth.id);
+  const id = useSelector((state) => state.auth.id) || '';
 
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((state) => state.orders) || [];
 
   const matchOrder =
     orders.find((order) => order.userId === id && order.isOrdered === false) ||
@@ -62,17 +62,39 @@ const Products = () => {
 
   //-------------------Guest Cart Functionality---------------------//
 
-  const guestCart = useSelector((state) => state.guestOrderItems);
-  const users = useSelector((state) => state.users);
+  const guestCart = useSelector((state) => state.guestOrderItems) || [];
+  const users = useSelector((state) => state.users) || [];
 
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
 
   //TRYING TO UPDATE CURRENT USER ORDER WITH GUEST CART ITEMS
+  // useEffect(() => {
+  //   dispatch(editOrder({ ...matchOrder, orderItems: [...guestCart] }) || '');
+  // }, [users]);
+
+  //-------------------Guest to Login Cart Functionality---------------------//
+
+  const guestToUserCart =
+    guestCart.map((guestItem) => {
+      const item = { ...guestItem, orderId: matchOrder.id, userId: id };
+      return item;
+    }) || [];
+
   useEffect(() => {
-    dispatch(editOrder({ ...matchOrder, orderItems: [...guestCart] }) || '');
-  }, [users]);
+    if (id) {
+      guestToUserCart.forEach((guestCartItem) => {
+        const itemFound = orderItems.find(
+          (orderItem) => orderItem.id === guestCartItem.id
+        );
+
+        if (!itemFound) {
+          dispatch(addOrderItem(guestCartItem));
+        }
+      });
+    }
+  }, []);
 
   return (
     <div>
