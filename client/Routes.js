@@ -39,6 +39,9 @@ class Routes extends Component {
     if (prevProps.auth.id !== this.props.auth.id) {
       this.props.loadInitialData();
     }
+    if (prevProps.orderItems.length !== this.props.orderItems.length) {
+      this.props.loadInitialData();
+    }
   }
 
   render() {

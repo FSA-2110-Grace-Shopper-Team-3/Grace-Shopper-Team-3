@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout } from '../store';
+import { logout, emptyGuestOrderItem } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
-  const userId = useSelector((state) => state.auth.id);
+  const userId = useSelector((state) => state.auth.id) || '';
 
   const currUser =
     useSelector((state) => state.users.find((user) => user.id === userId)) ||
@@ -17,20 +17,20 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
       )
     ) || {};
 
-  const matchingOrderItems = orderItems.filter(
-    (orderItem) => orderItem.orderId === matchingOrder.id
-  );
-
-  const cartTotal = matchingOrderItems.reduce((acc, item) => {
-    acc += item.quantity;
-    return acc;
-  }, 0);
+  const matchingOrderItems =
+    orderItems.filter((orderItem) => orderItem.orderId === matchingOrder.id) ||
+    [];
 
   //-------------------Guest Cart Functionality---------------------//
 
   const guestCart = useSelector((state) => state.guestOrderItems) || [];
 
   const guestCartTotal = guestCart.reduce((acc, item) => {
+    acc += item.quantity;
+    return acc;
+  }, 0);
+
+  const cartTotal = matchingOrderItems.reduce((acc, item) => {
     acc += item.quantity;
     return acc;
   }, 0);
@@ -91,6 +91,7 @@ const mapDispatch = (dispatch) => {
   return {
     handleClick() {
       dispatch(logout());
+      dispatch(emptyGuestOrderItem());
     },
   };
 };

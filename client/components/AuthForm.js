@@ -11,12 +11,6 @@ import auth from '../store/auth';
 const AuthForm = (props) => {
   const { displayName, handleLogin, handleSignup, error, name, match } = props;
 
-  const guestCart = useSelector((state) => state.guestOrderItems);
-
-  console.log(guestCart);
-
-  const handleSignUp = () => {};
-
   if (match.path === '/' || match.path === '/signup') {
     return (
       <div>
