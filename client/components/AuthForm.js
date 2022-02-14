@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, useSelector } from 'react-redux';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import { authenticate } from '../store';
 import { authenticateNewUser } from '../store';
 import auth from '../store/auth';
@@ -10,6 +10,12 @@ import auth from '../store/auth';
 
 const AuthForm = (props) => {
   const { displayName, handleLogin, handleSignup, error, name, match } = props;
+
+  const guestCart = useSelector((state) => state.guestOrderItems);
+
+  console.log(guestCart);
+
+  const handleSignUp = () => {};
 
   if (match.path === '/' || match.path === '/signup') {
     return (

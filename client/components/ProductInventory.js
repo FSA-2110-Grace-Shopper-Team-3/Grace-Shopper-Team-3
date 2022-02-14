@@ -2,10 +2,12 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import AddProduct from './AddProduct';
+import { deleteProd } from '../store';
 
 const ProductInventory = () => {
   let products = useSelector((state) => state.products);
   const match = useRouteMatch();
+  const dispatch = useDispatch();
 
   if (match.params.sortBy) {
     const field = match.params.sortBy;
@@ -59,6 +61,7 @@ const ProductInventory = () => {
       <div className="inventory">
         {products.map((product) => (
           <div key={product.id}>
+            <button onClick={() => dispatch(deleteProd(product.id))}>x</button>
             <Link to={`/admin/inventory/${product.id}`}>
               {product.category} - {product.brand} - {product.model} - Price: $
               {product.price}
