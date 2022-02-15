@@ -8,23 +8,55 @@ import {
   editGuestOrderItem,
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
+import { useEffect } from 'react';
 
 const SingleProduct = () => {
   const { id } = useParams();
-  const currentUserId = useSelector((state) => state.auth.id);
+  const currentUserId = useSelector((state) => state.auth.id) || '';
   const singleProduct =
     useSelector((state) =>
       state.products.find((product) => product.id === id)
     ) || {};
 
-  const user = useSelector((state) => state.auth.id);
   const orders = useSelector((state) => state.orders);
   const orderItems = useSelector((state) => state.orderItems);
+
   const guestCart = useSelector((state) => state.guestOrderItems);
   const matchOrder =
     orders.find(
-      (order) => order.userId === user && order.isOrdered === false
+      (order) => order.userId === currentUserId && order.isOrdered === false
     ) || {};
+
+  useEffect(() => {
+    localStorage.setItem('orderitems', JSON.stringify(guestCart));
+  }, [guestCart]);
+
+  //-------------------Guest to Login Cart Functionality---------------------//
+
+  const guestToUserCart =
+    guestCart.map((guestItem) => {
+      const item = {
+        ...guestItem,
+        orderId: matchOrder.id,
+        userId: currentUserId,
+      };
+      return item;
+    }) || [];
+
+  useEffect(() => {
+    if (currentUserId) {
+      guestToUserCart.forEach((guestCartItem) => {
+        const itemFound = orderItems.find(
+          (orderItem) => orderItem.id === guestCartItem.id
+        );
+
+        if (!itemFound) {
+          dispatch(addOrderItem(guestCartItem));
+        }
+      });
+    }
+  }, []);
+
   const dispatch = useDispatch();
 
   return (
