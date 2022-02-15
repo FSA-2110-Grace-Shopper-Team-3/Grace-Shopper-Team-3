@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import {
@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Products = () => {
   const username = useSelector((state) => state.auth.username) || '';
-  let products = useSelector((state) => state.products) || [];
+  let products = useSelector((state) => state.products);
   const orderItems = useSelector((state) => state.orderItems) || [];
 
   const dispatch = useDispatch();
@@ -27,38 +27,38 @@ const Products = () => {
 
   const match = useRouteMatch();
 
-  if (match.params.sortBy) {
-    const field = match.params.sortBy;
-    if (field === 'guitars') {
-      products = [...products].filter(
-        (product) => product.category === 'Guitar'
-      );
-    } else if (field === 'drums') {
-      products = [...products].filter((product) => product.category === 'Drum');
-    } else if (field === 'cellos') {
-      products = [...products].filter(
-        (product) => product.category === 'Cello'
-      );
-    } else if (field === 'accesories') {
-      products = [...products].filter(
-        (product) => product.category === 'Accesory'
-      );
-    } else if (field === 'pianos') {
-      products = [...products].filter(
-        (product) => product.category === 'Piano'
-      );
-    } else {
-      products = [...products].sort((a, b) => {
-        if (field === 'lowtohighprice') {
-          return a.price - b.price;
-        }
-        if (field === 'hightolowprice') {
-          return b.price - a.price;
-        }
-        return a[field].localeCompare(b[field]);
-      });
-    }
-  }
+  // if (match.params.sortBy) {
+  //   const field = match.params.sortBy;
+  //   if (field === 'guitars') {
+  //     products = [...products].filter(
+  //       (product) => product.category === 'Guitar'
+  //     );
+  //   } else if (field === 'drums') {
+  //     products = [...products].filter((product) => product.category === 'Drum');
+  //   } else if (field === 'cellos') {
+  //     products = [...products].filter(
+  //       (product) => product.category === 'Cello'
+  //     );
+  //   } else if (field === 'accesories') {
+  //     products = [...products].filter(
+  //       (product) => product.category === 'Accesory'
+  //     );
+  //   } else if (field === 'pianos') {
+  //     products = [...products].filter(
+  //       (product) => product.category === 'Piano'
+  //     );
+  //   } else {
+  //     products = [...products].sort((a, b) => {
+  //       if (field === 'lowtohighprice') {
+  //         return a.price - b.price;
+  //       }
+  //       if (field === 'hightolowprice') {
+  //         return b.price - a.price;
+  //       }
+  //       return a[field].localeCompare(b[field]);
+  //     });
+  //   }
+  // }
 
   //-------------------Guest Cart Functionality---------------------//
 
@@ -96,11 +96,88 @@ const Products = () => {
     }
   }, []);
 
+  const [instruments, setInstruments] = useState(products);
+  useEffect(() => {
+    setInstruments(products);
+  }, [products]);
+
+  const saveInstrument = (event) => {
+    if (event.target.value === 'all') {
+      setInstruments(products);
+    }
+    if (event.target.value === 'guitars') {
+      let guitarProducts = [...products].filter(
+        (product) => product.category === 'Guitar'
+      );
+      setInstruments(guitarProducts);
+    }
+
+    if (event.target.value === 'drums') {
+      let drumProducts = [...products].filter(
+        (product) => product.category === 'Drum'
+      );
+      setInstruments(drumProducts);
+    }
+    if (event.target.value === 'cellos') {
+      let celloProducts = [...products].filter(
+        (product) => product.category === 'Cello'
+      );
+      setInstruments(celloProducts);
+    }
+    if (event.target.value === 'pianos') {
+      let pianoProducts = [...products].filter(
+        (product) => product.category === 'Piano'
+      );
+      setInstruments(pianoProducts);
+    }
+    if (event.target.value === 'accessories') {
+      let accesoryProducts = [...products].filter(
+        (product) => product.category === 'Accesory'
+      );
+      setInstruments(accesoryProducts);
+    }
+  };
+
+  // ------- Not working sorting by price, model etc.
+  // const [productFilter, setProductFilter] = useState(products);
+
+  // const saveProductFilter = (event) => {
+  //   if (event.target.value === 'lowToHigh') {
+  //     let lowPrice = [...instruments].sort((a, b) => {
+  //       return a.price - b.price;
+  //     });
+  //     setProductFilter(lowPrice);
+  //   }
+  //   if (event.target.value === 'highToLow') {
+  //     let highPrice = [...instruments].sort((a, b) => {
+  //       return b.price - a.price;
+  //     });
+  //     setProductFilter(highPrice);
+  //   }
+  // };
+
   return (
     <div>
       <div>
         <h3>Welcome, {username ? username : 'Guest!'}</h3>
-        <div className="sortinglinks">
+        <form>
+          <select onChange={saveInstrument}>
+            <option value="all">All</option>
+            <option value="drums">drums</option>
+            <option value="guitars">guitars</option>
+            <option value="cellos">cellos</option>
+            <option value="pianos">pianos</option>
+            <option value="accessories">accesories</option>
+          </select>
+        </form>
+        {/* <form>
+          <select onChange={saveProductFilter}>
+            <option value="lowToHigh">Sort by price - low to high</option>
+            <option value="highToLow">Sort by price - high to low</option>
+          </select>
+        </form> */}
+
+        {/* <div className="sortinglinks">
           <Link to={`/products/sort/guitars`}>Guitars </Link>
           <Link to={`/products/sort/drums`}>Drums </Link>
           <Link to={`/products/sort/cellos`}>Cellos </Link>
@@ -112,9 +189,9 @@ const Products = () => {
             sort by price low to high
           </Link>
           <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
-        </div>
+        </div> */}
       </div>
-      {products.map((product) => {
+      {instruments.map((product) => {
         return (
           <div key={product.id}>
             {
