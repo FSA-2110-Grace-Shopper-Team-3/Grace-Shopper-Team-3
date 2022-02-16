@@ -33,6 +33,9 @@ const User = db.define('user', {
     },
     allowNull: false,
   },
+  img: {
+    type: STRING,
+  },
   // address: {
   //   type: STRING,
   //   allowNull: false,

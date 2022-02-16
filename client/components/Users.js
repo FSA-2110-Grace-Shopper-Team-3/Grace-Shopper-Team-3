@@ -13,7 +13,7 @@ const Users = () => {
     <div>
       {users.map((user) => (
         <div key={user.id}>
-          <button onClick={() => dispatch(deleteUser(user.id))}>x</button>
+          <button onClick={() => dispatch(deleteUser(user.id))}>delete</button>
           <Link to={`/admin/users/${user.id}`}>{user.username} </Link>
         </div>
       ))}

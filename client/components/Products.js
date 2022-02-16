@@ -63,16 +63,10 @@ const Products = () => {
   //-------------------Guest Cart Functionality---------------------//
 
   const guestCart = useSelector((state) => state.guestOrderItems) || [];
-  const users = useSelector((state) => state.users) || [];
 
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
-
-  //TRYING TO UPDATE CURRENT USER ORDER WITH GUEST CART ITEMS
-  // useEffect(() => {
-  //   dispatch(editOrder({ ...matchOrder, orderItems: [...guestCart] }) || '');
-  // }, [users]);
 
   //-------------------Guest to Login Cart Functionality---------------------//
 
