@@ -42,6 +42,9 @@ class Routes extends Component {
     if (prevProps.orderItems.length !== this.props.orderItems.length) {
       this.props.loadInitialData();
     }
+    if (prevProps.orderItems.length !== this.props.orderItems.length) {
+      this.props.loadInitialData();
+    }
   }
 
   render() {
@@ -88,7 +91,7 @@ class Routes extends Component {
             <Route exact path="/products" component={Products} />
             <Route exact path="/products/sort/:sortBy" component={Products} />
             <Route exact path="/products/:id" component={SingleProduct} />
-            <Redirect to="/products" />
+            {/* <Redirect to="/products" /> */}
           </Switch>
         )}
       </div>
