@@ -42,9 +42,9 @@ class Routes extends Component {
     if (prevProps.orderItems.length !== this.props.orderItems.length) {
       this.props.loadInitialData();
     }
-    if (prevProps.orderItems.length !== this.props.orderItems.length) {
-      this.props.loadInitialData();
-    }
+    // if (prevProps.orders.length !== this.props.orders.length) {
+    //   this.props.loadInitialData();
+    // }
   }
 
   render() {
