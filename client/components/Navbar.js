@@ -58,6 +58,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
               Logout
             </a>
             <Link to="/products">Products</Link>
+            <Link to={`/editprofile/${userId}`}>Edit Profile</Link>
             <Link to="/orderhistory">Past Orders</Link>
             <Link to="/cart">Cart ({cartTotal})</Link>
           </div>

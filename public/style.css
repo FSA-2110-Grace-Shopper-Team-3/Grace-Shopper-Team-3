@@ -15,10 +15,11 @@ nav a {
   margin: 1em;
 }
 
-form div {
+/* form div {
   margin: 1em;
   display: inline-block;
-}
+} */
+
 form {
   display: flex;
   flex-direction: column;
@@ -64,4 +65,10 @@ ul {
   flex-direction: column;
   justify-content: center;
   line-height: 2;
+}
+
+.formik {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
