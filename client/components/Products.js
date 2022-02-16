@@ -97,9 +97,6 @@ const Products = () => {
   }, []);
 
   const [instruments, setInstruments] = useState(products);
-  useEffect(() => {
-    setInstruments(products);
-  }, [products]);
 
   const saveInstrument = (event) => {
     if (event.target.value === 'all') {
@@ -137,6 +134,8 @@ const Products = () => {
       setInstruments(accesoryProducts);
     }
   };
+
+  const currentInstruments = !instruments.length ? products : instruments;
 
   // ------- Not working sorting by price, model etc.
   // const [productFilter, setProductFilter] = useState(products);
@@ -191,7 +190,7 @@ const Products = () => {
           <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
         </div> */}
       </div>
-      {instruments.map((product) => {
+      {currentInstruments.map((product) => {
         return (
           <div key={product.id}>
             {

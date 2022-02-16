@@ -11,6 +11,7 @@ import {
 import { Link, useHistory } from 'react-router-dom';
 
 const Cart = () => {
+  console.log('Cart rendered!!!');
   const orderItems = useSelector((state) => state.orderItems);
   const products = useSelector((state) => state.products);
   const userId = useSelector((state) => state.auth.id);
