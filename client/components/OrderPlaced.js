@@ -4,27 +4,25 @@ import { editOrder, addOrder } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
 
 const OrderPlaced = () => {
-  console.log('OrderPlaced rendered!!');
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.id) || '';
+  const orders = useSelector((state) => state.orders) || [];
+  const orderItems = useSelector((state) => state.orderItems) || [];
   const matchingOrder =
-    useSelector((state) =>
-      state.orders.find(
-        (order) => order.userId === userId && order.isOrdered === false
-      )
+    orders.find(
+      (order) => order.userId === userId && order.isOrdered === false
     ) || {};
-  const orders = useSelector((state) => state.orders);
+  const matchingOrderItems =
+    orderItems.filter((orderItem) => orderItem.orderId === matchingOrder.id) ||
+    [];
+
   //-------------------Checkout Functionality---------------------//
 
-  const [matchOrder, setMatchOrder] = useState(matchingOrder);
-
-  // const [currentUserId, setCurrentUserId] = useState(userId);
+  const url = new URLSearchParams(window.location.search);
 
   useEffect(() => {
-    setMatchOrder(matchingOrder);
-    const url = new URLSearchParams(window.location.search);
-    console.log('matchOrder', matchingOrder);
-    if (matchingOrder.id) {
+    console.log('useEffect called!!');
+    if (matchingOrder.id && matchingOrderItems.length > 0) {
       if (url.get('success')) {
         dispatch(
           editOrder({
@@ -36,7 +34,7 @@ const OrderPlaced = () => {
         dispatch(addOrder({ userId: userId }));
       }
     }
-  }, [matchOrder]);
+  }, [matchingOrderItems.length]);
   return (
     <div>
       Order placed!
