@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { logout, emptyGuestOrderItem } from '../store';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
+import Cart from './Cart';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
+  const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.id) || '';
 
   const currUser =
@@ -41,9 +43,15 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
 
   const notify = () => toast.success('added to cart!');
 
+  //-------------------Cart Drawer Functionality---------------------//
+  const [cartDrawer, setCartDrawer] = useState(false);
+
+  const close = () => {
+    setCartDrawer(false);
+  };
+
   return (
     <div>
-
       <nav className="navbar">
         {isLoggedIn && currUser.isAdmin === true ? (
           <div className="navbar-admin">
@@ -62,14 +70,14 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
               <li>
                 <Link to="/home">Home</Link>
               </li>
-              <li>
+              <li onClick={() => dispatch(emptyGuestOrderItem())}>
                 <Link to="/products">Products</Link>
               </li>
               <li>
-                <SearchBar placeholder={'Search for rock!'} data={products} />
+                <Link to="/orderhistory">Past Orders</Link>
               </li>
               <li>
-                <Link to="/orderhistory">Past Orders</Link>
+                <SearchBar placeholder={'Search for rock!'} data={products} />
               </li>
             </ul>
             <ul className="navbar-ul">
@@ -77,7 +85,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 <p>Welcome, {currUser.username}</p>
               </li>
               <li>
-                <a href="#" onClick={handleClick}>
+                <a href="" onClick={handleClick}>
                   Logout
                 </a>
               </li>
@@ -85,12 +93,13 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 <Link to={`/editprofile/${userId}`}>Edit Profile</Link>
               </li>
               <li>
-                <Link to="/cart">Cart ({cartTotal})</Link>
+                <a href="#" onClick={() => setCartDrawer(true)}>
+                  Cart ({cartTotal})
+                </a>
               </li>
             </ul>
           </div>
         ) : (
-      
           <div className="navbar-guest">
             <ul className="navbar-ul">
               <li>
@@ -114,13 +123,16 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 <Link to="/signup">Sign Up</Link>{' '}
               </li>
               <li>
-                <Link to="/cart">Cart ({guestCartTotal})</Link>
+                <a href="#" onClick={() => setCartDrawer(true)}>
+                  Cart ({guestCartTotal})
+                </a>
               </li>
             </ul>
           </div>
         )}
       </nav>
-      <hr />
+      <Cart cartOpen={cartDrawer} handleClose={close} />
+      {/* {cartDrawer && setCartDrawer(false)} */}
     </div>
   );
 };

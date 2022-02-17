@@ -97,8 +97,6 @@ const Products = () => {
 
   const currentInstruments = !instruments.length ? products : instruments;
 
-
-
   // ------- Not working sorting by price, model etc.
   // const [productFilter, setProductFilter] = useState(products);
 
@@ -117,7 +115,6 @@ const Products = () => {
   //   }
   // };
 
-
   return (
     <div className="pds">
       <div className="pds-filter">
@@ -125,7 +122,6 @@ const Products = () => {
       </div>
       <div>
         <div>
-          <h3>Welcome, {username ? username : 'Guest!'}</h3>
           <form>
             <select onChange={saveInstrument}>
               <option value="all">All</option>
@@ -231,7 +227,6 @@ const Products = () => {
           })}
         </div>
       </div>
-
     </div>
   );
 };
