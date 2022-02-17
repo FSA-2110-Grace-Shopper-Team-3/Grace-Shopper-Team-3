@@ -6,7 +6,6 @@ import {
   editOrderItem,
   addGuestOrderItem,
   editGuestOrderItem,
-  editOrder,
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,39 +25,6 @@ const Products = () => {
     {};
 
   const match = useRouteMatch();
-
-  // if (match.params.sortBy) {
-  //   const field = match.params.sortBy;
-  //   if (field === 'guitars') {
-  //     products = [...products].filter(
-  //       (product) => product.category === 'Guitar'
-  //     );
-  //   } else if (field === 'drums') {
-  //     products = [...products].filter((product) => product.category === 'Drum');
-  //   } else if (field === 'cellos') {
-  //     products = [...products].filter(
-  //       (product) => product.category === 'Cello'
-  //     );
-  //   } else if (field === 'accesories') {
-  //     products = [...products].filter(
-  //       (product) => product.category === 'Accesory'
-  //     );
-  //   } else if (field === 'pianos') {
-  //     products = [...products].filter(
-  //       (product) => product.category === 'Piano'
-  //     );
-  //   } else {
-  //     products = [...products].sort((a, b) => {
-  //       if (field === 'lowtohighprice') {
-  //         return a.price - b.price;
-  //       }
-  //       if (field === 'hightolowprice') {
-  //         return b.price - a.price;
-  //       }
-  //       return a[field].localeCompare(b[field]);
-  //     });
-  //   }
-  // }
 
   //-------------------Guest Cart Functionality---------------------//
 
@@ -131,6 +97,8 @@ const Products = () => {
 
   const currentInstruments = !instruments.length ? products : instruments;
 
+
+
   // ------- Not working sorting by price, model etc.
   // const [productFilter, setProductFilter] = useState(products);
 
@@ -148,6 +116,7 @@ const Products = () => {
   //     setProductFilter(highPrice);
   //   }
   // };
+
 
   return (
     <div className="pds">
@@ -262,6 +231,7 @@ const Products = () => {
           })}
         </div>
       </div>
+
     </div>
   );
 };

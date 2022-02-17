@@ -3,6 +3,8 @@ import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { logout, emptyGuestOrderItem } from '../store';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   const userId = useSelector((state) => state.auth.id) || '';
@@ -37,8 +39,11 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     return acc;
   }, 0);
 
+  const notify = () => toast.success('added to cart!');
+
   return (
     <div>
+
       <nav className="navbar">
         {isLoggedIn && currUser.isAdmin === true ? (
           <div className="navbar-admin">
@@ -85,6 +90,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             </ul>
           </div>
         ) : (
+      
           <div className="navbar-guest">
             <ul className="navbar-ul">
               <li>
@@ -140,3 +146,33 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Navbar);
+//-------------------------------------------------------------
+
+// REACT-TOASTIFY
+
+// import React from "react";
+
+// function Toastify() {
+//   const notify = () => toast.success("item added to cart");
+
+//   return (
+//     <div className="App">
+//       <Button variant="contained" color="secondary" onClick={notify}>
+//         Toastify!
+//       </Button>
+//       <ToastContainer
+//         position="top-right"
+//         autoClose={1500}
+//         hideProgressBar
+//         newestOnTop={true}
+//         closeOnClick
+//         rtl={false}
+//         pauseOnFocusLoss
+//         draggable
+//         transition={Slide}
+//       />
+//     </div>
+//   );
+// }
+
+// export default Toastify;

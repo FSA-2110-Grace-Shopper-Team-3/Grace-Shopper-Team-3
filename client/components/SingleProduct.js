@@ -71,56 +71,58 @@ const SingleProduct = () => {
         <li>Description: {singleProduct.description}</li>
         {/* <li>{singleProduct.category}</li> BACKEND ONLY? */}
       </ul>
-      <button
-        onClick={() => {
-          if (!currentUserId) {
-            const guestOrderItem = guestCart.find(
-              (orderItem) =>
-                orderItem.productId === singleProduct.id &&
-                orderItem.userId === null
-            );
-            guestOrderItem
-              ? dispatch(
-                  editGuestOrderItem({
-                    ...guestOrderItem,
-                    id: guestOrderItem.id,
-                    quantity: guestOrderItem.quantity + 1,
-                  })
-                )
-              : dispatch(
-                  addGuestOrderItem({
-                    productId: singleProduct.id,
-                    userId: null,
-                    id: uuidv4(),
-                    quantity: 1,
-                  })
-                );
-          } else {
-            const orderItem = orderItems.find(
-              (orderItem) =>
-                orderItem.productId === singleProduct.id &&
-                orderItem.orderId === matchOrder.id
-            );
-            orderItem
-              ? dispatch(
-                  editOrderItem({
-                    id: orderItem.id,
-                    quantity: orderItem.quantity + 1,
-                    userId: currentUserId,
-                  })
-                )
-              : dispatch(
-                  addOrderItem({
-                    productId: singleProduct.id,
-                    orderId: matchOrder.id,
-                    userId: currentUserId,
-                  })
-                );
-          }
-        }}
-      >
-        Add to Cart
-      </button>
+      <div>
+        <button
+          onClick={() => {
+            if (!currentUserId) {
+              const guestOrderItem = guestCart.find(
+                (orderItem) =>
+                  orderItem.productId === singleProduct.id &&
+                  orderItem.userId === null
+              );
+              guestOrderItem
+                ? dispatch(
+                    editGuestOrderItem({
+                      ...guestOrderItem,
+                      id: guestOrderItem.id,
+                      quantity: guestOrderItem.quantity + 1,
+                    })
+                  )
+                : dispatch(
+                    addGuestOrderItem({
+                      productId: singleProduct.id,
+                      userId: null,
+                      id: uuidv4(),
+                      quantity: 1,
+                    })
+                  );
+            } else {
+              const orderItem = orderItems.find(
+                (orderItem) =>
+                  orderItem.productId === singleProduct.id &&
+                  orderItem.orderId === matchOrder.id
+              );
+              orderItem
+                ? dispatch(
+                    editOrderItem({
+                      id: orderItem.id,
+                      quantity: orderItem.quantity + 1,
+                      userId: currentUserId,
+                    })
+                  )
+                : dispatch(
+                    addOrderItem({
+                      productId: singleProduct.id,
+                      orderId: matchOrder.id,
+                      userId: currentUserId,
+                    })
+                  );
+            }
+          }}
+        >
+          Add to Cart
+        </button>
+      </div>
     </div>
   );
 };
