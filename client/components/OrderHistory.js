@@ -13,17 +13,19 @@ const OrderHistory = () => {
     ) || [];
 
   return (
-    <div>
-      <h1>Your Order History</h1>
-      <div>
+    <div className="oh">
+      <div className="oh-title">
+        <h1>ORDER HISTORY</h1>
+      </div>
+      <div className="oh-list">
         {matchingOrders.map((matchingOrder) => {
           const matchingOrderItems =
             orderItems.filter(
               (orderItem) => orderItem.orderId === matchingOrder.id
             ) || [];
           return (
-            <div key={matchingOrder.id}>
-              <h3>Order #: {matchingOrder.id}</h3>
+            <div key={matchingOrder.id} className="oh-order">
+              <p>Order #: {matchingOrder.id}</p>
               <ul>
                 {matchingOrderItems.map((matchingOrderItem) => {
                   const productItem = products.find(

@@ -9,9 +9,9 @@ import {
   editGuestOrderItem,
 } from '../store';
 import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
 
 const Cart = () => {
-  console.log('Cart rendered!!!');
   const orderItems = useSelector((state) => state.orderItems);
   const products = useSelector((state) => state.products);
   const userId = useSelector((state) => state.auth.id);
@@ -51,6 +51,31 @@ const Cart = () => {
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
+
+  //-------------------Checkout Functionality---------------------//
+
+  const lineItems = matchingOrderItems.map((orderItem) => {
+    const currentProduct =
+      products.find((product) => product.id === orderItem.productId) || {};
+    return {
+      name: `${currentProduct.brand} - ${currentProduct.model}`,
+      amount: currentProduct.price * 100,
+      currency: 'usd',
+      quantity: orderItem.quantity,
+    };
+  });
+
+  const handleCheckout = async (ev) => {
+    ev.preventDefault();
+    const data = {
+      line_items: lineItems,
+      mode: 'payment',
+      success_url: `http://localhost:8080/orderplaced/?success=true`,
+      cancel_url: `http://localhost:8080/cart/?cancelled=true`,
+    };
+    const response = await axios.post('/api/create-checkout-session', data);
+    window.location = response.data.url;
+  };
 
   return (
     <div>
@@ -153,24 +178,9 @@ const Cart = () => {
           </div>
         )}
       </ul>
-      <button
-        onClick={() => {
-          dispatch(
-            editOrder({
-              id: matchingOrder.id,
-              isOrdered: true,
-              totalPrice: userCartPriceTotal.toFixed(2),
-            })
-          );
-          dispatch(addOrder({ userId: userId }));
-          history.push('/orderPlaced');
-        }}
-      >
-        Submit Order
+      <button type="submit" onClick={handleCheckout}>
+        Checkout
       </button>
-      <form action="/api/create-checkout-session" method="POST">
-        <button type="submit">Checkout</button>
-      </form>
       <Link to="/orderhistory">View Order History</Link>
     </div>
   );

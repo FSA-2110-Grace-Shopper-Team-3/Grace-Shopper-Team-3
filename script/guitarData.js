@@ -127,7 +127,7 @@ const guitars = [
   },
   {
     brand: 'Seagull',
-    model: 'Coastline, 12-String Concert Hall',
+    model: 'Coastline, 12-String',
     price: 1029.99,
     description:
       "The Seagull Guitars Coastline Spruce 12-string Concert Hall acoustic-electric guitar delivers the power, punch, and dynamics you need to bring your playing to life. Singer/songwriters, fingerpickers, and studio players alike will appreciate how the focused, authoritative midrange furnished by this guitar's Concert Hall body makes everybody sit up and take notice.",
@@ -199,7 +199,7 @@ const guitars = [
   },
   {
     brand: 'Breedlove',
-    model: 'ECO Pursuit Exotic S Concerto Bass',
+    model: 'ECO Pursuit Exotic S',
     price: 799.99,
     description:
       'There’s nothing quite like the playing experience and enriching low end of an awesome acoustic bass. For “unplugged” sets, bassists at Sweetwater recommend the Breedlove ECO Pursuit Exotic S Concerto CE Acoustic-electric Bass.',

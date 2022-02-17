@@ -116,6 +116,84 @@ ul {
 
 .navbar {
   display: flex;
+  flex-direction: row;
+}
+
+.navbar-user,
+.navbar-guest {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar-ul {
+  display: flex;
+  flex-direction: row;
+}
+
+/* ---------------Products.js CSS--------------- */
+
+.pds {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pds-filter {
+  width: 100%;
+}
+
+.pds-filter h2 {
+  text-align: center;
+}
+
+.pds-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pds-product {
+  display: flex;
+  width: 300px;
+  height: 300px;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.pds-product img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.pds-product-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.pds-product-name {
+  text-align: center;
+}
+
+/* ---------------SingleProduct.js CSS--------------- */
+
+/* ---------------OrderHistory.js CSS--------------- */
+
+.oh {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.oh-title h1 {
+  text-align: center;
+}
+
+.oh-order {
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 2rem;
 }
 
 /* ---------------Admin CSS--------------- */

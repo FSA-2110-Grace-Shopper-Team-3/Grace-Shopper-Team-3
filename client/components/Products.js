@@ -123,7 +123,7 @@ const Products = () => {
     }
     if (event.target.value === 'accessories') {
       let accesoryProducts = [...products].filter(
-        (product) => product.category === 'Accesory'
+        (product) => product.category === 'Accessory'
       );
       setInstruments(accesoryProducts);
     }
@@ -150,6 +150,16 @@ const Products = () => {
   // };
 
   return (
+    <div className="pds">
+      <div className="pds-filter">
+        <h2>PRODUCTS</h2>
+        <input
+          type="text"
+          placeholder="search"
+          onChange={(event) => {
+            setMyInstrument(event.target.value);
+          }}
+        />
     <div>
       <div>
         <h3>Welcome, {username ? username : 'Guest!'}</h3>
@@ -184,67 +194,79 @@ const Products = () => {
           <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
         </div> */}
       </div>
-      {currentInstruments.map((product) => {
-        return (
-          <div key={product.id}>
-            {
-              <Link to={`/products/${product.id}`}>
-                {product.category} - {product.brand} - {product.model}
-              </Link>
-            }
-            <button
-              onClick={() => {
-                if (!id) {
-                  const guestOrderItem = guestCart.find(
-                    (orderItem) =>
-                      orderItem.productId === product.id &&
-                      orderItem.userId === null
-                  );
-                  guestOrderItem
-                    ? dispatch(
-                        editGuestOrderItem({
-                          ...guestOrderItem,
-                          id: guestOrderItem.id,
-                          quantity: guestOrderItem.quantity + 1,
-                        })
-                      )
-                    : dispatch(
-                        addGuestOrderItem({
-                          productId: product.id,
-                          userId: null,
-                          id: uuidv4(),
-                          quantity: 1,
-                        })
-                      );
-                } else {
-                  const orderItem = orderItems.find(
-                    (orderItem) =>
-                      orderItem.productId === product.id &&
-                      orderItem.orderId === matchOrder.id
-                  );
-                  orderItem
-                    ? dispatch(
-                        editOrderItem({
-                          id: orderItem.id,
-                          quantity: orderItem.quantity + 1,
-                          userId: id,
-                        })
-                      )
-                    : dispatch(
-                        addOrderItem({
-                          productId: product.id,
-                          orderId: matchOrder.id,
-                          userId: id,
-                        })
-                      );
+      <div className="pds-list">
+        {currentInstruments.map((product) => {
+            return (
+              <div key={product.id} className="pds-product">
+                {
+                  <div className="pds-product-wrapper">
+                    <Link to={`/products/${product.id}`}>
+                      <div>
+                        <img src={product.img} />
+                      </div>
+                      <div className="pds-product-name">
+                        <div>
+                          {product.category} - {product.brand}
+                        </div>
+                        <div>{product.model}</div>
+                      </div>
+                    </Link>
+                  </div>
                 }
-              }}
-            >
-              Add to Cart
-            </button>
-          </div>
-        );
-      })}
+                <button
+                  onClick={() => {
+                    if (!id) {
+                      const guestOrderItem = guestCart.find(
+                        (orderItem) =>
+                          orderItem.productId === product.id &&
+                          orderItem.userId === null
+                      );
+                      guestOrderItem
+                        ? dispatch(
+                            editGuestOrderItem({
+                              ...guestOrderItem,
+                              id: guestOrderItem.id,
+                              quantity: guestOrderItem.quantity + 1,
+                            })
+                          )
+                        : dispatch(
+                            addGuestOrderItem({
+                              productId: product.id,
+                              userId: null,
+                              id: uuidv4(),
+                              quantity: 1,
+                            })
+                          );
+                    } else {
+                      const orderItem = orderItems.find(
+                        (orderItem) =>
+                          orderItem.productId === product.id &&
+                          orderItem.orderId === matchOrder.id
+                      );
+                      orderItem
+                        ? dispatch(
+                            editOrderItem({
+                              id: orderItem.id,
+                              quantity: orderItem.quantity + 1,
+                              userId: id,
+                            })
+                          )
+                        : dispatch(
+                            addOrderItem({
+                              productId: product.id,
+                              orderId: matchOrder.id,
+                              userId: id,
+                            })
+                          );
+                    }
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </div>
+            );
+          })}
+      </div>
     </div>
   );
 };
