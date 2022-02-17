@@ -68,7 +68,7 @@ a > p:hover {
   font-size: 18px;
   padding: 15px;
   height: 30px;
-  width: 300px;
+  width: 100px;
 }
 
 .searchIcon {
@@ -144,7 +144,7 @@ ul {
 
 .pds-product {
   display: flex;
-  width: 300px;
+  width: 250px;
   height: 300px;
   flex-direction: column;
   padding: 1rem;
@@ -187,8 +187,8 @@ ul {
 }
 
 .sp-img {
-  height: 600px;
-  width: 600px;
+  height: 60vh;
+  width: 50vh;
   object-fit: contain;
   /* border: 1px solid black; */
 }

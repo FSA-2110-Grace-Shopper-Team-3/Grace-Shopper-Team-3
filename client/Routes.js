@@ -6,7 +6,6 @@ import Home from './components/Home';
 import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
 import OrderPlaced from './components/OrderPlaced';
-import Cart from './components/Cart';
 import AdminPanel from './components/AdminPanel';
 import Users from './components/Users';
 import AdminSettings from './components/AdminSettings';
@@ -75,7 +74,6 @@ class Routes extends Component {
         ) : isLoggedIn && currUser.isAdmin === false ? (
           <Switch>
             <Route exact path="/products" component={Products} />
-            <Route exact path="/cart" component={Cart} />
             <Route exact path="/orderplaced" component={OrderPlaced} />
             <Route exact path="/orderhistory" component={OrderHistory} />
             <Route exact path="/editprofile/:id" component={EditUser} />
@@ -88,7 +86,6 @@ class Routes extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/cart" component={Cart} />
             <Route exact path="/products" component={Products} />
             <Route exact path="/products/sort/:sortBy" component={Products} />
             <Route exact path="/products/:id" component={SingleProduct} />
@@ -128,8 +125,8 @@ const mapDispatch = (dispatch) => {
       dispatch(me());
       dispatch(getOrders());
       dispatch(getUsers());
-      // dispatch(getGuestOrderItems());
-      dispatch(emptyGuestOrderItem());
+      dispatch(getGuestOrderItems());
+      // dispatch(emptyGuestOrderItem());
     },
   };
 };
