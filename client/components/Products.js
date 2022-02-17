@@ -153,34 +153,28 @@ const Products = () => {
     <div className="pds">
       <div className="pds-filter">
         <h2>PRODUCTS</h2>
-        <input
-          type="text"
-          placeholder="search"
-          onChange={(event) => {
-            setMyInstrument(event.target.value);
-          }}
-        />
-    <div>
+      </div>
       <div>
-        <h3>Welcome, {username ? username : 'Guest!'}</h3>
-        <form>
-          <select onChange={saveInstrument}>
-            <option value="all">All</option>
-            <option value="drums">drums</option>
-            <option value="guitars">guitars</option>
-            <option value="cellos">cellos</option>
-            <option value="pianos">pianos</option>
-            <option value="accessories">accesories</option>
-          </select>
-        </form>
-        {/* <form>
+        <div>
+          <h3>Welcome, {username ? username : 'Guest!'}</h3>
+          <form>
+            <select onChange={saveInstrument}>
+              <option value="all">All</option>
+              <option value="drums">drums</option>
+              <option value="guitars">guitars</option>
+              <option value="cellos">cellos</option>
+              <option value="pianos">pianos</option>
+              <option value="accessories">accesories</option>
+            </select>
+          </form>
+          {/* <form>
           <select onChange={saveProductFilter}>
             <option value="lowToHigh">Sort by price - low to high</option>
             <option value="highToLow">Sort by price - high to low</option>
           </select>
         </form> */}
 
-        {/* <div className="sortinglinks">
+          {/* <div className="sortinglinks">
           <Link to={`/products/sort/guitars`}>Guitars </Link>
           <Link to={`/products/sort/drums`}>Drums </Link>
           <Link to={`/products/sort/cellos`}>Cellos </Link>
@@ -193,9 +187,9 @@ const Products = () => {
           </Link>
           <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
         </div> */}
-      </div>
-      <div className="pds-list">
-        {currentInstruments.map((product) => {
+        </div>
+        <div className="pds-list">
+          {currentInstruments.map((product) => {
             return (
               <div key={product.id} className="pds-product">
                 {
@@ -266,6 +260,7 @@ const Products = () => {
               </div>
             );
           })}
+        </div>
       </div>
     </div>
   );
