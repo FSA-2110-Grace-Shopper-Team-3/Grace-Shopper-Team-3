@@ -37,10 +37,9 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
 
   return (
     <div>
-      <h1>FS-App-Template</h1>
       <nav className="navbar">
         {isLoggedIn && currUser.isAdmin === true ? (
-          <div>
+          <div className="navbar-admin">
             <a href="#" onClick={handleClick}>
               Logout
             </a>
@@ -51,24 +50,59 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <Link to="/admin/analytics">Analytics</Link>
           </div>
         ) : isLoggedIn && currUser.isAdmin === false ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-            <Link to="/products">Products</Link>
-            <Link to={`/editprofile/${userId}`}>Edit Profile</Link>
-            <Link to="/orderhistory">Past Orders</Link>
-            <Link to="/cart">Cart ({cartTotal})</Link>
+          <div className="navbar-user">
+            <ul className="navbar-ul">
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/products">Products</Link>
+              </li>
+              <li>
+                <Link to="/orderhistory">Past Orders</Link>
+              </li>
+            </ul>
+            <ul className="navbar-ul">
+              <li>
+                <p>Welcome, {currUser.username}</p>
+              </li>
+              <li>
+                <a href="#" onClick={handleClick}>
+                  Logout
+                </a>
+              </li>
+              <li>
+                <Link to={`/editprofile/${userId}`}>Edit Profile</Link>
+              </li>
+              <li>
+                <Link to="/cart">Cart ({cartTotal})</Link>
+              </li>
+            </ul>
           </div>
         ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/cart">Cart ({guestCartTotal})</Link>
+          <div className="navbar-guest">
+            <ul className="navbar-ul">
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/products">Products</Link>
+              </li>
+            </ul>
+            <ul className="navbar-ul">
+              <li>
+                <p>Welcome, Guest!</p>
+              </li>
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+              <li>
+                <Link to="/signup">Sign Up</Link>{' '}
+              </li>
+              <li>
+                <Link to="/cart">Cart ({guestCartTotal})</Link>
+              </li>
+            </ul>
           </div>
         )}
       </nav>
