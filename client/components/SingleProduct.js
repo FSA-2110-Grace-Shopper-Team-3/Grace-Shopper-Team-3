@@ -60,67 +60,108 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="single-prod">
-      <ul>
-        <li>
-          <img className="prod-img" src={singleProduct.img} />
-        </li>
-        <li>Brand: {singleProduct.brand}</li>
-        <li>Model: {singleProduct.model}</li>
-        <li>Price: ${singleProduct.price}</li>
-        <li>Description: {singleProduct.description}</li>
-        {/* <li>{singleProduct.category}</li> BACKEND ONLY? */}
-      </ul>
-      <button
-        onClick={() => {
-          if (!currentUserId) {
-            const guestOrderItem = guestCart.find(
-              (orderItem) =>
-                orderItem.productId === singleProduct.id &&
-                orderItem.userId === null
-            );
-            guestOrderItem
-              ? dispatch(
-                  editGuestOrderItem({
-                    ...guestOrderItem,
-                    id: guestOrderItem.id,
-                    quantity: guestOrderItem.quantity + 1,
-                  })
-                )
-              : dispatch(
-                  addGuestOrderItem({
-                    productId: singleProduct.id,
-                    userId: null,
-                    id: uuidv4(),
-                    quantity: 1,
-                  })
+    <div className="sp">
+      <div className="sp-left">
+        <div>
+          <img className="sp-img" src={singleProduct.img} />
+        </div>
+      </div>
+      <div className="sp-right">
+        <div className="sp-right-wrap">
+          <div className="sp-desc">
+            {/* <ul>
+              <li></li>
+              <li>Brand: {singleProduct.brand}</li>
+              <li>Model: {singleProduct.model}</li>
+              <li>Price: ${singleProduct.price}</li>
+              <li>Description: {singleProduct.description}</li>
+            </ul> */}
+            <h1>
+              {singleProduct.brand} - {singleProduct.model}
+            </h1>
+            <h3>{singleProduct.category} </h3>
+
+            <p>{singleProduct.description}</p>
+            <h4>${singleProduct.price}</h4>
+          </div>
+          {/* Quantity:{orderItem.quantity}
+          <button
+            onClick={() =>
+              dispatch(
+                editOrderItem({
+                  id: orderItem.id,
+                  quantity: orderItem.quantity + 1,
+                })
+              )
+            }
+          >
+            +
+          </button>
+          <button
+            onClick={() =>
+              dispatch(
+                editOrderItem({
+                  id: orderItem.id,
+                  quantity: orderItem.quantity - 1,
+                })
+              )
+            }
+            disabled={orderItem.quantity === 1}
+          >
+            -
+          </button> */}
+          <button
+            onClick={() => {
+              if (!currentUserId) {
+                const guestOrderItem = guestCart.find(
+                  (orderItem) =>
+                    orderItem.productId === singleProduct.id &&
+                    orderItem.userId === null
                 );
-          } else {
-            const orderItem = orderItems.find(
-              (orderItem) =>
-                orderItem.productId === singleProduct.id &&
-                orderItem.orderId === matchOrder.id
-            );
-            orderItem
-              ? dispatch(
-                  editOrderItem({
-                    id: orderItem.id,
-                    quantity: orderItem.quantity + 1,
-                    userId: currentUserId,
-                  })
-                )
-              : dispatch(
-                  addOrderItem({
-                    productId: singleProduct.id,
-                    orderId: matchOrder.id,
-                    userId: currentUserId,
-                  })
+                guestOrderItem
+                  ? dispatch(
+                      editGuestOrderItem({
+                        ...guestOrderItem,
+                        id: guestOrderItem.id,
+                        quantity: guestOrderItem.quantity + 1,
+                      })
+                    )
+                  : dispatch(
+                      addGuestOrderItem({
+                        productId: singleProduct.id,
+                        userId: null,
+                        id: uuidv4(),
+                        quantity: 1,
+                      })
+                    );
+              } else {
+                const orderItem = orderItems.find(
+                  (orderItem) =>
+                    orderItem.productId === singleProduct.id &&
+                    orderItem.orderId === matchOrder.id
                 );
-          }
-        }}
-      >
-        Add to Cart
-      </button>
+                orderItem
+                  ? dispatch(
+                      editOrderItem({
+                        id: orderItem.id,
+                        quantity: orderItem.quantity + 1,
+                        userId: currentUserId,
+                      })
+                    )
+                  : dispatch(
+                      addOrderItem({
+                        productId: singleProduct.id,
+                        orderId: matchOrder.id,
+                        userId: currentUserId,
+                      })
+                    );
+              }
+            }}
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

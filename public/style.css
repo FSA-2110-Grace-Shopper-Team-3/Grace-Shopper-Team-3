@@ -90,16 +90,6 @@ button {
   height: 2rem;
 }
 
-.single-prod {
-  display: flex;
-  justify-content: center;
-}
-
-.prod-img {
-  height: auto;
-  width: 400px;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -176,6 +166,40 @@ ul {
 }
 
 /* ---------------SingleProduct.js CSS--------------- */
+
+.sp {
+  display: flex;
+  height: 80vh;
+  justify-content: center;
+}
+
+.sp-left {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.sp-right {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+
+.sp-img {
+  height: 600px;
+  width: 600px;
+  object-fit: contain;
+  /* border: 1px solid black; */
+}
+
+.sp-desc {
+  width: 70%;
+}
+
+.sp-desc h1 {
+  text-transform: uppercase;
+}
 
 /* ---------------OrderHistory.js CSS--------------- */
 
