@@ -6,7 +6,6 @@ import {
   editOrderItem,
   addGuestOrderItem,
   editGuestOrderItem,
-  editOrder,
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,39 +25,6 @@ const Products = () => {
     {};
 
   const match = useRouteMatch();
-
-  // if (match.params.sortBy) {
-  //   const field = match.params.sortBy;
-  //   if (field === 'guitars') {
-  //     products = [...products].filter(
-  //       (product) => product.category === 'Guitar'
-  //     );
-  //   } else if (field === 'drums') {
-  //     products = [...products].filter((product) => product.category === 'Drum');
-  //   } else if (field === 'cellos') {
-  //     products = [...products].filter(
-  //       (product) => product.category === 'Cello'
-  //     );
-  //   } else if (field === 'accesories') {
-  //     products = [...products].filter(
-  //       (product) => product.category === 'Accesory'
-  //     );
-  //   } else if (field === 'pianos') {
-  //     products = [...products].filter(
-  //       (product) => product.category === 'Piano'
-  //     );
-  //   } else {
-  //     products = [...products].sort((a, b) => {
-  //       if (field === 'lowtohighprice') {
-  //         return a.price - b.price;
-  //       }
-  //       if (field === 'hightolowprice') {
-  //         return b.price - a.price;
-  //       }
-  //       return a[field].localeCompare(b[field]);
-  //     });
-  //   }
-  // }
 
   //-------------------Guest Cart Functionality---------------------//
 
@@ -131,23 +97,6 @@ const Products = () => {
 
   const currentInstruments = !instruments.length ? products : instruments;
 
-  // ------- Not working sorting by price, model etc.
-  // const [productFilter, setProductFilter] = useState(products);
-
-  // const saveProductFilter = (event) => {
-  //   if (event.target.value === 'lowToHigh') {
-  //     let lowPrice = [...instruments].sort((a, b) => {
-  //       return a.price - b.price;
-  //     });
-  //     setProductFilter(lowPrice);
-  //   }
-  //   if (event.target.value === 'highToLow') {
-  //     let highPrice = [...instruments].sort((a, b) => {
-  //       return b.price - a.price;
-  //     });
-  //     setProductFilter(highPrice);
-  //   }
-  // };
   const [myInstrument, setMyInstrument] = useState('');
 
   return (
@@ -172,26 +121,6 @@ const Products = () => {
             <option value="accessories">accesories</option>
           </select>
         </form>
-        {/* <form>
-          <select onChange={saveProductFilter}>
-            <option value="lowToHigh">Sort by price - low to high</option>
-            <option value="highToLow">Sort by price - high to low</option>
-          </select>
-        </form> */}
-
-        {/* <div className="sortinglinks">
-          <Link to={`/products/sort/guitars`}>Guitars </Link>
-          <Link to={`/products/sort/drums`}>Drums </Link>
-          <Link to={`/products/sort/cellos`}>Cellos </Link>
-          <Link to={`/products/sort/pianos`}>Pianos </Link>
-          <Link to={`/products/sort/accesories`}>Accesories </Link>
-          <Link to={`/products/sort/brand`}>sort by brand </Link>
-          <Link to={`/products/sort/model`}>sort by model</Link>
-          <Link to={`/products/sort/lowtohighprice`}>
-            sort by price low to high
-          </Link>
-          <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
-        </div> */}
       </div>
       {currentInstruments
         .filter((val) => {
@@ -212,7 +141,8 @@ const Products = () => {
             <div key={product.id}>
               {
                 <Link to={`/products/${product.id}`}>
-                  {product.category} - {product.brand} - {product.model}
+                  {product.brand} - {product.model} ---> Stock:{' '}
+                  {product.quantity}{' '}
                 </Link>
               }
               <button

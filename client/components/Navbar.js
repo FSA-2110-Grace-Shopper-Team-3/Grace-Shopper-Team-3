@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logout, emptyGuestOrderItem } from '../store';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   const userId = useSelector((state) => state.auth.id) || '';
@@ -35,8 +37,11 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     return acc;
   }, 0);
 
+  const notify = () => toast.success('added to cart!');
+
   return (
     <div>
+      {injectStyle()}
       <h1>FS-App-Template</h1>
       <nav className="navbar">
         {isLoggedIn && currUser.isAdmin === true ? (
@@ -69,6 +74,19 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <Link to="/signup">Sign Up</Link>
             <Link to="/products">Products</Link>
             <Link to="/cart">Cart ({guestCartTotal})</Link>
+            <button onClick={notify}>Toastify!</button>
+            <ToastContainer
+              position="top-center"
+              autoClose={1500}
+              hideProgressBar
+              newestOnTop={true}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              transition={Slide}
+              limit={5}
+            />
           </div>
         )}
       </nav>
@@ -98,3 +116,33 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Navbar);
+//-------------------------------------------------------------
+
+// REACT-TOASTIFY
+
+// import React from "react";
+
+// function Toastify() {
+//   const notify = () => toast.success("item added to cart");
+
+//   return (
+//     <div className="App">
+//       <Button variant="contained" color="secondary" onClick={notify}>
+//         Toastify!
+//       </Button>
+//       <ToastContainer
+//         position="top-right"
+//         autoClose={1500}
+//         hideProgressBar
+//         newestOnTop={true}
+//         closeOnClick
+//         rtl={false}
+//         pauseOnFocusLoss
+//         draggable
+//         transition={Slide}
+//       />
+//     </div>
+//   );
+// }
+
+// export default Toastify;

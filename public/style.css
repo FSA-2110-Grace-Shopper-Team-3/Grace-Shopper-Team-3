@@ -32,6 +32,7 @@ button {
 
 .single-prod {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }
 
