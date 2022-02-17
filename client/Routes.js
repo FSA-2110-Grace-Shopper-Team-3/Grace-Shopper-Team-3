@@ -24,6 +24,7 @@ import {
   getOrders,
   getUsers,
   getGuestOrderItems,
+  emptyGuestOrderItem,
 } from './store';
 
 /**
@@ -40,7 +41,7 @@ class Routes extends Component {
       this.props.loadInitialData();
     }
     if (prevProps.orderItems.length !== this.props.orderItems.length) {
-      this.props.loadInitialData();
+      this.props.loadCart();
     }
     // if (prevProps.orders.length !== this.props.orders.length) {
     //   this.props.loadInitialData();
@@ -120,6 +121,15 @@ const mapDispatch = (dispatch) => {
       dispatch(getOrders());
       dispatch(getUsers());
       dispatch(getGuestOrderItems());
+    },
+    loadCart() {
+      dispatch(getProd());
+      dispatch(getOrderItems());
+      dispatch(me());
+      dispatch(getOrders());
+      dispatch(getUsers());
+      // dispatch(getGuestOrderItems());
+      dispatch(emptyGuestOrderItem());
     },
   };
 };
