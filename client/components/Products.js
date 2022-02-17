@@ -89,7 +89,7 @@ const Products = () => {
     }
     if (event.target.value === 'accessories') {
       let accesoryProducts = [...products].filter(
-        (product) => product.category === 'Accesory'
+        (product) => product.category === 'Accessory'
       );
       setInstruments(accesoryProducts);
     }
@@ -97,107 +97,141 @@ const Products = () => {
 
   const currentInstruments = !instruments.length ? products : instruments;
 
-  const [myInstrument, setMyInstrument] = useState('');
+
+
+  // ------- Not working sorting by price, model etc.
+  // const [productFilter, setProductFilter] = useState(products);
+
+  // const saveProductFilter = (event) => {
+  //   if (event.target.value === 'lowToHigh') {
+  //     let lowPrice = [...instruments].sort((a, b) => {
+  //       return a.price - b.price;
+  //     });
+  //     setProductFilter(lowPrice);
+  //   }
+  //   if (event.target.value === 'highToLow') {
+  //     let highPrice = [...instruments].sort((a, b) => {
+  //       return b.price - a.price;
+  //     });
+  //     setProductFilter(highPrice);
+  //   }
+  // };
+
 
   return (
-    <div>
-      <div>
-        <h3>Welcome, {username ? username : 'Guest!'}</h3>
-        <input
-          type="text"
-          placeholder="search"
-          onChange={(event) => {
-            setMyInstrument(event.target.value);
-          }}
-        />
-
-        <form>
-          <select onChange={saveInstrument}>
-            <option value="all">All</option>
-            <option value="drums">drums</option>
-            <option value="guitars">guitars</option>
-            <option value="cellos">cellos</option>
-            <option value="pianos">pianos</option>
-            <option value="accessories">accesories</option>
-          </select>
-        </form>
+    <div className="pds">
+      <div className="pds-filter">
+        <h2>PRODUCTS</h2>
       </div>
-      {currentInstruments
-        .filter((val) => {
-          if (setInstruments === '') {
-            return val;
-          } else if (
-            val.brand.toLowerCase().includes(myInstrument.toLowerCase())
-          ) {
-            return val;
-          } else if (
-            val.model.toLowerCase().includes(myInstrument.toLowerCase())
-          ) {
-            return val;
-          }
-        })
-        .map((product) => {
-          return (
-            <div key={product.id}>
-              {
-                <Link to={`/products/${product.id}`}>
-                  {product.brand} - {product.model} ---> Stock:{' '}
-                  {product.quantity}{' '}
-                </Link>
-              }
-              <button
-                onClick={() => {
-                  if (!id) {
-                    const guestOrderItem = guestCart.find(
-                      (orderItem) =>
-                        orderItem.productId === product.id &&
-                        orderItem.userId === null
-                    );
-                    guestOrderItem
-                      ? dispatch(
-                          editGuestOrderItem({
-                            ...guestOrderItem,
-                            id: guestOrderItem.id,
-                            quantity: guestOrderItem.quantity + 1,
-                          })
-                        )
-                      : dispatch(
-                          addGuestOrderItem({
-                            productId: product.id,
-                            userId: null,
-                            id: uuidv4(),
-                            quantity: 1,
-                          })
-                        );
-                  } else {
-                    const orderItem = orderItems.find(
-                      (orderItem) =>
-                        orderItem.productId === product.id &&
-                        orderItem.orderId === matchOrder.id
-                    );
-                    orderItem
-                      ? dispatch(
-                          editOrderItem({
-                            id: orderItem.id,
-                            quantity: orderItem.quantity + 1,
-                            userId: id,
-                          })
-                        )
-                      : dispatch(
-                          addOrderItem({
-                            productId: product.id,
-                            orderId: matchOrder.id,
-                            userId: id,
-                          })
-                        );
-                  }
-                }}
-              >
-                Add to Cart
-              </button>
-            </div>
-          );
-        })}
+      <div>
+        <div>
+          <h3>Welcome, {username ? username : 'Guest!'}</h3>
+          <form>
+            <select onChange={saveInstrument}>
+              <option value="all">All</option>
+              <option value="drums">drums</option>
+              <option value="guitars">guitars</option>
+              <option value="cellos">cellos</option>
+              <option value="pianos">pianos</option>
+              <option value="accessories">accesories</option>
+            </select>
+          </form>
+          {/* <form>
+          <select onChange={saveProductFilter}>
+            <option value="lowToHigh">Sort by price - low to high</option>
+            <option value="highToLow">Sort by price - high to low</option>
+          </select>
+        </form> */}
+
+          {/* <div className="sortinglinks">
+          <Link to={`/products/sort/guitars`}>Guitars </Link>
+          <Link to={`/products/sort/drums`}>Drums </Link>
+          <Link to={`/products/sort/cellos`}>Cellos </Link>
+          <Link to={`/products/sort/pianos`}>Pianos </Link>
+          <Link to={`/products/sort/accesories`}>Accesories </Link>
+          <Link to={`/products/sort/brand`}>sort by brand </Link>
+          <Link to={`/products/sort/model`}>sort by model</Link>
+          <Link to={`/products/sort/lowtohighprice`}>
+            sort by price low to high
+          </Link>
+          <Link to={`/products/sort/hightolowprice`}>sort by high to low</Link>
+        </div> */}
+        </div>
+        <div className="pds-list">
+          {currentInstruments.map((product) => {
+            return (
+              <div key={product.id} className="pds-product">
+                {
+                  <div className="pds-product-wrapper">
+                    <Link to={`/products/${product.id}`}>
+                      <div>
+                        <img src={product.img} />
+                      </div>
+                      <div className="pds-product-name">
+                        <div>
+                          {product.category} - {product.brand}
+                        </div>
+                        <div>{product.model}</div>
+                      </div>
+                    </Link>
+                  </div>
+                }
+                <button
+                  onClick={() => {
+                    if (!id) {
+                      const guestOrderItem = guestCart.find(
+                        (orderItem) =>
+                          orderItem.productId === product.id &&
+                          orderItem.userId === null
+                      );
+                      guestOrderItem
+                        ? dispatch(
+                            editGuestOrderItem({
+                              ...guestOrderItem,
+                              id: guestOrderItem.id,
+                              quantity: guestOrderItem.quantity + 1,
+                            })
+                          )
+                        : dispatch(
+                            addGuestOrderItem({
+                              productId: product.id,
+                              userId: null,
+                              id: uuidv4(),
+                              quantity: 1,
+                            })
+                          );
+                    } else {
+                      const orderItem = orderItems.find(
+                        (orderItem) =>
+                          orderItem.productId === product.id &&
+                          orderItem.orderId === matchOrder.id
+                      );
+                      orderItem
+                        ? dispatch(
+                            editOrderItem({
+                              id: orderItem.id,
+                              quantity: orderItem.quantity + 1,
+                              userId: id,
+                            })
+                          )
+                        : dispatch(
+                            addOrderItem({
+                              productId: product.id,
+                              orderId: matchOrder.id,
+                              userId: id,
+                            })
+                          );
+                    }
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
     </div>
   );
 };

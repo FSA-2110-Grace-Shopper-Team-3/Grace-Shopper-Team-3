@@ -54,7 +54,7 @@ const OrderPlaced = () => {
   return (
     <div>
       Order placed!
-      <Link to="/products">Back to Shopping</Link>
+      <Link to="/orderhistory">View Order History</Link>
     </div>
   );
 };
