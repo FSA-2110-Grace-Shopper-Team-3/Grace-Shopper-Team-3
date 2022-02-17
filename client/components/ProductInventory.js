@@ -63,8 +63,8 @@ const ProductInventory = () => {
           <div key={product.id}>
             <button onClick={() => dispatch(deleteProd(product.id))}>x</button>
             <Link to={`/admin/inventory/${product.id}`}>
-              {product.category} - {product.brand} - {product.model} - Price: $
-              {product.price}
+              QUANTITY:{product.quantity}------{product.category} -{' '}
+              {product.brand} - {product.model} - Price: ${product.price}
             </Link>
           </div>
         ))}

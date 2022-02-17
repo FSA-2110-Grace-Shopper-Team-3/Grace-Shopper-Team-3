@@ -3,7 +3,7 @@ import { updateUser } from '../store/users';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { Formik, Form, useField } from 'formik';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Grid } from '@material-ui/core';
 import * as yup from 'yup';
 
 const MyTextField = ({ placeholder, ...props }) => {
@@ -16,12 +16,15 @@ const MyTextField = ({ placeholder, ...props }) => {
       {...field}
       helperText={errorText}
       error={!!errorText}
+      className="textfield"
+      style={{ width: 320 }}
+      variant="outlined"
     />
   );
 };
 
 const validationSchema = yup.object({
-  username: yup.string().required('username is required').max(20),
+  username: yup.string().required('username is required').min(3).max(20),
   password: yup.string().required('password is required'),
   email: yup.string().required('email is required').max(25),
   img: yup.string().max(25),
@@ -34,8 +37,6 @@ const EditUser = () => {
   );
   const history = useHistory();
   const dispatch = useDispatch();
-
-  console.log('USER', currUser);
 
   return (
     <div className="formik">
@@ -68,38 +69,40 @@ const EditUser = () => {
             <div>
               <h4>Edit User Info</h4>
             </div>
-            <div>
-              <MyTextField
-                placeholder="username"
-                name="username"
-                type="input"
-              />
-            </div>
-            <div>
-              <MyTextField
-                placeholder="password"
-                name="password"
-                type="input"
-              />
-            </div>
-            <div>
-              <MyTextField placeholder="email" name="email" type="input" />
-            </div>
-            <div>
-              <MyTextField placeholder="photo url" name="img" type="input" />
-            </div>
-
-            <div>
-              <Button disabled={isSubmitting} type="submit">
-                SUBMIT
-              </Button>
-              <Button
-                type="button"
-                onClick={() => history.push('/admin/users')}
-              >
-                CANCEL
-              </Button>
-            </div>
+            <Grid container direction={'column'} spacing={3}>
+              <Grid item>
+                <MyTextField
+                  placeholder="username"
+                  name="username"
+                  type="input"
+                />
+              </Grid>
+              <Grid item>
+                <MyTextField
+                  placeholder="password"
+                  name="password"
+                  type="input"
+                />
+              </Grid>
+              <Grid item>
+                <MyTextField placeholder="email" name="email" type="input" />
+              </Grid>
+              <Grid item>
+                <MyTextField placeholder="photo url" name="img" type="input" />
+              </Grid>
+              <Grid item>
+                <Button disabled={isSubmitting} type="submit" color="primary">
+                  SUBMIT
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => history.push('/products')}
+                  color="primary"
+                >
+                  CANCEL
+                </Button>
+              </Grid>
+            </Grid>
           </Form>
         )}
       </Formik>
