@@ -61,6 +61,9 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 <Link to="/products">Products</Link>
               </li>
               <li>
+                <SearchBar placeholder={'Search for rock!'} data={products} />
+              </li>
+              <li>
                 <Link to="/orderhistory">Past Orders</Link>
               </li>
             </ul>
@@ -90,6 +93,9 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
               <li>
                 <Link to="/products">Products</Link>
               </li>
+              <li>
+                <SearchBar placeholder={'Search for rock!'} data={products} />
+              </li>
             </ul>
             <ul className="navbar-ul">
               <li>
@@ -105,8 +111,6 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 <Link to="/cart">Cart ({guestCartTotal})</Link>
               </li>
             </ul>
-
-            
           </div>
         )}
       </nav>
