@@ -148,7 +148,6 @@ const Products = () => {
   //     setProductFilter(highPrice);
   //   }
   // };
-  const [myInstrument, setMyInstrument] = useState('');
 
   return (
     <div className="pds">
@@ -161,7 +160,9 @@ const Products = () => {
             setMyInstrument(event.target.value);
           }}
         />
-
+    <div>
+      <div>
+        <h3>Welcome, {username ? username : 'Guest!'}</h3>
         <form>
           <select onChange={saveInstrument}>
             <option value="all">All</option>
@@ -194,21 +195,7 @@ const Products = () => {
         </div> */}
       </div>
       <div className="pds-list">
-        {currentInstruments
-          .filter((val) => {
-            if (setInstruments === '') {
-              return val;
-            } else if (
-              val.brand.toLowerCase().includes(myInstrument.toLowerCase())
-            ) {
-              return val;
-            } else if (
-              val.model.toLowerCase().includes(myInstrument.toLowerCase())
-            ) {
-              return val;
-            }
-          })
-          .map((product) => {
+        {currentInstruments.map((product) => {
             return (
               <div key={product.id} className="pds-product">
                 {

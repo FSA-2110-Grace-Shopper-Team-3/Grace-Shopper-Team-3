@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 import { logout, emptyGuestOrderItem } from '../store';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
@@ -21,6 +22,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     orderItems.filter((orderItem) => orderItem.orderId === matchingOrder.id) ||
     [];
 
+  const products = useSelector((state) => state.products);
   //-------------------Guest Cart Functionality---------------------//
 
   const guestCart = useSelector((state) => state.guestOrderItems) || [];
@@ -103,6 +105,8 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 <Link to="/cart">Cart ({guestCartTotal})</Link>
               </li>
             </ul>
+
+            
           </div>
         )}
       </nav>
