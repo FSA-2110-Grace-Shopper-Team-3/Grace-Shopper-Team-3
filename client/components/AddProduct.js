@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { createProd } from '../store';
+import { ToastContainer, toast, Slide } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 class AddProduct extends Component {
   constructor(props) {
@@ -48,9 +50,17 @@ class AddProduct extends Component {
       ),
     ];
 
+    const notify = () => toast.success('product added');
+
+    const handleOnClick = () => {
+      notify();
+      // USE HISTORY TO REDIRECT TO INVENTORY PAGE -> set timout 2000 ms
+    };
+
     return (
       <div>
         {!!error && <pre>{JSON.stringify(error, null, 2)}</pre>}
+        {injectStyle()}
         <h4>Add Product</h4>
         <form id="add-product" onSubmit={handleSubmit}>
           <input
@@ -74,10 +84,7 @@ class AddProduct extends Component {
           <input
             name="img"
             onChange={handleChange}
-            value={
-              img ||
-              'https://tracerproducts.com/wp-content/uploads/2019/12/Product-Image-Coming-Soon.jpg'
-            }
+            value={img}
             placeholder="Image"
           />
           <input
@@ -106,7 +113,20 @@ class AddProduct extends Component {
               );
             })}
           </select>
-          <button type="submit">Add Product</button>
+          <button type="submit" onClick={handleOnClick}>
+            Add Product
+          </button>
+          <ToastContainer
+            position="top-center"
+            autoClose={1500}
+            hideProgressBar
+            newestOnTop={true}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            transition={Slide}
+          />
         </form>
       </div>
     );

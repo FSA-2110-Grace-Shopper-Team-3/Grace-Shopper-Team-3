@@ -34,6 +34,9 @@ const Product = db.define('product', {
   quantity: {
     type: INTEGER,
     defaultValue: 10,
+    validate: {
+      min: 0,
+    },
   },
 });
 
