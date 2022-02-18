@@ -61,10 +61,10 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <a href="#" onClick={handleClick}>
               Logout
             </a>
+            <Link to="/admin/addproduct">Add Product</Link>
             <Link to="/admin/inventory">Product Inventory</Link>
             <Link to="/admin/users">Users</Link>
             <Link to="/admin/orders">Orders</Link>
-            <Link to="/admin/settings">Settings</Link>
             <Link to="/admin/analytics">Analytics</Link>
           </div>
         ) : isLoggedIn && currUser.isAdmin === false ? (

@@ -59,13 +59,9 @@ const ProductInventory = () => {
           sort by high to low
         </Link>
       </div>
-      <div></div>
-      <div>
-        <AddProduct />
-      </div>
       <div className="pds">
         <div className="pds-filter">
-          <h2>PRODUCTS</h2>
+          <h2>PRODUCT INVENTORY</h2>
         </div>
         <div>
           <div className="pds-list">
