@@ -5,6 +5,9 @@ import SearchBar from './SearchBar';
 import { logout, emptyGuestOrderItem } from '../store';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
+import Badge from '@material-ui/core/Badge';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PersonIcon from '@material-ui/icons/Person';
 import Cart from './Cart';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
@@ -90,11 +93,15 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 </a>
               </li>
               <li>
-                <Link to={`/editprofile/${userId}`}>Edit Profile</Link>
+                <Link to={`/editprofile/${userId}`}>
+                  <PersonIcon />
+                </Link>
               </li>
               <li>
                 <a href="#" onClick={() => setCartDrawer(true)}>
-                  Cart ({cartTotal})
+                  <Badge color="secondary" badgeContent={cartTotal}>
+                    <ShoppingCartIcon />{' '}
+                  </Badge>
                 </a>
               </li>
             </ul>
@@ -124,7 +131,9 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
               </li>
               <li>
                 <a href="#" onClick={() => setCartDrawer(true)}>
-                  Cart ({guestCartTotal})
+                  <Badge color="secondary" badgeContent={guestCartTotal}>
+                    <ShoppingCartIcon />{' '}
+                  </Badge>
                 </a>
               </li>
             </ul>
