@@ -167,7 +167,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                         </div>
                         <div className="ct-uc-item-qty-wrap">
                           <div className="ct-uc-item-price">
-                            ${orderItem.quantity * cartItem.price}
+                            ${(orderItem.quantity * cartItem.price).toFixed(2)}
                           </div>
                           <div className="ct-uc-item-qty">
                             QTY:
@@ -180,6 +180,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                                 onClick={() =>
                                   dispatch(
                                     editGuestOrderItem({
+                                      ...orderItem,
                                       id: orderItem.id,
                                       quantity: orderItem.quantity + 1,
                                     })
@@ -196,6 +197,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                                 onClick={() =>
                                   dispatch(
                                     editGuestOrderItem({
+                                      ...orderItem,
                                       id: orderItem.id,
                                       quantity: orderItem.quantity - 1,
                                     })
@@ -335,7 +337,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                       </div>
                       <div className="ct-uc-item-qty-wrap">
                         <div className="ct-uc-item-price">
-                          ${orderItem.quantity * cartItem.price}
+                          ${(orderItem.quantity * cartItem.price).toFixed(2)}
                         </div>
                         <div className="ct-uc-item-qty">
                           QTY:
