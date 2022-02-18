@@ -74,7 +74,10 @@ class AddProduct extends Component {
           <input
             name="img"
             onChange={handleChange}
-            value={img}
+            value={
+              img ||
+              'https://tracerproducts.com/wp-content/uploads/2019/12/Product-Image-Coming-Soon.jpg'
+            }
             placeholder="Image"
           />
           <input
@@ -103,7 +106,7 @@ class AddProduct extends Component {
               );
             })}
           </select>
-          <button type="submit">Submit</button>
+          <button type="submit">Add Product</button>
         </form>
       </div>
     );
