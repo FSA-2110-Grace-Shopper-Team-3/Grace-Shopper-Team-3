@@ -121,6 +121,156 @@ ul {
   flex-direction: row;
 }
 
+/* ---------------Navbar.js CSS--------------- */
+.ct {
+  display: flex;
+}
+
+.ct-uc {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  /* height: 50vh; */
+  min-height: 100vh;
+}
+
+.ct-uc-empty {
+  width: 300px;
+  text-align: center;
+}
+
+.ct-uc-header {
+  display: flex;
+  justify-content: center;
+}
+
+.ct-uc-header h3 {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.ct-uc-items {
+  height: 250px;
+}
+
+.ct-uc-item {
+  display: flex;
+  padding: 1rem;
+  width: 100%;
+}
+
+.ct-checkout {
+  margin-top: auto;
+  width: 100%;
+  padding: 1rem;
+  /* height: 130px; */
+  position: fixed;
+  bottom: 0;
+  background-color: black;
+  color: white;
+}
+
+.ct-checkout h3 {
+  margin: 0;
+}
+
+.ct-checkout-p {
+  width: 250px;
+}
+
+.ct-checkout-p p {
+  line-height: 1.1rem;
+  font-size: 0.7rem;
+}
+
+.ct-uc-item-img {
+  display: flex;
+  margin-right: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.ct-uc-item-img img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.ct-uc-item-desc {
+  display: flex;
+  flex-direction: column;
+  width: 170px;
+}
+
+.ct-uc-item-desc h4 {
+  margin: 0;
+  margin-bottom: 5px;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.ct-uc-item-brand {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.ct-uc-item-qty-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ct-uc-item-price {
+  width: 150px;
+  font-weight: bold;
+}
+
+.ct-uc-item-qty {
+  display: flex;
+  font-size: 0.9rem;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  position: relative;
+  margin-left: 20px;
+}
+
+.ct-quantity {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.ct-uc-item-del {
+  cursor: pointer;
+  height: 20px;
+}
+
+.ct-uc-arrows {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin-left: 100px;
+}
+
+/* #checkout-btn {
+  background-color: white;
+  color: black;
+  border: none;
+  width: 150px;
+  height: 60px;
+  text-align: center;
+  vertical-align: middle;
+} */
+
 /* ---------------Products.js CSS--------------- */
 
 .pds {
@@ -148,6 +298,8 @@ ul {
   height: 300px;
   flex-direction: column;
   padding: 1rem;
+  margin: 1rem;
+  /* background-color: rgb(235, 249, 255); */
 }
 
 .pds-product img {
@@ -188,7 +340,7 @@ ul {
 
 .sp-img {
   height: 60vh;
-  width: 50vh;
+  /* width: 50vh; */
   object-fit: contain;
   /* border: 1px solid black; */
 }
@@ -197,8 +349,48 @@ ul {
   width: 70%;
 }
 
-.sp-desc h1 {
+/* .sp-desc-name {
+  background-color: black;
+  color: white;
+  padding: 1rem;
+} */
+
+.sp-desc h2 {
+  display: inline-block;
   text-transform: uppercase;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+}
+
+.sp-desc h3 {
+  margin-top: 0;
+}
+
+.sp-desc p {
+  line-height: 1.5rem;
+}
+
+.sp-desc-price h3 {
+  display: inline-block;
+  text-transform: uppercase;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+}
+
+.sp-buttons {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.sp-quantity {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
 }
 
 /* ---------------OrderHistory.js CSS--------------- */

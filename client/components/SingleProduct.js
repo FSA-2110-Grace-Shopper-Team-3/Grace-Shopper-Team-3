@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import {
@@ -11,6 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 
 const SingleProduct = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const currentUserId = useSelector((state) => state.auth.id) || '';
   const singleProduct =
@@ -57,7 +58,8 @@ const SingleProduct = () => {
     }
   }, []);
 
-  const dispatch = useDispatch();
+  //-------------------Adding to Cart Functionality---------------------//
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="sp">
@@ -69,47 +71,32 @@ const SingleProduct = () => {
       <div className="sp-right">
         <div className="sp-right-wrap">
           <div className="sp-desc">
-            {/* <ul>
-              <li></li>
-              <li>Brand: {singleProduct.brand}</li>
-              <li>Model: {singleProduct.model}</li>
-              <li>Price: ${singleProduct.price}</li>
-              <li>Description: {singleProduct.description}</li>
-            </ul> */}
-            <h1>
-              {singleProduct.brand} - {singleProduct.model}
-            </h1>
+            <div className="sp-desc-name">
+              <h2>
+                {singleProduct.brand} - {singleProduct.model}
+              </h2>
+            </div>
             <h3>{singleProduct.category} </h3>
-
             <p>{singleProduct.description}</p>
-            <h4>${singleProduct.price}</h4>
+            <div className="sp-desc-price">
+              <h3>${singleProduct.price}</h3>
+            </div>
           </div>
-          {/* Quantity:{orderItem.quantity}
-          <button
-            onClick={() =>
-              dispatch(
-                editOrderItem({
-                  id: orderItem.id,
-                  quantity: orderItem.quantity + 1,
-                })
-              )
-            }
-          >
-            +
-          </button>
-          <button
-            onClick={() =>
-              dispatch(
-                editOrderItem({
-                  id: orderItem.id,
-                  quantity: orderItem.quantity - 1,
-                })
-              )
-            }
-            disabled={orderItem.quantity === 1}
-          >
-            -
-          </button> */}
+          <div className="sp-buttons">
+            <button
+              onClick={() => setQuantity(quantity - 1)}
+              disabled={quantity === 1}
+            >
+              -
+            </button>
+            <div className="sp-quantity">{quantity}</div>
+            <button
+              onClick={() => setQuantity(quantity + 1)}
+              disabled={quantity === 10}
+            >
+              +
+            </button>
+          </div>
           <button
             onClick={() => {
               if (!currentUserId) {
@@ -123,7 +110,7 @@ const SingleProduct = () => {
                       editGuestOrderItem({
                         ...guestOrderItem,
                         id: guestOrderItem.id,
-                        quantity: guestOrderItem.quantity + 1,
+                        quantity: guestOrderItem.quantity + quantity,
                       })
                     )
                   : dispatch(
@@ -131,7 +118,7 @@ const SingleProduct = () => {
                         productId: singleProduct.id,
                         userId: null,
                         id: uuidv4(),
-                        quantity: 1,
+                        quantity: quantity,
                       })
                     );
               } else {
@@ -144,7 +131,7 @@ const SingleProduct = () => {
                   ? dispatch(
                       editOrderItem({
                         id: orderItem.id,
-                        quantity: orderItem.quantity + 1,
+                        quantity: orderItem.quantity + quantity,
                         userId: currentUserId,
                       })
                     )
@@ -153,6 +140,7 @@ const SingleProduct = () => {
                         productId: singleProduct.id,
                         orderId: matchOrder.id,
                         userId: currentUserId,
+                        quantity: quantity,
                       })
                     );
               }
