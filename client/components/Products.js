@@ -164,9 +164,7 @@ const Products = () => {
                         <img src={product.img} />
                       </div>
                       <div className="pds-product-name">
-                        <div>
-                          {product.category} - {product.brand}
-                        </div>
+                        <div>{product.brand}</div>
                         <div>{product.model}</div>
                       </div>
                     </Link>
