@@ -59,6 +59,7 @@ const ProductInventory = () => {
           sort by high to low
         </Link>
       </div>
+      <div></div>
       <div>
         <AddProduct />
       </div>
