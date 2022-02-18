@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useRouteMatch } from 'react-router-dom';
 import AddProduct from './AddProduct';
 import { deleteProd } from '../store';
+import { Button } from '@material-ui/core';
 
 const ProductInventory = () => {
   let products = useSelector((state) => state.products);
@@ -23,7 +24,7 @@ const ProductInventory = () => {
       );
     } else if (field === 'accesories') {
       products = [...products].filter(
-        (product) => product.category === 'Accesory'
+        (product) => product.category === 'Accessory'
       );
     } else if (field === 'pianos') {
       products = [...products].filter(
@@ -58,17 +59,43 @@ const ProductInventory = () => {
           sort by high to low
         </Link>
       </div>
-      <div className="inventory">
-        {products.map((product) => (
-          <div key={product.id}>
-            <button onClick={() => dispatch(deleteProd(product.id))}>x</button>
-            <Link to={`/admin/inventory/${product.id}`}>
-              QUANTITY:{product.quantity}------{product.category} -{' '}
-              {product.brand} - {product.model} - Price: ${product.price}
-            </Link>
-          </div>
-        ))}
+      <div>
         <AddProduct />
+      </div>
+      <div className="pds">
+        <div className="pds-filter">
+          <h2>PRODUCTS</h2>
+        </div>
+        <div>
+          <div className="pds-list">
+            {products.map((product) => {
+              return (
+                <div key={product.id} className="pds-product">
+                  {
+                    <div className="pds-product-wrapper">
+                      <Link to={`/admin/inventory/${product.id}`}>
+                        <div>
+                          <img src={product.img} />
+                        </div>
+                        <div className="pds-product-name">
+                          <div>{product.category}</div>
+                          <div>
+                            {product.brand} {product.model}
+                          </div>
+                          <div>Quantity:{product.quantity}</div>
+                          <div>Price: ${product.price}</div>
+                        </div>
+                      </Link>
+                    </div>
+                  }
+                  <button onClick={() => dispatch(deleteProd(product.id))}>
+                    delete product
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
