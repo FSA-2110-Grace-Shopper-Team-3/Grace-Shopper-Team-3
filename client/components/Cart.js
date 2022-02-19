@@ -148,13 +148,19 @@ const Cart = ({ cartOpen, handleClose }) => {
                 <h3>GUEST CART</h3>
               </div>
               <div className="ct-uc-items">
-                {guestCart.map((orderItem) => {
+                {guestCart.map((orderItem, idx) => {
                   const cartItem =
                     products.find(
                       (product) => product.id === orderItem.productId
                     ) || {};
                   return (
-                    <div className="ct-uc-item" key={orderItem.id}>
+                    <div
+                      className="ct-uc-item"
+                      key={orderItem.id}
+                      style={{
+                        paddingBottom: idx === guestCart.length - 1 ? 180 : 0,
+                      }}
+                    >
                       <div className="ct-uc-item-img">
                         <img src={cartItem.img} />
                       </div>
@@ -318,13 +324,20 @@ const Cart = ({ cartOpen, handleClose }) => {
               <h3>YOUR CART</h3>
             </div>
             <div className="ct-uc-items">
-              {matchingOrderItems.map((orderItem) => {
+              {matchingOrderItems.map((orderItem, idx) => {
                 const cartItem =
                   products.find(
                     (product) => product.id === orderItem.productId
                   ) || {};
                 return (
-                  <div className="ct-uc-item" key={orderItem.id}>
+                  <div
+                    className="ct-uc-item"
+                    key={orderItem.id}
+                    style={{
+                      paddingBottom:
+                        idx === matchingOrderItems.length - 1 ? 180 : 0,
+                    }}
+                  >
                     <div className="ct-uc-item-img">
                       <img src={cartItem.img} />
                     </div>
