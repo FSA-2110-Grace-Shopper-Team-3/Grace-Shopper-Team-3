@@ -9,8 +9,11 @@ import {
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
+import { ToastContainer, Slide, toast } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 const SingleProduct = () => {
+  const notify = () => toast.success('added to cart!');
   const dispatch = useDispatch();
   const { id } = useParams();
   const currentUserId = useSelector((state) => state.auth.id) || '';
@@ -63,6 +66,7 @@ const SingleProduct = () => {
 
   return (
     <div className="sp">
+      {injectStyle()}
       <div className="sp-left">
         <div className="sp-left-img">
           <img className="sp-img" src={singleProduct.img} />
@@ -100,6 +104,9 @@ const SingleProduct = () => {
           </div>
           <button
             onClick={() => {
+              {
+                notify();
+              }
               if (!currentUserId) {
                 const guestOrderItem = guestCart.find(
                   (orderItem) =>
