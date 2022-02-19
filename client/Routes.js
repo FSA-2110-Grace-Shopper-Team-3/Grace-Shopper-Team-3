@@ -64,7 +64,7 @@ class Routes extends Component {
               component={ProductInventory}
             />
             <Route exact path="/admin/inventory/:id" component={EditProduct} />
-            <Route exact path="/admin/addproduct" component={AddProduct} />
+            <Route exact path="/admin/addproduct" component={EditProduct} />
             <Route exact path="/admin/analytics" component={Analytics} />
             <Route exact path="/admin/orders" component={Orders} />
             <Redirect to="/admin/inventory" />
