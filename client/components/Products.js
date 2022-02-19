@@ -10,8 +10,11 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PageviewIcon from '@material-ui/icons/Pageview';
+import { ToastContainer, Slide, toast } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 const Products = () => {
+  const notify = () => toast.success('added to cart!');
   const username = useSelector((state) => state.auth.username) || '';
   let products = useSelector((state) => state.products);
   const orderItems = useSelector((state) => state.orderItems) || [];
@@ -113,6 +116,7 @@ const Products = () => {
 
   return (
     <div className="pds">
+      {injectStyle()}
       <div className="pds-filter">
         <h2>PRODUCTS</h2>
       </div>
@@ -219,6 +223,9 @@ const Products = () => {
                   <div className="pds-product-icon">
                     <ShoppingCartIcon
                       onClick={() => {
+                        {
+                          notify();
+                        }
                         if (!id) {
                           const guestOrderItem = guestCart.find(
                             (orderItem) =>
@@ -277,6 +284,18 @@ const Products = () => {
           })}
         </div>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={1500}
+        hideProgressBar
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        transition={Slide}
+        limit={5}
+      />
     </div>
   );
 };

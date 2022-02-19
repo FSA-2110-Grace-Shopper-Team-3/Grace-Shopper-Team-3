@@ -15,8 +15,16 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
+import { ToastContainer, Slide, toast } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 const Cart = ({ cartOpen, handleClose }) => {
+  const notify = () => toast.error('removed from cart');
+  const signUptoOrder = () =>
+    toast.error('Please create an account to place an order with UNPLGD', {
+      autoClose: 2000,
+      limit: 1,
+    });
   const dispatch = useDispatch();
   const history = useHistory();
   const orderItems = useSelector((state) => state.orderItems);
@@ -90,6 +98,7 @@ const Cart = ({ cartOpen, handleClose }) => {
 
   return (
     <div className="ct">
+      {injectStyle()}
       {!userId ? (
         !guestCart.length ? (
           <Drawer
@@ -127,7 +136,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                   height: 50,
                 }}
                 endIcon={<AddShoppingCartIcon />}
-                onClick={handleCheckout}
+                onClick={() => signUptoOrder()}
               >
                 TO CHECKOUT
               </Button>
@@ -221,9 +230,12 @@ const Cart = ({ cartOpen, handleClose }) => {
                       <div className="ct-uc-item-del">
                         <HighlightOffTwoToneIcon
                           style={{ color: 'red' }}
-                          onClick={() =>
-                            dispatch(deleteGuestOrderItem(orderItem.id))
-                          }
+                          onClick={() => {
+                            {
+                              notify();
+                            }
+                            dispatch(deleteGuestOrderItem(orderItem.id));
+                          }}
                         />
                       </div>
                     </div>
@@ -254,7 +266,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                   height: 50,
                 }}
                 endIcon={<AddShoppingCartIcon />}
-                onClick={handleCheckout}
+                onClick={() => signUptoOrder()}
               >
                 TO CHECKOUT
               </Button>
@@ -396,7 +408,12 @@ const Cart = ({ cartOpen, handleClose }) => {
                     <div className="ct-uc-item-del">
                       <HighlightOffTwoToneIcon
                         style={{ color: 'red' }}
-                        onClick={() => dispatch(deleteOrderItem(orderItem.id))}
+                        onClick={() => {
+                          {
+                            notify();
+                          }
+                          dispatch(deleteOrderItem(orderItem.id));
+                        }}
                       />
                     </div>
                   </div>
