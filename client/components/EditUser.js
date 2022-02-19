@@ -6,26 +6,28 @@ import { Formik, Form, useField } from 'formik';
 import { TextField, Button, Grid } from '@material-ui/core';
 import * as yup from 'yup';
 
-const MyTextField = ({ placeholder, ...props }) => {
+const MyTextField = ({ label, type, ...props }) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : '';
   return (
     <TextField
       fullWidth={true}
-      placeholder={placeholder}
       {...field}
       helperText={errorText}
       error={!!errorText}
       className="textfield"
       style={{ width: 320 }}
+      id="outlined-basic"
+      label={label}
       variant="outlined"
+      type={type}
     />
   );
 };
 
 const validationSchema = yup.object({
   username: yup.string().required('username is required').min(3).max(20),
-  password: yup.string().required('password is required'),
+  password: yup.string(),
   email: yup.string().required('email is required').max(25),
   img: yup.string().max(25),
 });
@@ -38,29 +40,38 @@ const EditUser = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const currPassword = currUser.password;
+
   return (
     <div className="formik">
       <Formik
         initialValues={{
           id: currUser.id || 1,
           username: currUser.username || '',
-          password: currUser.password || '',
           email: currUser.email || '',
           img: currUser.img || 'https://i.pravatar.cc/300',
+          password: '',
+          confirmPassword: '',
         }}
         validationSchema={validationSchema}
         validate={(values) => {
           const errors = {};
 
-          values.username === currUser.username
-            ? (errors.username = `Your current username is ${currUser.username}`)
+          values.password !== values.confirmPassword
+            ? (errors.confirmPassword = 'Passwords do not match')
             : '';
 
           return errors;
         }}
         onSubmit={(data, { setSubmitting }) => {
           setSubmitting(true); // before async call
-          dispatch(updateUser(data));
+
+          if (data.password === '') {
+            dispatch(updateUser({ ...data, password: currPassword }));
+          } else {
+            dispatch(updateUser(data));
+          }
+
           setSubmitting(false); //after async call
         }}
       >
@@ -71,25 +82,29 @@ const EditUser = () => {
             </div>
             <Grid container direction={'column'} spacing={3}>
               <Grid item>
-                <MyTextField
-                  placeholder="username"
-                  name="username"
-                  type="input"
-                />
+                <MyTextField label="Username" name="username" type="input" />
+              </Grid>
+              <Grid item>
+                <MyTextField label="Email" name="email" type="input" />
+              </Grid>
+              <Grid item>
+                <MyTextField label="Photo" name="img" type="input" />
               </Grid>
               <Grid item>
                 <MyTextField
-                  placeholder="password"
+                  label="New Password"
                   name="password"
-                  type="input"
+                  type="password"
                 />
               </Grid>
               <Grid item>
-                <MyTextField placeholder="email" name="email" type="input" />
+                <MyTextField
+                  label="Confirm New Password"
+                  name="confirmPassword"
+                  type="password"
+                />
               </Grid>
-              <Grid item>
-                <MyTextField placeholder="photo url" name="img" type="input" />
-              </Grid>
+
               <Grid item>
                 <Button disabled={isSubmitting} type="submit" color="primary">
                   SUBMIT
