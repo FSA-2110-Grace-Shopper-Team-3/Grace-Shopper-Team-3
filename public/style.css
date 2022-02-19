@@ -121,7 +121,7 @@ ul {
   flex-direction: row;
 }
 
-/* ---------------Navbar.js CSS--------------- */
+/* ---------------Cart.js CSS--------------- */
 .ct {
   display: flex;
 }
@@ -290,31 +290,92 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  /* background-color: beige; */
 }
 
 .pds-product {
   display: flex;
-  width: 250px;
-  height: 300px;
+  min-width: 250px;
+  height: 355px;
   flex-direction: column;
   padding: 1rem;
   margin: 1rem;
-  /* background-color: rgb(235, 249, 255); */
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 .pds-product img {
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   object-fit: contain;
 }
 
 .pds-product-wrapper {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .pds-product-name {
   text-align: center;
+}
+
+.pds-product-name h3 {
+  display: inline-block;
+  text-transform: uppercase;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
+  width: 230px;
+  margin-bottom: 8px;
+}
+
+.pds-product-brand {
+  margin-bottom: 5px;
+}
+
+.pds-product-price {
+  font-weight: bold;
+}
+
+.pds-product-cover {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.5s ease;
+}
+
+.pds-product-cover:hover {
+  opacity: 1;
+}
+
+.pds-product-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 3.2rem;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.pds-product-icon:hover {
+  background-color: #d8d8d8;
+  transform: scale(1.1);
 }
 
 /* ---------------SingleProduct.js CSS--------------- */
