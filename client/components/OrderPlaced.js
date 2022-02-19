@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { editOrder, addOrder, updateProd } from '../store';
 import { useDispatch, useSelector } from 'react-redux';
+import Band from '../../public/images/band.png';
 
 const OrderPlaced = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,13 @@ const OrderPlaced = () => {
   const matchingOrderItems =
     orderItems.filter((orderItem) => orderItem.orderId === matchingOrder.id) ||
     [];
+
+  const userCartPriceTotal = matchingOrderItems.reduce((acc, curr) => {
+    const currentProduct =
+      products.find((product) => product.id === curr.productId) || {};
+    acc += currentProduct.price * curr.quantity;
+    return acc;
+  }, 0);
 
   const matchingOrderItemsQty = matchingOrderItems.map((item) => item.quantity);
 
@@ -37,6 +45,7 @@ const OrderPlaced = () => {
           editOrder({
             id: matchingOrder.id,
             isOrdered: true,
+            totalPrice: userCartPriceTotal.toFixed(2),
           })
         );
         dispatch(addOrder({ userId: userId }));
@@ -51,9 +60,18 @@ const OrderPlaced = () => {
       }
     }
   }, [matchingOrderItems.length]);
+
   return (
-    <div>
-      Order placed!
+    <div className="op">
+      <h1>ORDER SUCCESSFUL</h1>
+      <img src={Band} />
+      <div className="op-desc">
+        <h2>Let's jam!</h2>
+        <p>
+          Thank you for your purchase. We hope you are satisfied with your
+          order!
+        </p>
+      </div>
       <Link to="/orderhistory">View Order History</Link>
     </div>
   );

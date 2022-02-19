@@ -6,11 +6,6 @@ label {
   display: block;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
 /* form div {
   margin: 1em;
   display: inline-block;
@@ -120,6 +115,11 @@ ul {
 
 /* ---------------Navbar.js CSS--------------- */
 
+nav a {
+  display: inline-block;
+  margin: 1em;
+}
+
 .navbar {
   display: flex;
   flex-direction: row;
@@ -130,11 +130,28 @@ ul {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  border-bottom: 1px solid lightgray;
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  background: white;
+  z-index: 2;
 }
 
 .navbar-ul {
   display: flex;
   flex-direction: row;
+}
+
+/* .navbar-logo {
+  width: 100px;
+  height: 100px;
+} */
+
+.navbar-user img {
+  width: 320px;
+  height: 100px;
+  object-fit: contain;
 }
 
 /* ---------------Cart.js CSS--------------- */
@@ -292,6 +309,7 @@ ul {
 .pds {
   display: flex;
   flex-wrap: wrap;
+  padding-top: 100px;
 }
 
 .pds-filter {
@@ -306,6 +324,7 @@ ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
   /* background-color: beige; */
 }
 
@@ -321,6 +340,7 @@ ul {
   position: relative;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
 
 .pds-product img {
@@ -400,11 +420,23 @@ ul {
   display: flex;
   height: 80vh;
   justify-content: center;
+  padding-top: 100px;
 }
 
 .sp-left {
   display: flex;
   flex: 1;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sp-left-img {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  height: 70vh;
+  width: 90%;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -417,7 +449,7 @@ ul {
 
 .sp-img {
   height: 60vh;
-  /* width: 50vh; */
+  width: 90vh;
   object-fit: contain;
   /* border: 1px solid black; */
 }
@@ -476,6 +508,7 @@ ul {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 100px;
 }
 
 .oh-title h1 {
@@ -483,10 +516,219 @@ ul {
 }
 
 .oh-order {
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) -3px 3px 7px -3px;
   margin-bottom: 2rem;
+  width: 550px;
+}
+
+.oh-order-id {
+  background-color: black;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.oh-order-id span {
+  font-weight: bold;
+}
+
+.oh-order-id div {
+  padding: 0.5rem;
+  padding-bottom: 0;
+  font-size: 0.8rem;
+}
+
+.oh-order-items {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.oh-order-item {
+  display: flex;
+  padding: 0.5rem;
+}
+
+.oh-order-item-img {
+  /* margin-left: 50px; */
+}
+
+.oh-order-item-img img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.oh-order-item-desc {
+  display: flex;
+  flex-direction: column;
+}
+
+.oh-order-item-desc h4 {
+  text-transform: uppercase;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.oh-order-items-total {
+  width: 100%;
+  height: 35px;
+  background-color: black;
+  color: white;
+}
+
+.oh-order-items-total h3 {
+  padding: 0.5rem;
+}
+
+/* ---------------OrderPlaced.js CSS--------------- */
+
+.op {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  flex-direction: column;
+  padding-top: 100px;
+}
+
+.op img {
+  height: 400px;
+  width: 400px;
+  object-fit: contain;
+}
+
+.op-desc {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* ---------------AuthForm.js CSS--------------- */
+
+.li {
+  display: flex;
+  height: 50vh;
+  justify-content: center;
+  padding-top: 100px;
+}
+
+.li-form {
+  width: 480px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) -3px 3px 7px -3px;
+}
+
+.li-form h2 {
+  text-align: center;
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  margin-left: 11px;
+}
+
+.li-form input {
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  flex-direction: column;
+  padding: 0.5rem;
+  border: 1px solid rgb(198, 198, 198);
+  margin: 10px;
+  width: 350px;
+}
+
+.li-form label {
+  margin-left: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.li-form button {
+  width: 368px;
+  padding: 0.5rem;
+  margin: 10px;
+  border-radius: 0;
+}
+
+.li-reg {
+  margin-left: 11px;
+}
+
+.li-reg span {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.auth-error {
+  color: red;
+  margin-left: 11px;
+  margin-bottom: 10px;
+  font-size: small;
+}
+
+.su {
+  display: flex;
+  height: 50vh;
+  justify-content: center;
+}
+
+.su-form {
+  width: 480px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) -3px 3px 7px -3px;
+}
+
+.su-form h2 {
+  text-align: center;
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  margin-left: 11px;
+}
+
+.su-form input {
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  flex-direction: column;
+  padding: 0.5rem;
+  border: 1px solid rgb(198, 198, 198);
+  margin: 10px;
+  width: 350px;
+}
+
+.su-form label {
+  margin-left: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.su-form button {
+  width: 368px;
+  padding: 0.5rem;
+  margin: 10px;
+  border-radius: 0;
+}
+
+.su-reg {
+  margin-left: 11px;
+}
+
+.su-reg span {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* ---------------Admin CSS--------------- */

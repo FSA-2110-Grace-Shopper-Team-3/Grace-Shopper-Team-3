@@ -1,8 +1,11 @@
 import React from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { authenticate } from '../store';
 import { authenticateNewUser } from '../store';
 import auth from '../store/auth';
+import Button from '@mui/material/Button';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
 /**
  * COMPONENT
@@ -10,57 +13,115 @@ import auth from '../store/auth';
 
 const AuthForm = (props) => {
   const { displayName, handleLogin, handleSignup, error, name, match } = props;
+  const history = useHistory();
+  console.log('rendered');
 
   if (match.path === '/' || match.path === '/signup') {
     return (
-      <div>
-        <form onSubmit={handleSignup} name={name}>
+      <div className="su">
+        <div className="su-form">
           <div>
-            <label htmlFor="username">
-              <small>Username</small>
-            </label>
-            <input name="username" type="text" required />
+            <h2>REGISTER</h2>
           </div>
-          <div>
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input name="password" type="password" required />
-          </div>
-          <div>
-            <label htmlFor="email">
-              <small>e-mail</small>
-            </label>
-            <input name="email" type="email" required />
-          </div>
-          <div>
-            <button type="submit">{displayName} </button>
-          </div>
-          {error && error.response && <div> {error.response.data} </div>}
-        </form>
+          <form onSubmit={handleSignup} name={name}>
+            <div>
+              <label htmlFor="username">
+                <small>Username</small>
+              </label>
+              <input name="username" type="text" required />
+            </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input name="password" type="password" required />
+            </div>
+            <div>
+              <label htmlFor="email">
+                <small>e-mail</small>
+              </label>
+              <input name="email" type="email" required />
+            </div>
+            <div>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  color: 'white',
+                  backgroundColor: 'black',
+                  '&:hover': {
+                    backgroundColor: 'white',
+                    color: 'black',
+                  },
+                  borderRadius: 0,
+                  width: 180,
+                  height: 50,
+                }}
+                endIcon={<ArrowForwardIcon />}
+              >
+                {displayName}
+              </Button>
+            </div>
+            <div className="li-reg">
+              Already have an account?{' '}
+              <span onClick={() => history.push('/login')}>Log in</span>
+            </div>
+          </form>
+        </div>
       </div>
     );
   } else if (match.path === '/login') {
     return (
-      <div>
-        <form onSubmit={handleLogin} name={name}>
+      <div className="li">
+        <div className="li-form">
           <div>
-            <label htmlFor="username">
-              <small>Username</small>
-            </label>
-            <input name="username" type="text" />
+            <h2>LOGIN</h2>
           </div>
-          <div>
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input name="password" type="password" />
-          </div>
-          <div>
-            <button type="submit">{displayName}</button>
-          </div>
-          {error && error.response && <div> {error.response.data} </div>}
-        </form>
+          <form onSubmit={handleLogin} name={name}>
+            <div>
+              <label htmlFor="username">
+                <small>Username</small>
+              </label>
+              <input name="username" type="text" />
+            </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input name="password" type="password" />
+            </div>
+            <div>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  color: 'white',
+                  backgroundColor: 'black',
+                  '&:hover': {
+                    backgroundColor: 'white',
+                    color: 'black',
+                  },
+                  borderRadius: 0,
+                  width: 180,
+                  height: 50,
+                }}
+                endIcon={<ArrowForwardIcon />}
+              >
+                {displayName}
+              </Button>
+              {/* <button type="submit">{displayName}</button> */}
+            </div>
+            {error && error.response && (
+              <div className="auth-error"> {error.response.data} </div>
+            )}
+            <div className="li-reg">
+              Not registered?{' '}
+              <span onClick={() => history.push('/signup')}>
+                Create an account
+              </span>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
