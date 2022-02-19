@@ -95,27 +95,21 @@ const Products = () => {
       );
       setInstruments(accesoryProducts);
     }
+    if (event.target.value === 'lowToHigh') {
+      let lowPrice = [...products].sort((a, b) => {
+        return a.price - b.price;
+      });
+      setInstruments(lowPrice);
+    }
+    if (event.target.value === 'highToLow') {
+      let highPrice = [...products].sort((a, b) => {
+        return b.price - a.price;
+      });
+      setInstruments(highPrice);
+    }
   };
 
   const currentInstruments = !instruments.length ? products : instruments;
-
-  // ------- Not working sorting by price, model etc.
-  // const [productFilter, setProductFilter] = useState(products);
-
-  // const saveProductFilter = (event) => {
-  //   if (event.target.value === 'lowToHigh') {
-  //     let lowPrice = [...instruments].sort((a, b) => {
-  //       return a.price - b.price;
-  //     });
-  //     setProductFilter(lowPrice);
-  //   }
-  //   if (event.target.value === 'highToLow') {
-  //     let highPrice = [...instruments].sort((a, b) => {
-  //       return b.price - a.price;
-  //     });
-  //     setProductFilter(highPrice);
-  //   }
-  // };
 
   return (
     <div className="pds">
@@ -134,12 +128,12 @@ const Products = () => {
               <option value="accessories">accesories</option>
             </select>
           </form>
-          {/* <form>
-          <select onChange={saveProductFilter}>
-            <option value="lowToHigh">Sort by price - low to high</option>
-            <option value="highToLow">Sort by price - high to low</option>
-          </select>
-        </form> */}
+          <form>
+            <select onChange={saveInstrument}>
+              <option value="lowToHigh">Sort by price - low to high</option>
+              <option value="highToLow">Sort by price - high to low</option>
+            </select>
+          </form>
 
           {/* <div className="sortinglinks">
           <Link to={`/products/sort/guitars`}>Guitars </Link>

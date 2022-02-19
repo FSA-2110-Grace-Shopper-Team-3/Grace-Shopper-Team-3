@@ -22,10 +22,14 @@ form {
 }
 
 /* search bar start */
-
+.search {
+  position: absolute;
+}
 .dataResult {
-  margin-top: 5px;
-  width: 300px;
+  display: flex;
+  flex-direction: column;
+  /* margin-top: 5px; */
+  width: 185px;
   height: 200px;
   background-color: white;
   box-shadow: rgba(0, 0, 0 0.35) 0px 5px 15px;
@@ -37,25 +41,29 @@ form {
   display: none;
 }
 
-.dataResult .dataItem {
+.dataResult .dataIcon {
   width: 100%;
   height: 50px;
-  display: flex;
+  /* display: flex;
+  flex-direction: column; */
   align-items: center;
   color: black;
 }
 
-.dataItem p {
-  margin-left: 10px;
+.dataIcon {
+  margin: 0;
+  padding: 0.5rem;
 }
 
 a {
   text-decoration: none;
+  margin: 0;
 }
 
-a > p:hover {
+.dataIcon:hover {
   background-color: grey;
 }
+
 .searchInputs {
   display: flex;
 }
@@ -85,6 +93,11 @@ a > p:hover {
 
 #clearBtn {
   cursor: pointer;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }
 /* search bar end */
 
