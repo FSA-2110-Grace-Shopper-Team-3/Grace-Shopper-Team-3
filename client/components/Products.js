@@ -8,6 +8,8 @@ import {
   editGuestOrderItem,
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import PageviewIcon from '@material-ui/icons/Pageview';
 
 const Products = () => {
   const username = useSelector((state) => state.auth.username) || '';
@@ -157,20 +159,19 @@ const Products = () => {
           {currentInstruments.map((product) => {
             return (
               <div key={product.id} className="pds-product">
-                {
-                  <div className="pds-product-wrapper">
-                    <Link to={`/products/${product.id}`}>
-                      <div>
-                        <img src={product.img} />
-                      </div>
-                      <div className="pds-product-name">
-                        <div>{product.brand}</div>
-                        <div>{product.model}</div>
-                      </div>
-                    </Link>
+                <div className="pds-product-wrapper">
+                  <div>
+                    <img src={product.img} />
                   </div>
-                }
-                <button
+                  <div className="pds-product-name">
+                    <div className="pds-product-model">
+                      <h3>{product.model}</h3>
+                    </div>
+                    <div className="pds-product-brand">{product.brand}</div>
+                    <div className="pds-product-price">${product.price}</div>
+                  </div>
+                </div>
+                {/* <button
                   onClick={() => {
                     if (!id) {
                       const guestOrderItem = guestCart.find(
@@ -219,7 +220,64 @@ const Products = () => {
                   }}
                 >
                   Add to Cart
-                </button>
+                </button> */}
+                <div className="pds-product-cover">
+                  <div className="pds-product-icon">
+                    <ShoppingCartIcon
+                      onClick={() => {
+                        if (!id) {
+                          const guestOrderItem = guestCart.find(
+                            (orderItem) =>
+                              orderItem.productId === product.id &&
+                              orderItem.userId === null
+                          );
+                          guestOrderItem
+                            ? dispatch(
+                                editGuestOrderItem({
+                                  ...guestOrderItem,
+                                  id: guestOrderItem.id,
+                                  quantity: guestOrderItem.quantity + 1,
+                                })
+                              )
+                            : dispatch(
+                                addGuestOrderItem({
+                                  productId: product.id,
+                                  userId: null,
+                                  id: uuidv4(),
+                                  quantity: 1,
+                                })
+                              );
+                        } else {
+                          const orderItem = orderItems.find(
+                            (orderItem) =>
+                              orderItem.productId === product.id &&
+                              orderItem.orderId === matchOrder.id
+                          );
+                          orderItem
+                            ? dispatch(
+                                editOrderItem({
+                                  id: orderItem.id,
+                                  quantity: orderItem.quantity + 1,
+                                  userId: id,
+                                })
+                              )
+                            : dispatch(
+                                addOrderItem({
+                                  productId: product.id,
+                                  orderId: matchOrder.id,
+                                  userId: id,
+                                })
+                              );
+                        }
+                      }}
+                    />
+                  </div>
+                  <Link to={`/products/${product.id}`}>
+                    <div className="pds-product-icon">
+                      <PageviewIcon />
+                    </div>
+                  </Link>
+                </div>
               </div>
             );
           })}
