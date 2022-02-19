@@ -64,9 +64,10 @@ const SingleProduct = () => {
   return (
     <div className="sp">
       <div className="sp-left">
-        <div>
+        <div className="sp-left-img">
           <img className="sp-img" src={singleProduct.img} />
         </div>
+        <div>Back to Products</div>
       </div>
       <div className="sp-right">
         <div className="sp-right-wrap">

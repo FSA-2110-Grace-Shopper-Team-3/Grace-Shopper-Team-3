@@ -9,6 +9,7 @@ import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PersonIcon from '@material-ui/icons/Person';
 import Cart from './Cart';
+import Logo1 from '../../public/images/UNPLGD-nav-logo.png';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   const dispatch = useDispatch();
@@ -79,10 +80,18 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
               <li>
                 <Link to="/orderhistory">Past Orders</Link>
               </li>
-              <li>
+              {/* <li>
                 <SearchBar placeholder={'Search for rock!'} data={products} />
-              </li>
+              </li> */}
             </ul>
+            <div className="navbar-logo">
+              {' '}
+              <ul>
+                <li>
+                  <img src={Logo1} />
+                </li>
+              </ul>
+            </div>
             <ul className="navbar-ul">
               <li>
                 <p>Welcome, {currUser.username}</p>
