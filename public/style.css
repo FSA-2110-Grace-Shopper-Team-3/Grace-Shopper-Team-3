@@ -62,19 +62,23 @@ a > p:hover {
 .search input {
   background-color: white;
   border: black solid 1px;
+  border-right: 0px;
   border-radius: 2px;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
-  font-size: 18px;
+  font-size: 15px;
   padding: 15px;
-  height: 30px;
-  width: 100px;
+  height: 20px;
+  width: 150px;
+  z-index: 0;
 }
 
 .searchIcon {
-  height: 60px;
+  height: 50px;
   width: 50px;
-  background-color: grey;
+  background-color: white;
+  border: black solid 1px;
+  border-left: 0px;
   display: grid;
   place-items: center;
 }
@@ -82,8 +86,7 @@ a > p:hover {
 #clearBtn {
   cursor: pointer;
 }
-
-/* search bar start */
+/* search bar end */
 
 input,
 button {
