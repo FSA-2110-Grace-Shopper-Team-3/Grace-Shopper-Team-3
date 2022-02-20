@@ -160,7 +160,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 className="react-link"
                 onClick={() => setCartDrawer(true)}
               >
-                <Badge color="secondary" badgeContent={cartTotal}>
+                <Badge color="secondary" badgeContent={guestCartTotal}>
                   <ShoppingCartIcon />{' '}
                 </Badge>
               </a>

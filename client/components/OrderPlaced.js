@@ -72,7 +72,9 @@ const OrderPlaced = () => {
           order!
         </p>
       </div>
-      <Link to="/orderhistory">View Order History</Link>
+      <Link className="react-link-ct" to="/orderhistory">
+        View Order History
+      </Link>
     </div>
   );
 };
