@@ -36,13 +36,12 @@ const User = db.define('user', {
   img: {
     type: STRING,
   },
-  // address: {
-  //   type: STRING,
-  //   allowNull: false,
-  // },
-  // phoneNumber: {
-  //   type: STRING,
-  // },
+  address: {
+    type: STRING,
+  },
+  phoneNumber: {
+    type: STRING,
+  },
   // paymentInfo: {
   //   type: STRING,
   //   allowNull: false,

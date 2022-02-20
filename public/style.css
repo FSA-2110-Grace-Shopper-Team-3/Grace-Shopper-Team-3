@@ -682,8 +682,9 @@ nav a {
 }
 
 .su-form {
+  margin-top: 100px;
   width: 480px;
-  height: 480px;
+  height: 580px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -745,4 +746,20 @@ nav a {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.formik-user {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-user {
+  align-items: center;
+}
+
+.edit-user-btns {
+  display: flex;
+  justify-content: space-around;
 }

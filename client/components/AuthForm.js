@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authenticate } from '../store';
@@ -16,6 +16,9 @@ const AuthForm = (props) => {
   const history = useHistory();
   console.log('rendered');
 
+  const [pwVal, setPwVal] = useState('');
+  const [confPwVal, setConfPwVal] = useState('');
+
   if (match.path === '/' || match.path === '/signup') {
     return (
       <div className="su">
@@ -31,17 +34,36 @@ const AuthForm = (props) => {
               <input name="username" type="text" required />
             </div>
             <div>
-              <label htmlFor="password">
-                <small>Password</small>
-              </label>
-              <input name="password" type="password" required />
-            </div>
-            <div>
               <label htmlFor="email">
                 <small>e-mail</small>
               </label>
               <input name="email" type="email" required />
             </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input
+                name="password"
+                type="password"
+                required
+                id="password"
+                onChange={(event) => setPwVal(event.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="confirmPassword">
+                <small>Confirm Password</small>
+              </label>
+              <input
+                name="confirmPassword"
+                type="password"
+                required
+                id="confirmPassword"
+                onChange={(event) => setConfPwVal(event.target.value)}
+              />
+            </div>
+
             <div>
               <Button
                 type="submit"
@@ -58,6 +80,11 @@ const AuthForm = (props) => {
                   height: 50,
                 }}
                 endIcon={<ArrowForwardIcon />}
+                disabled={
+                  pwVal !== '' && confPwVal !== '' && pwVal === confPwVal
+                    ? false
+                    : true
+                }
               >
                 {displayName}
               </Button>
@@ -164,8 +191,12 @@ const mapDispatch = (dispatch) => {
       const formName = evt.target.name;
       const username = evt.target.username.value;
       const password = evt.target.password.value;
+      const confirmPassword = evt.target.confirmPassword.value;
       const email = evt.target.email.value;
-      dispatch(authenticateNewUser(username, password, email, formName));
+
+      if (password === confirmPassword) {
+        dispatch(authenticateNewUser(username, password, email, formName));
+      }
     },
   };
 };
