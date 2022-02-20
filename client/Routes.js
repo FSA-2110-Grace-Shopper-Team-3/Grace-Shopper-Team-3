@@ -14,6 +14,7 @@ import EditUser from './components/EditUser';
 import EditProduct from './components/EditProduct';
 import OrderHistory from './components/OrderHistory';
 import AddProduct from './components/AddProduct';
+import FrontPage from './components/FrontPage/FrontPage';
 
 import {
   me,
@@ -71,6 +72,7 @@ class Routes extends Component {
           </Switch>
         ) : isLoggedIn && currUser.isAdmin === false ? (
           <Switch>
+            <Route exact path="/home" component={FrontPage} />
             <Route exact path="/products" component={Products} />
             <Route exact path="/orderplaced" component={OrderPlaced} />
             <Route exact path="/orderhistory" component={OrderHistory} />
@@ -84,6 +86,7 @@ class Routes extends Component {
             <Route exact path="/" component={Login} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/home" component={FrontPage} />
             <Route exact path="/products" component={Products} />
             <Route exact path="/products/sort/:sortBy" component={Products} />
             <Route exact path="/products/:id" component={SingleProduct} />

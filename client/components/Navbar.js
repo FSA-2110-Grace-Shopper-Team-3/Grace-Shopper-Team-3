@@ -90,7 +90,9 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
           </div>
           <div className="navbar-logo">
             <div>
-              <img src={Logo1} />
+              <Link className="react-link" to="/home">
+                <img src={Logo1} />
+              </Link>
             </div>
           </div>
           <div className="navbar-user-right">
