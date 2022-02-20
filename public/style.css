@@ -277,7 +277,18 @@ ul {
   justify-content: center;
 }
 
-/* ---------------FrontPage.js CSS--------------- */
+/* ---------------FrontPage/Slider.js CSS--------------- */
+
+.sl {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  margin-top: 50px;
+}
+
+.sl img {
+  height: 100%;
+}
 
 /* ---------------Cart.js CSS--------------- */
 .ct {
