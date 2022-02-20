@@ -26,8 +26,8 @@ const MyTextField = ({ label, type, ...props }) => {
 };
 
 const validationSchema = yup.object({
-  username: yup.string().required('username is required').min(3).max(20),
-  password: yup.string(),
+  username: yup.string().required('username is required').max(20),
+  password: yup.string().min(3).max(15),
   email: yup.string().required('email is required').max(25),
   img: yup.string().max(25),
 });
@@ -43,12 +43,13 @@ const EditUser = () => {
   const currPassword = currUser.password;
 
   return (
-    <div className="formik">
+    <div className="formik-user">
       <Formik
         initialValues={{
           id: currUser.id || 1,
           username: currUser.username || '',
           email: currUser.email || '',
+          phone: '',
           img: currUser.img || 'https://i.pravatar.cc/300',
           password: '',
           confirmPassword: '',
@@ -76,7 +77,7 @@ const EditUser = () => {
         }}
       >
         {({ isSubmitting }) => (
-          <Form>
+          <Form className="edit-user">
             <div>
               <h4>Edit User Info</h4>
             </div>
@@ -88,7 +89,10 @@ const EditUser = () => {
                 <MyTextField label="Email" name="email" type="input" />
               </Grid>
               <Grid item>
-                <MyTextField label="Photo" name="img" type="input" />
+                <MyTextField label="Phone" name="phone" type="input" />
+              </Grid>
+              <Grid item>
+                <MyTextField label="Photo URL" name="img" type="input" />
               </Grid>
               <Grid item>
                 <MyTextField
@@ -105,7 +109,7 @@ const EditUser = () => {
                 />
               </Grid>
 
-              <Grid item>
+              <Grid item className="edit-user-btns">
                 <Button disabled={isSubmitting} type="submit" color="primary">
                   SUBMIT
                 </Button>
