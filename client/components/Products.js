@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useLocation } from 'react-router-dom';
 import {
   addOrderItem,
   editOrderItem,
@@ -31,6 +31,9 @@ const Products = () => {
     {};
 
   const match = useRouteMatch();
+  console.log('here the match', match);
+  const location = useLocation();
+  console.log('heres the location bud', location.pathname);
 
   //-------------------Guest Cart Functionality---------------------//
 
@@ -71,7 +74,78 @@ const Products = () => {
   const prodsPerPage = 6;
   const pagesVisited = pageNumber * prodsPerPage;
 
-  // PAGINATE
+  const saveInstrument = (event) => {
+    if (event.target.value === 'lowToHigh') {
+      currentInstruments = [...currentInstruments].sort((a, b) => {
+        return a.price - b.price;
+      });
+      console.log(currentInstruments);
+    }
+    if (event.target.value === 'highToLow') {
+      currentInstruments = [...currentInstruments].sort((a, b) => {
+        return b.price - a.price;
+      });
+      console.log(currentInstruments);
+    }
+  };
+
+  const guitars = products.filter((product) => product.category === 'Guitar');
+  const drums = products.filter((product) => product.category === 'Drum');
+  const cellos = products.filter((product) => product.category === 'Cello');
+  const pianos = products.filter((product) => product.category === 'Piano');
+  const accesories = products.filter(
+    (product) => product.category === 'Accessory'
+  );
+
+  let pageCount = Math.ceil(products.length / prodsPerPage);
+  const guitarPageCount = Math.ceil(guitars.length / prodsPerPage);
+  const drumPageCount = Math.ceil(drums.length / prodsPerPage);
+  const celloPageCount = Math.ceil(cellos.length / prodsPerPage);
+  const pianoPageCount = Math.ceil(pianos.length / prodsPerPage);
+  const accesoriesPageCount = Math.ceil(accesories.length / prodsPerPage);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
+  if (match.params.sortBy) {
+    const field = match.params.sortBy;
+    if (field === 'guitars') {
+      currentInstruments = [...products].filter(
+        (product) => product.category === 'Guitar'
+      );
+      pageCount = guitarPageCount;
+      // setInstruments(guitars);
+    } else if (field === 'drums') {
+      currentInstruments = [...products].filter(
+        (product) => product.category === 'Drum'
+      );
+      pageCount = drumPageCount;
+      // setInstruments(drums);
+    } else if (field === 'cellos') {
+      currentInstruments = [...products].filter(
+        (product) => product.category === 'Cello'
+      );
+      pageCount = celloPageCount;
+      // setInstruments(cellos);
+    } else if (field === 'accessories') {
+      currentInstruments = [...products].filter(
+        (product) => product.category === 'Accessory'
+      );
+      pageCount = accesoriesPageCount;
+      // setInstruments(accs);
+    } else if (field === 'pianos') {
+      currentInstruments = [...products].filter(
+        (product) => product.category === 'Piano'
+      );
+      pageCount = pianoPageCount;
+      // setInstruments(pianos);
+    } else {
+      currentInstruments = [...products];
+    }
+  }
+
+  // PAGINATE START
   const displayProducts = currentInstruments
     .slice(pagesVisited, pagesVisited + prodsPerPage)
     .map((product) => {
@@ -154,60 +228,7 @@ const Products = () => {
       );
     });
 
-  const pageCount = Math.ceil(products.length / prodsPerPage);
-
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
-
-  //PAGINATE
-
-  const saveInstrument = (event) => {
-    if (event.target.value === 'lowToHigh') {
-      currentInstruments = [...currentInstruments].sort((a, b) => {
-        return a.price - b.price;
-      });
-      console.log(currentInstruments);
-    }
-    if (event.target.value === 'highToLow') {
-      currentInstruments = [...currentInstruments].sort((a, b) => {
-        return b.price - a.price;
-      });
-      console.log(currentInstruments);
-    }
-  };
-
-  if (match.params.sortBy) {
-    const field = match.params.sortBy;
-    if (field === 'guitars') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Guitar'
-      );
-      // setInstruments(guitars);
-    } else if (field === 'drums') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Drum'
-      );
-      // setInstruments(drums);
-    } else if (field === 'cellos') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Cello'
-      );
-      // setInstruments(cellos);
-    } else if (field === 'accessories') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Accessory'
-      );
-      // setInstruments(accs);
-    } else if (field === 'pianos') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Piano'
-      );
-      // setInstruments(pianos);
-    } else {
-      currentInstruments = [...products];
-    }
-  }
+  //PAGINATE END
 
   return (
     <div className="pds">
