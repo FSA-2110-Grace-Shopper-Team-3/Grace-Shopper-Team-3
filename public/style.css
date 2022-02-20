@@ -2,6 +2,14 @@ body {
   font-family: sans-serif;
 }
 
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
 label {
   display: block;
 }
@@ -18,7 +26,7 @@ form {
 
 /* search bar start */
 .search {
-  position: absolute;
+  /* position: absolute; */
 }
 .dataResult {
   display: flex;
@@ -30,6 +38,8 @@ form {
   box-shadow: rgba(0, 0, 0 0.35) 0px 5px 15px;
   overflow: hidden;
   overflow-y: auto;
+  position: fixed;
+  z-index: 0;
 }
 
 .dataResult::-webkit-scrollbar {
@@ -38,7 +48,7 @@ form {
 
 .dataResult .dataIcon {
   width: 100%;
-  height: 50px;
+  height: 40px;
   /* display: flex;
   flex-direction: column; */
   align-items: center;
@@ -47,7 +57,7 @@ form {
 
 .dataIcon {
   margin: 0;
-  padding: 0.5rem;
+  padding: 0.2rem;
 }
 
 a {
@@ -96,7 +106,7 @@ input:focus {
 }
 /* search bar end */
 
-input,
+/* input,
 button {
   height: 2rem;
 }
@@ -105,7 +115,7 @@ ul {
   list-style-type: none;
   padding: 0;
   margin: 0;
-}
+} */
 
 .sortinglinks {
   display: flex;
@@ -113,45 +123,143 @@ ul {
   padding: 15px;
 }
 
+.react-link {
+  text-decoration: none;
+  color: black;
+}
+
+.react-link-ft {
+  text-decoration: none;
+  color: white;
+}
+
 /* ---------------Navbar.js CSS--------------- */
 
-nav a {
-  display: inline-block;
-  margin: 1em;
-}
-
 .navbar {
-  display: flex;
-  flex-direction: row;
-}
-
-.navbar-user,
-.navbar-guest {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  border-bottom: 1px solid lightgray;
   position: fixed;
   overflow: hidden;
   top: 0;
   background: white;
   z-index: 2;
+  width: 100%;
+  color: black;
 }
 
-.navbar-ul {
+.navbar-wrap {
   display: flex;
-  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
 }
 
-/* .navbar-logo {
-  width: 100px;
-  height: 100px;
-} */
+.navbar-user-itemLeft {
+  margin-left: 30px;
+  text-decoration: none;
+}
 
-.navbar-user img {
+.navbar-user-itemRight {
+  margin-right: 30px;
+}
+
+.navbar-user-left {
+  flex: 1;
+  display: flex;
+  padding: 0.9rem;
+  justify-content: flex-end;
+}
+
+.navbar-logo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.navbar-user-right {
+  flex: 1;
+  display: flex;
+  padding: 0.9rem;
+}
+
+.navbar-user-right p {
+  margin: 0;
+}
+
+.navbar-wrap img {
   width: 320px;
   height: 100px;
   object-fit: contain;
+}
+
+/* ---------------Footer.js CSS--------------- */
+
+.ft {
+  display: flex;
+  height: 35vh;
+  background: black;
+  color: white;
+  padding: 1rem;
+  height: auto;
+}
+
+.ft-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.ft-logo {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.ft-logo img {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.ft-left {
+  display: flex;
+  flex: 1;
+  /* justify-content: center; */
+  flex-direction: column;
+  text-align: center;
+}
+
+.ft-left p {
+  margin: 0.3rem;
+  font-size: small;
+}
+
+.ft-center {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  text-align: center;
+}
+
+.ft-center p {
+  margin: 0.3rem;
+  font-size: small;
+}
+
+.ft-center-phone {
+  display: flex;
+  justify-content: center;
+  margin: 0.3rem;
+}
+
+.ft-right {
+  display: flex;
+  flex: 1;
+  text-align: center;
+  flex-direction: column;
+}
+
+.ft-right-wrap {
+  display: flex;
+  justify-content: center;
 }
 
 /* ---------------Cart.js CSS--------------- */
@@ -311,6 +419,7 @@ nav a {
   display: flex;
   flex-wrap: wrap;
   padding-top: 100px;
+  padding-bottom: 50px;
 }
 
 .pds-filter {
@@ -319,6 +428,31 @@ nav a {
 
 .pds-filter h2 {
   text-align: center;
+}
+
+.pds-ctg {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pds-ctg-wrap {
+  display: flex;
+}
+
+.pds-single-ctg {
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.pds-single-ctg h3 {
+  margin: 0;
+  display: inline-block;
+  text-transform: uppercase;
+  background-color: black;
+  color: white;
+  padding: 0.5rem;
 }
 
 .pds-list {
@@ -419,9 +553,9 @@ nav a {
 
 .sp {
   display: flex;
-  height: 80vh;
+  height: auto;
   justify-content: center;
-  padding-top: 100px;
+  padding-top: 120px;
 }
 
 .sp-left {
@@ -446,6 +580,7 @@ nav a {
   display: flex;
   flex: 1;
   justify-content: center;
+  height: auto;
 }
 
 .sp-img {
@@ -590,9 +725,10 @@ nav a {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: auto;
   flex-direction: column;
   padding-top: 100px;
+  padding-bottom: 20px;
 }
 
 .op img {
@@ -614,7 +750,8 @@ nav a {
   display: flex;
   height: 50vh;
   justify-content: center;
-  padding-top: 100px;
+  padding-top: 120px;
+  padding-bottom: 50px;
 }
 
 .li-form {
@@ -677,8 +814,10 @@ nav a {
 
 .su {
   display: flex;
-  height: 50vh;
+  height: auto;
   justify-content: center;
+  padding-top: 120px;
+  padding-bottom: 20px;
 }
 
 .su-form {

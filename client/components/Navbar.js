@@ -3,13 +3,14 @@ import { connect, useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
 import { logout, emptyGuestOrderItem } from '../store';
-import { ToastContainer, toast, Slide } from 'react-toastify';
+import { ToastContainer, toast, Sdivde } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PersonIcon from '@material-ui/icons/Person';
 import Cart from './Cart';
 import Logo1 from '../../public/images/UNPLGD-nav-logo.png';
+import Logo1White from '../../public/images/UNPLGD-logo1_white.png';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
     [];
 
   const products = useSelector((state) => state.products);
-  //-------------------Guest Cart Functionality---------------------//
+  //-------------------Guest Cart Functionadivty---------------------//
 
   const guestCart = useSelector((state) => state.guestOrderItems) || [];
 
@@ -47,7 +48,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
 
   const notify = () => toast.success('added to cart!');
 
-  //-------------------Cart Drawer Functionality---------------------//
+  //-------------------Cart Drawer Functionadivty---------------------//
   const [cartDrawer, setCartDrawer] = useState(false);
 
   const close = () => {
@@ -55,102 +56,119 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   };
 
   return (
-    <div>
-      <nav className="navbar">
-        {isLoggedIn && currUser.isAdmin === true ? (
-          <div className="navbar-admin">
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-            <Link to="/admin/addproduct">Add Product</Link>
-            <Link to="/admin/inventory">Product Inventory</Link>
-            <Link to="/admin/users">Users</Link>
-            <Link to="/admin/orders">Orders</Link>
-            <Link to="/admin/analytics">Analytics</Link>
-          </div>
-        ) : isLoggedIn && currUser.isAdmin === false ? (
-          <div className="navbar-user">
-            <ul className="navbar-ul">
-              <li>
-                <Link to="/home">Home</Link>
-              </li>
-              <li onClick={() => dispatch(emptyGuestOrderItem())}>
-                <Link to="/products">Products</Link>
-              </li>
-              <li>
-                <Link to="/orderhistory">Past Orders</Link>
-              </li>
-              {/* <li>
-                <SearchBar placeholder={'Search for rock!'} data={products} />
-              </li> */}
-            </ul>
-            <div className="navbar-logo">
-              {' '}
-              <ul>
-                <li>
-                  <img src={Logo1} />
-                </li>
-              </ul>
+    <div className="navbar">
+      {isLoggedIn && currUser.isAdmin === true ? (
+        <div className="navbar-admin">
+          <a href="#" onClick={handleClick}>
+            Logout
+          </a>
+          <Link to="/admin/addproduct">Add Product</Link>
+          <Link to="/admin/inventory">Product Inventory</Link>
+          <Link to="/admin/users">Users</Link>
+          <Link to="/admin/orders">Orders</Link>
+          <Link to="/admin/analytics">Analytics</Link>
+        </div>
+      ) : isLoggedIn && currUser.isAdmin === false ? (
+        <div className="navbar-wrap">
+          <div className="navbar-user-left">
+            <div className="navbar-user-itemLeft">
+              <SearchBar placeholder={'Search for rock!'} data={products} />
             </div>
-            <ul className="navbar-ul">
-              <li>
-                <p>Welcome, {currUser.username}</p>
-              </li>
-              <li>
-                <a href="" onClick={handleClick}>
-                  Logout
-                </a>
-              </li>
-              <li>
-                <Link to={`/editprofile/${userId}`}>
-                  <PersonIcon />
-                </Link>
-              </li>
-              <li>
-                <a href="#" onClick={() => setCartDrawer(true)}>
-                  <Badge color="secondary" badgeContent={cartTotal}>
-                    <ShoppingCartIcon />{' '}
-                  </Badge>
-                </a>
-              </li>
-            </ul>
+            <div
+              className="navbar-user-itemLeft"
+              onClick={() => dispatch(emptyGuestOrderItem())}
+            >
+              <Link className="react-link" to="/products">
+                Products
+              </Link>
+            </div>
+            <div className="navbar-user-itemLeft">
+              <Link className="react-link" to="/orderhistory">
+                Past Orders
+              </Link>
+            </div>
           </div>
-        ) : (
-          <div className="navbar-guest">
-            <ul className="navbar-ul">
-              <li>
-                <Link to="/home">Home</Link>
-              </li>
-              <li>
-                <Link to="/products">Products</Link>
-              </li>
-              <li>
-                <SearchBar placeholder={'Search for rock!'} data={products} />
-              </li>
-            </ul>
-            <ul className="navbar-ul">
-              <li>
-                <p>Welcome, Guest!</p>
-              </li>
-              <li>
-                <Link to="/login">Login</Link>
-              </li>
-              <li>
-                <Link to="/signup">Sign Up</Link>{' '}
-              </li>
-              <li>
-                <a href="#" onClick={() => setCartDrawer(true)}>
-                  <Badge color="secondary" badgeContent={guestCartTotal}>
-                    <ShoppingCartIcon />{' '}
-                  </Badge>
-                </a>
-              </li>
-            </ul>
+          <div className="navbar-logo">
+            <div>
+              <img src={Logo1} />
+            </div>
           </div>
-        )}
-      </nav>
+          <div className="navbar-user-right">
+            <div className="navbar-user-itemRight">
+              <p>Welcome, {currUser.username}</p>
+            </div>
+            <div className="navbar-user-itemRight">
+              <a href="" className="react-link" onClick={handleClick}>
+                Logout
+              </a>
+            </div>
+            <div className="navbar-user-itemRight">
+              <Link className="react-link" to={`/editprofile/${userId}`}>
+                <PersonIcon />
+              </Link>
+            </div>
+            <div className="navbar-user-itemRight">
+              <a
+                href="#"
+                className="react-link"
+                onClick={() => setCartDrawer(true)}
+              >
+                <Badge color="secondary" badgeContent={cartTotal}>
+                  <ShoppingCartIcon />{' '}
+                </Badge>
+              </a>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="navbar-wrap">
+          <div className="navbar-user-left">
+            <div className="navbar-user-itemLeft">
+              <SearchBar placeholder={'Search for rock!'} data={products} />
+            </div>
+            <div
+              className="navbar-user-itemLeft"
+              onClick={() => dispatch(emptyGuestOrderItem())}
+            >
+              <Link className="react-link" to="/products">
+                Products
+              </Link>
+            </div>
+          </div>
+          <div className="navbar-logo">
+            <div>
+              <img src={Logo1} />
+            </div>
+          </div>
+          <div className="navbar-user-right">
+            <div className="navbar-user-itemRight">
+              <p>Welcome, Guest</p>
+            </div>
+            <div className="navbar-user-itemRight">
+              <Link to="/login" className="react-link">
+                Login
+              </Link>
+            </div>
+            <div className="navbar-user-itemRight">
+              <Link className="react-link" to={`/editprofile/${userId}`}>
+                <PersonIcon />
+              </Link>
+            </div>
+            <div className="navbar-user-itemRight">
+              <a
+                href="#"
+                className="react-link"
+                onClick={() => setCartDrawer(true)}
+              >
+                <Badge color="secondary" badgeContent={cartTotal}>
+                  <ShoppingCartIcon />{' '}
+                </Badge>
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
       <Cart cartOpen={cartDrawer} handleClose={close} />
-      {/* {cartDrawer && setCartDrawer(false)} */}
     </div>
   );
 };
@@ -195,11 +213,11 @@ export default connect(mapState, mapDispatch)(Navbar);
 //         autoClose={1500}
 //         hideProgressBar
 //         newestOnTop={true}
-//         closeOnClick
+//         closeonClick
 //         rtl={false}
 //         pauseOnFocusLoss
 //         draggable
-//         transition={Slide}
+//         transition={Sdivde}
 //       />
 //     </div>
 //   );

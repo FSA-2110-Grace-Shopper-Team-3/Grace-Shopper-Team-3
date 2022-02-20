@@ -44,6 +44,15 @@ const piano = [
     category: 'Piano',
     img: 'https://pianopiano.com/wp-content/uploads/2015/08/Screen-Shot-2019-12-10-at-2.39.05-PM.png',
   },
+  {
+    brand: 'Yamaha',
+    model: 'GB1K',
+    price: 17699,
+    description:
+      " The Yamaha GB1K Grand Piano is the most affordable available instrument in the Yamaha line. Grand pianos also take up a lot of space; the GB1K is a popular choice for locations with limited space. This 5' grand piano has a full, resonant tone comparable to larger pianos. Bring the concert hall to your home with the Yamaha GB1K Grand Piano.",
+    category: 'Piano',
+    img: 'https://media.sweetwater.com/api/i/f-webp__q-82__ha-0401c652e22820ac__hmac-ca48f4b277c448b5cf52a05fb451c11ee20fc1ae/images/items/750/GB1KPM-large.jpg.auto.webp',
+  },
 ];
 
 module.exports = piano;
