@@ -50,7 +50,10 @@ const OrderHistory = () => {
                         <img src={productItem.img} />
                       </div>
                       <div className="oh-order-item-desc">
-                        <Link to={`/products/${matchingOrderItem.productId}`}>
+                        <Link
+                          className="react-link-ct"
+                          to={`/products/${matchingOrderItem.productId}`}
+                        >
                           <h4>{productItem.model}</h4>
                         </Link>
                         <div>

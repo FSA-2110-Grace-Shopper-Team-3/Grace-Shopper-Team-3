@@ -21,10 +21,13 @@ import { injectStyle } from 'react-toastify/dist/inject-style';
 const Cart = ({ cartOpen, handleClose }) => {
   const notify = () => toast.error('removed from cart');
   const signUptoOrder = () =>
-    toast.error('Please create an account to place an order with UNPLGD', {
-      autoClose: 2000,
-      limit: 1,
-    });
+    toast.error(
+      'Please login or create an account to place an order with UNPLGD',
+      {
+        autoClose: 2000,
+        limit: 1,
+      }
+    );
   const dispatch = useDispatch();
   const history = useHistory();
   const orderItems = useSelector((state) => state.orderItems);
@@ -174,7 +177,10 @@ const Cart = ({ cartOpen, handleClose }) => {
                         <img src={cartItem.img} />
                       </div>
                       <div className="ct-uc-item-desc">
-                        <Link to={`/products/${orderItem.productId}`}>
+                        <Link
+                          className="react-link-ct"
+                          to={`/products/${orderItem.productId}`}
+                        >
                           <h4>{cartItem.model}</h4>
                         </Link>
                         <div className="ct-uc-item-brand">
@@ -270,9 +276,6 @@ const Cart = ({ cartOpen, handleClose }) => {
               >
                 TO CHECKOUT
               </Button>
-              {/* <button id="checkout-btn" type="submit" onClick={handleCheckout}>
-              TO CHECKOUT
-            </button> */}
             </div>
           </Drawer>
         )
@@ -316,9 +319,6 @@ const Cart = ({ cartOpen, handleClose }) => {
             >
               TO CHECKOUT
             </Button>
-            {/* <button id="checkout-btn" type="submit" onClick={handleCheckout}>
-              TO CHECKOUT
-            </button> */}
           </div>
         </Drawer>
       ) : (
@@ -354,7 +354,10 @@ const Cart = ({ cartOpen, handleClose }) => {
                       <img src={cartItem.img} />
                     </div>
                     <div className="ct-uc-item-desc">
-                      <Link to={`/products/${orderItem.productId}`}>
+                      <Link
+                        className="react-link-ct"
+                        to={`/products/${orderItem.productId}`}
+                      >
                         <h4>{cartItem.model}</h4>
                       </Link>
                       <div className="ct-uc-item-brand">
@@ -448,9 +451,6 @@ const Cart = ({ cartOpen, handleClose }) => {
             >
               TO CHECKOUT
             </Button>
-            {/* <button id="checkout-btn" type="submit" onClick={handleCheckout}>
-              TO CHECKOUT
-            </button> */}
           </div>
         </Drawer>
       )}
@@ -459,85 +459,3 @@ const Cart = ({ cartOpen, handleClose }) => {
 };
 
 export default Cart;
-
-// {!userId ? (
-//   !guestCart.length ? (
-//     <Drawer
-//       anchor="right"
-//       open={isCartOpen}
-//       onClose={() => {
-//         setIsCartOpen(false);
-//         handleClose();
-//       }}
-//     >
-//       <div>
-//         <h1>Your Cart is Empty</h1>
-//         <h2>Total Price: ${guestCartPriceTotal.toFixed(2)}</h2>
-//         <button type="submit" onClick={handleCheckout}>
-//           Checkout
-//         </button>
-//       </div>
-//     </Drawer>
-//   ) : (
-//     <Drawer
-//       anchor="right"
-//       open={isCartOpen}
-//       onClose={() => {
-//         setIsCartOpen(false);
-//         handleClose();
-//       }}
-//     >
-//       <div className="gc">
-//         {guestCart.map((orderItem) => {
-//           const cartItem =
-//             products.find(
-//               (product) => product.id === orderItem.productId
-//             ) || {};
-//           return (
-//             <li key={orderItem.id}>
-//               <button
-//                 onClick={() =>
-//                   dispatch(deleteGuestOrderItem(orderItem.id))
-//                 }
-//               >
-//                 x
-//               </button>
-//               <Link to={`/products/${orderItem.productId}`}>
-//                 {cartItem.brand} - {cartItem.model}
-//               </Link>{' '}
-//               Quantity:{orderItem.quantity}
-//               <button
-//                 onClick={() =>
-//                   dispatch(
-//                     editGuestOrderItem({
-//                       ...orderItem,
-//                       quantity: orderItem.quantity + 1,
-//                     })
-//                   )
-//                 }
-//               >
-//                 +
-//               </button>
-//               <button
-//                 onClick={() =>
-//                   dispatch(
-//                     editGuestOrderItem({
-//                       ...orderItem,
-//                       quantity: orderItem.quantity - 1,
-//                     })
-//                   )
-//                 }
-//                 disabled={orderItem.quantity === 1}
-//               >
-//                 -
-//               </button>
-//             </li>
-//           );
-//         })}
-//         <h2>Total Price: ${guestCartPriceTotal.toFixed(2)}</h2>
-//       </div>
-//       <button type="submit" onClick={handleCheckout}>
-//         Checkout
-//       </button>
-//     </Drawer>
-//   )
