@@ -44,6 +44,15 @@ const accesories = [
     category: 'Accessory',
     img: 'https://media.sweetwater.com/api/i/q-85__ha-133f954120053ea7__hmac-227aa1f63b9b71380ce973bbd3a750d4aa2e37d3/images/items/1800/PVP101-xlarge.jpg',
   },
+  {
+    brand: 'Manhasset',
+    model: 'Model 48 Stand',
+    price: 54.99,
+    description:
+      "The Symphony Stand stands up to the day-in/day-out abuse musicians throw at it. Robust, lightweight, and baked with a scratch-resistant textured finish, this music stand belongs wherever music's being made. If you need a music stand, pick up a Manhasset Symphony Stand - you'll love it!",
+    category: 'Accessory',
+    img: 'https://media.sweetwater.com/api/i/f-webp__q-82__ha-8c2683163abfe9a6__hmac-64acbfb90f3a29bb2ae1418fae81c005da2252ee/images/items/750/M48-large.jpg',
+  },
 ];
 
 module.exports = accesories;
