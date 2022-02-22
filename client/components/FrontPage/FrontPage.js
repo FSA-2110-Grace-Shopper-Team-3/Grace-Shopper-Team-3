@@ -1,12 +1,16 @@
 import React from 'react';
+import Categories from './Categories';
 import Slider from './Slider';
+import Image from './Image';
+import PopularItems from './PopularItems';
 
 const FrontPage = () => {
   return (
     <div className="fp">
       <Slider />
-      <div></div>
-      <div></div>
+      <Categories />
+      <PopularItems />
+      {/* <Image /> */}
     </div>
   );
 };

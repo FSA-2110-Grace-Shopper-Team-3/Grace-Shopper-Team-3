@@ -22,6 +22,12 @@ const AuthForm = (props) => {
   if (match.path === '/' || match.path === '/signup') {
     return (
       <div className="su">
+        {/* <div className="bg">
+          <div className="bg-wrap">
+            <BackGround />
+          </div>
+        </div> */}
+
         <div className="su-form">
           <div>
             <h2>REGISTER</h2>

@@ -74,7 +74,7 @@ const Products = () => {
     setPageNumber(0);
   }, []);
 
-  const prodsPerPage = 6;
+  const prodsPerPage = 16;
   const pagesVisited = pageNumber * prodsPerPage;
 
   const saveInstrument = (event) => {
@@ -237,7 +237,7 @@ const Products = () => {
     <div className="pds">
       {injectStyle()}
       <div className="pds-filter">
-        <h2>PRODUCTS</h2>
+        <h1>PRODUCTS</h1>
       </div>
       <div className="pds-ctg">
         <div className="pds-ctg-wrap">

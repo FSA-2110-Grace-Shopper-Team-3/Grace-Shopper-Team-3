@@ -138,9 +138,9 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             </div>
           </div>
           <div className="navbar-logo">
-            <div>
+            <Link className="react-link" to="/home">
               <img src={Logo1} />
-            </div>
+            </Link>
           </div>
           <div className="navbar-user-right">
             <div className="navbar-user-itemRight">
