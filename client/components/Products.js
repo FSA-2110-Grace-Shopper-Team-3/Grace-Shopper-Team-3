@@ -30,10 +30,9 @@ const Products = () => {
     orders.find((order) => order.userId === id && order.isOrdered === false) ||
     {};
 
-  const match = useRouteMatch();
-  console.log('here the match', match);
-  const location = useLocation();
-  console.log('heres the location bud', location.pathname);
+  let match = useRouteMatch();
+
+  let location = useLocation();
 
   //-------------------Guest Cart Functionality---------------------//
 
@@ -69,7 +68,11 @@ const Products = () => {
 
   let currentInstruments = !instruments.length ? products : instruments;
 
-  const [pageNumber, setPageNumber] = useState(0);
+  let [pageNumber, setPageNumber] = useState(0);
+
+  useEffect(() => {
+    setPageNumber(0);
+  }, []);
 
   const prodsPerPage = 6;
   const pagesVisited = pageNumber * prodsPerPage;
@@ -97,16 +100,12 @@ const Products = () => {
     (product) => product.category === 'Accessory'
   );
 
-  let pageCount = Math.ceil(products.length / prodsPerPage);
+  const pageCount = Math.ceil(products.length / prodsPerPage);
   const guitarPageCount = Math.ceil(guitars.length / prodsPerPage);
   const drumPageCount = Math.ceil(drums.length / prodsPerPage);
   const celloPageCount = Math.ceil(cellos.length / prodsPerPage);
   const pianoPageCount = Math.ceil(pianos.length / prodsPerPage);
   const accesoriesPageCount = Math.ceil(accesories.length / prodsPerPage);
-
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
 
   if (match.params.sortBy) {
     const field = match.params.sortBy;
@@ -144,6 +143,10 @@ const Products = () => {
       currentInstruments = [...products];
     }
   }
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   // PAGINATE START
   const displayProducts = currentInstruments
@@ -238,32 +241,32 @@ const Products = () => {
       </div>
       <div className="pds-ctg">
         <div className="pds-ctg-wrap">
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/`}>
               <h3>All</h3>
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/guitars`}>
               <h3>Guitars</h3>
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/drums`}>
               <h3>Drums</h3>{' '}
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/cellos`}>
               <h3>Cellos</h3>{' '}
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/pianos`}>
               <h3>Pianos</h3>{' '}
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/accessories`}>
               <h3>Accessories</h3>{' '}
             </Link>
@@ -300,6 +303,7 @@ const Products = () => {
           nextLinkClassName={'nextBttn'}
           disabledClassName={'paginationDisabled'}
           activeClassName={'paginationActive'}
+          forcePage={pageNumber}
         />
         {/* {currentInstruments.map((product) => {
           return (

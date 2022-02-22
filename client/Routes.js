@@ -78,6 +78,11 @@ class Routes extends Component {
             <Route exact path="/orderhistory" component={OrderHistory} />
             <Route exact path="/editprofile/:id" component={EditUser} />
             <Route exact path="/products/sort/:sortBy" component={Products} />
+            <Route
+              exact
+              path="/products/sort/:sortBy/:selected"
+              component={Products}
+            />
             <Route path="/products/:id" component={SingleProduct} />
             <Redirect to="/products" />
           </Switch>
