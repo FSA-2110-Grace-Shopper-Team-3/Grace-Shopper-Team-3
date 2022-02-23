@@ -7,7 +7,7 @@ import ScrollToTop from 'react-scroll-to-top';
 const App = () => {
   return (
     <div>
-      <ScrollToTop smooth />
+      <ScrollToTop smooth style={{ zIndex: 7 }} />
       <Navbar />
       <Routes />
       <Footer />

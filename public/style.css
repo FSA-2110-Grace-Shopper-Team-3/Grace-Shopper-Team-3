@@ -120,8 +120,18 @@ input:focus {
   color: black;
 }
 
+.react-link-cats {
+  text-decoration: none;
+  color: white;
+}
+
 .react-link-ft {
   text-decoration: none;
+  color: white;
+}
+
+.react-link-ft:hover {
+  text-decoration: underline;
   color: white;
 }
 
@@ -167,7 +177,7 @@ input:focus {
 .navbar-wrap {
   display: flex;
   justify-content: space-between;
-  border-bottom: 1px solid lightgray;
+  border-bottom: 1px solid lightgrey;
 }
 
 .navbar-user-itemLeft {
@@ -382,7 +392,7 @@ input:focus {
   align-items: center;
   /* width: 100%; */
   /* padding-top: 50px; */
-  height: 80vh;
+  height: 60vh;
 }
 
 .pi h1 {
@@ -429,9 +439,66 @@ input:focus {
   object-fit: contain;
 }
 
+/* ---------------FrontPage/NewsLetter.js CSS--------------- */
+
+.nl {
+  height: 50vh;
+  /* background-color: #eeeeee; */
+  background-image: url('/images/symbol-nl-v5.svg');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nl h1 {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+}
+
+.nl-desc {
+  font-size: 20px;
+  margin-bottom: 1rem;
+}
+
+.nl-input-wrap {
+  width: 30%;
+  height: 60px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid lightgray;
+}
+
+.nl-input {
+  border: none;
+  flex: 8;
+  padding-left: 20px;
+}
+
+.nl-button {
+  flex: 1;
+  border: none;
+  background-color: #00adb5;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
 /* ---------------Cart.js CSS--------------- */
 .ct {
   display: flex;
+  /* position: fixed; */
+}
+
+.ct-drawer {
+  position: fixed;
 }
 
 .ct-uc {
@@ -557,6 +624,7 @@ input:focus {
   justify-content: center;
   align-items: center;
   margin-left: 5px;
+  border-radius: 10px;
 }
 
 .ct-uc-item-del {
@@ -577,16 +645,28 @@ input:focus {
   display: flex;
   flex-wrap: wrap;
   padding-top: 10vh;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
+  min-height: calc(100vh - 25vh);
+  justify-content: center;
   /* background-image: url('/images/symbol-scatter-bg.svg');
   background-size: cover; */
 }
 
 .pds-filter {
+  display: flex;
   width: 100%;
+  background-image: url('/images/symbol-scatter-bg.svg');
+  background-size: cover;
+  height: 20vh;
+  justify-content: center;
+  align-items: center;
 }
 
 .pds-filter h1 {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 1rem;
   text-align: center;
 }
 
@@ -595,6 +675,7 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 }
 
 .pds-ctg-wrap {
@@ -619,12 +700,13 @@ input:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  /* height: auto; */
 }
 
 .pds-product {
   display: flex;
   min-width: 250px;
-  height: 355px;
+  height: 380px;
   flex-direction: column;
   padding: 1rem;
   margin: 1rem;
@@ -708,13 +790,17 @@ input:focus {
   transform: scale(1.1);
 }
 
+.rating {
+  margin-top: 10px;
+}
+
 /* ---------------SingleProduct.js CSS--------------- */
 
 .sp {
   display: flex;
-  height: auto;
+  min-height: calc(100vh - 25vh);
   justify-content: center;
-  padding-top: 120px;
+  padding-top: 12vh;
 }
 
 .sp-left {
@@ -738,7 +824,6 @@ input:focus {
 .sp-right {
   display: flex;
   flex: 1;
-  justify-content: center;
   height: auto;
 }
 
@@ -752,12 +837,6 @@ input:focus {
 .sp-desc {
   width: 70%;
 }
-
-/* .sp-desc-name {
-  background-color: black;
-  color: white;
-  padding: 1rem;
-} */
 
 .sp-desc h2 {
   display: inline-block;
@@ -786,15 +865,44 @@ input:focus {
 .sp-buttons {
   display: flex;
   padding-bottom: 1rem;
+  align-items: center;
+}
+
+.sp-buttons span {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.sp-buttons-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sp-buttons button {
+  font-size: xx-large;
+  background-color: white;
+  border: none;
 }
 
 .sp-quantity {
   display: flex;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border: 1px solid black;
   justify-content: center;
   align-items: center;
+  font-size: 1.5rem;
+  border-radius: 15px;
+}
+
+.sp-other-btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.sp-rating {
+  margin-bottom: 20px;
 }
 
 /* ---------------OrderHistory.js CSS--------------- */
@@ -886,12 +994,25 @@ input:focus {
   align-items: center;
   min-height: calc(100vh - 25vh);
   flex-direction: column;
-  padding-top: 10vh;
+  padding-top: 12.5vh;
+  padding-bottom: 2vh;
+  background-image: url('/images/symbol-scatter-bg.svg');
+  background-size: cover;
+}
+
+.op-box {
+  text-align: center;
+  padding: 2rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) -3px 3px 7px -3px;
+  background-color: white;
 }
 
 .op img {
-  height: 400px;
-  width: 400px;
+  height: 60vh;
+  width: 90vh;
+  /* height: 400px;
+  width: 400px; */
   object-fit: contain;
 }
 
@@ -1072,11 +1193,12 @@ input:focus {
 /* -------------PAGINATE CSS---------------*/
 
 .paginationBttns {
-  width: 80%;
+  width: 100%;
   height: 40px;
   list-style: none;
   display: flex;
   justify-content: center;
+  padding: 0;
 }
 
 .paginationBttns a {
