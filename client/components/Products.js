@@ -10,6 +10,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PageviewIcon from '@material-ui/icons/Pageview';
+import Rating from '@material-ui/lab/Rating';
 import { ToastContainer, Slide, toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import ReactPaginate from 'react-paginate';
@@ -100,7 +101,7 @@ const Products = () => {
     (product) => product.category === 'Accessory'
   );
 
-  const pageCount = Math.ceil(products.length / prodsPerPage);
+  let pageCount = Math.ceil(products.length / prodsPerPage);
   const guitarPageCount = Math.ceil(guitars.length / prodsPerPage);
   const drumPageCount = Math.ceil(drums.length / prodsPerPage);
   const celloPageCount = Math.ceil(cellos.length / prodsPerPage);
@@ -164,9 +165,14 @@ const Products = () => {
               </div>
               <div className="pds-product-brand">{product.brand}</div>
               <div className="pds-product-price">${product.price}</div>
+              <Rating
+                name="disabled"
+                value={product.rating}
+                disabled
+                className="rating"
+              />
             </div>
           </div>
-
           <div className="pds-product-cover">
             <div className="pds-product-icon">
               <ShoppingCartIcon
@@ -221,7 +227,7 @@ const Products = () => {
                 }}
               />
             </div>
-            <Link to={`/products/${product.id}`}>
+            <Link to={`/products/${product.id}`} className="react-link">
               <div className="pds-product-icon">
                 <PageviewIcon />
               </div>
@@ -305,80 +311,6 @@ const Products = () => {
           activeClassName={'paginationActive'}
           forcePage={pageNumber}
         />
-        {/* {currentInstruments.map((product) => {
-          return (
-            <div key={product.id} className="pds-product">
-              <div className="pds-product-wrapper">
-                <div>
-                  <img src={product.img} />
-                </div>
-                <div className="pds-product-name">
-                  <div className="pds-product-model">
-                    <h3>{product.model}</h3>
-                  </div>
-                  <div className="pds-product-brand">{product.brand}</div>
-                  <div className="pds-product-price">${product.price}</div>
-                </div>
-              </div>
-              <div className="pds-product-cover">
-                <div className="pds-product-icon">
-                  <ShoppingCartIcon
-                    onClick={() => {
-                      {
-                        notify();
-                      }
-                      if (!id) {
-                        const guestOrderItem = guestCart.find(
-                          (orderItem) =>
-                            orderItem.productId === product.id &&
-                            orderItem.userId === null
-                        );
-                        guestOrderItem
-                          ? dispatch(
-                              editGuestOrderItem({
-                                ...guestOrderItem,
-                                id: guestOrderItem.id,
-                                quantity: guestOrderItem.quantity + 1,
-                              })
-                            )
-                          : dispatch(
-                              addGuestOrderItem({
-                                productId: product.id,
-                                userId: null,
-                                id: uuidv4(),
-                                quantity: 1,
-                              })
-                            );
-                      } else {
-                        const orderItem = orderItems.find(
-                          (orderItem) =>
-                            orderItem.productId === product.id &&
-                            orderItem.orderId === matchOrder.id
-                        );
-                        orderItem
-                          ? dispatch(
-                              editOrderItem({
-                                id: orderItem.id,
-                                quantity: orderItem.quantity + 1,
-                                userId: id,
-                              })
-                            )
-                          : dispatch(
-                              addOrderItem({
-                                productId: product.id,
-                                orderId: matchOrder.id,
-                                userId: id,
-                              })
-                            );
-                      }
-                    }}
-                  />
-                </div>
-                <Link to={`/products/${product.id}`}>
-                  <div className="pds-product-icon">
-                    <PageviewIcon />
-                  </div>
-                </Link> */}
       </div>
       <ToastContainer
         position="bottom-center"

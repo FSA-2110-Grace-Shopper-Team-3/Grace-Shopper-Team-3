@@ -63,18 +63,20 @@ const OrderPlaced = () => {
 
   return (
     <div className="op">
-      <h1>ORDER SUCCESSFUL</h1>
-      <img src={Band} />
-      <div className="op-desc">
-        <h2>Let's jam!</h2>
-        <p>
-          Thank you for your purchase. We hope you are satisfied with your
-          order!
-        </p>
+      <div className="op-box">
+        <h1>ORDER SUCCESSFUL</h1>
+        <img src={Band} />
+        <div className="op-desc">
+          <h2>Let's jam!</h2>
+          <p>
+            Thank you for your purchase. We hope you are satisfied with your
+            order!
+          </p>
+        </div>
+        <Link className="react-link-ct" to="/orderhistory">
+          View Order History
+        </Link>
       </div>
-      <Link className="react-link-ct" to="/orderhistory">
-        View Order History
-      </Link>
     </div>
   );
 };

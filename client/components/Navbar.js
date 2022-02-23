@@ -113,7 +113,10 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
               <a
                 href="#"
                 className="react-link"
-                onClick={() => setCartDrawer(true)}
+                onClick={(ev) => {
+                  ev.preventDefault();
+                  setCartDrawer(true);
+                }}
               >
                 <Badge color="secondary" badgeContent={cartTotal}>
                   <ShoppingCartIcon />{' '}
@@ -151,16 +154,19 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 Login
               </Link>
             </div>
-            <div className="navbar-user-itemRight">
+            {/* <div className="navbar-user-itemRight">
               <Link className="react-link" to={`/editprofile/${userId}`}>
                 <PersonIcon />
               </Link>
-            </div>
+            </div> */}
             <div className="navbar-user-itemRight">
               <a
                 href="#"
                 className="react-link"
-                onClick={() => setCartDrawer(true)}
+                onClick={(ev) => {
+                  ev.preventDefault();
+                  setCartDrawer(true);
+                }}
               >
                 <Badge color="secondary" badgeContent={guestCartTotal}>
                   <ShoppingCartIcon />{' '}

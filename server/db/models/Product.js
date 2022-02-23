@@ -18,7 +18,7 @@ const Product = db.define('product', {
     allowNull: false,
   },
   price: {
-    type: DECIMAL,
+    type: DECIMAL(10, 2),
     allowNull: false,
   },
   img: {
@@ -37,6 +37,10 @@ const Product = db.define('product', {
     validate: {
       min: 0,
     },
+  },
+  rating: {
+    type: INTEGER,
+    defaultValue: 3,
   },
 });
 

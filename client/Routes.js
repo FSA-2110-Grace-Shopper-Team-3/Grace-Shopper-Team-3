@@ -15,6 +15,7 @@ import EditProduct from './components/EditProduct';
 import OrderHistory from './components/OrderHistory';
 import AddProduct from './components/AddProduct';
 import FrontPage from './components/FrontPage/FrontPage';
+import ScrollToTop from './components/ScrollToTop';
 
 import {
   me,
@@ -40,11 +41,8 @@ class Routes extends Component {
       this.props.loadInitialData();
     }
     if (prevProps.orderItems.length !== this.props.orderItems.length) {
-      this.props.loadCart();
+      this.props.loadInitialData();
     }
-    // if (prevProps.orders.length !== this.props.orders.length) {
-    //   this.props.loadInitialData();
-    // }
   }
 
   render() {
@@ -72,29 +70,28 @@ class Routes extends Component {
           </Switch>
         ) : isLoggedIn && currUser.isAdmin === false ? (
           <Switch>
-            <Route exact path="/home" component={FrontPage} />
-            <Route exact path="/products" component={Products} />
-            <Route exact path="/orderplaced" component={OrderPlaced} />
-            <Route exact path="/orderhistory" component={OrderHistory} />
-            <Route exact path="/editprofile/:id" component={EditUser} />
-            <Route exact path="/products/sort/:sortBy" component={Products} />
-            <Route
-              exact
-              path="/products/sort/:sortBy/:selected"
-              component={Products}
-            />
-            <Route path="/products/:id" component={SingleProduct} />
-            <Redirect to="/products" />
+            <ScrollToTop>
+              <Route exact path="/home" component={FrontPage} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/orderplaced" component={OrderPlaced} />
+              <Route exact path="/orderhistory" component={OrderHistory} />
+              <Route exact path="/editprofile/:id" component={EditUser} />
+              <Route exact path="/products/sort/:sortBy" component={Products} />
+              <Route exact path="/products/:id" component={SingleProduct} />
+              {/* <Redirect to="/products" /> */}
+            </ScrollToTop>
           </Switch>
         ) : (
           <Switch>
-            <Route exact path="/" component={Login} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
-            <Route exact path="/home" component={FrontPage} />
-            <Route exact path="/products" component={Products} />
-            <Route exact path="/products/sort/:sortBy" component={Products} />
-            <Route exact path="/products/:id" component={SingleProduct} />
+            <ScrollToTop>
+              <Route exact path="/" component={Login} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/home" component={FrontPage} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/products/sort/:sortBy" component={Products} />
+              <Route exact path="/products/:id" component={SingleProduct} />
+            </ScrollToTop>
             {/* <Redirect to="/products" /> */}
           </Switch>
         )}
@@ -124,15 +121,6 @@ const mapDispatch = (dispatch) => {
       dispatch(getOrders());
       dispatch(getUsers());
       dispatch(getGuestOrderItems());
-    },
-    loadCart() {
-      dispatch(getProd());
-      dispatch(getOrderItems());
-      dispatch(me());
-      dispatch(getOrders());
-      dispatch(getUsers());
-      dispatch(getGuestOrderItems());
-      // dispatch(emptyGuestOrderItem());
     },
   };
 };
