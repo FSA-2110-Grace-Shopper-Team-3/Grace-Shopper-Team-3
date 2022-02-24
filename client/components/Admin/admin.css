@@ -349,7 +349,63 @@
 .ad-usr-add-btn {
 }
 
-.inv {
+.ad-prd-lst {
+  flex: 4;
+}
+
+.ad-prdlst-prd {
+  display: flex;
+  align-items: center;
+}
+
+.ad-prdlst-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.ad-prdlst-edit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #43a8cf;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.ad-prdlst-edit-dsbld {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-right: 20px;
+}
+
+.ad-prdlst-dlt {
+  cursor: pointer;
+  color: rgb(112, 112, 112);
+}
+
+.ad-prd {
+  flex: 4;
+  padding: 20px;
+}
+
+.ad-prd-tle-cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ad-prd-tle {
+}
+
+.ad-prd-add-btn {
+}
+
+.ad-inv {
   margin-left: 10px;
   padding: 10px;
 }

@@ -35,6 +35,8 @@ const User = db.define('user', {
   },
   img: {
     type: STRING,
+    defaultValue:
+      'https://gravatar.com/avatar/8b6395833fa7c3e5702955ad6c2333b0?s=800&d=robohash&r=x',
   },
   address: {
     type: STRING,

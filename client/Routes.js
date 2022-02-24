@@ -20,9 +20,10 @@ import Navbar from './components/Navbar';
 import AdminUserList from './components/Admin/AdminUserList';
 import AdminUser from './components/Admin/AdminUser';
 import AdminInventory from './components/Admin/AdminInventory';
+import AdminOrders from './components/Admin/AdminOrders';
+import AdminUserOrder from './components/Admin/AdminUserOrder';
 
 import ScrollToTop from './components/ScrollToTop';
-
 
 import {
   me,
@@ -72,7 +73,8 @@ class Routes extends Component {
             <Route exact path="/admin/inventory/:id" component={EditProduct} />
             <Route exact path="/admin/addproduct" component={EditProduct} />
             <Route exact path="/admin" component={Analytics} />
-            <Route exact path="/admin/orders" component={Orders} />
+            <Route exact path="/admin/orders" component={AdminOrders} />
+            <Route exact path="/admin/orders/:id" component={AdminUserOrder} />
             <Redirect to="/admin" />
           </Switch>
         ) : isLoggedIn && currUser.isAdmin === false ? (
@@ -91,7 +93,7 @@ class Routes extends Component {
         ) : (
           <Switch>
             <ScrollToTop>
-              <Route exact path="/" component={Login} />
+              <Route exact path="/" component={FrontPage} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/home" component={FrontPage} />
