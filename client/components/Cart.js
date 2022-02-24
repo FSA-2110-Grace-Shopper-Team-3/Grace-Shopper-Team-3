@@ -15,7 +15,6 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { ToastContainer, Slide, toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 
@@ -135,14 +134,16 @@ const Cart = ({ cartOpen, handleClose }) => {
               <Button
                 variant="contained"
                 sx={{
-                  color: 'black',
-                  backgroundColor: 'white',
-                  '&:hover': {
-                    backgroundColor: 'lightgrey',
-                  },
+                  color: 'white',
+                  fontWeight: 'bold',
+                  backgroundColor: '#00ADB5',
                   borderRadius: 0,
-                  width: 180,
-                  height: 50,
+                  '&:hover': {
+                    backgroundColor: '#00ADB5',
+                  },
+                  width: 230,
+                  height: 60,
+                  fontSize: '1rem',
                 }}
                 endIcon={<AddShoppingCartIcon />}
                 onClick={() => signUptoOrder()}
@@ -270,14 +271,16 @@ const Cart = ({ cartOpen, handleClose }) => {
               <Button
                 variant="contained"
                 sx={{
-                  color: 'black',
-                  backgroundColor: 'white',
-                  '&:hover': {
-                    backgroundColor: 'lightgrey',
-                  },
+                  color: 'white',
+                  fontWeight: 'bold',
+                  backgroundColor: '#00ADB5',
                   borderRadius: 0,
-                  width: 180,
-                  height: 50,
+                  '&:hover': {
+                    backgroundColor: '#00ADB5',
+                  },
+                  width: 230,
+                  height: 60,
+                  fontSize: '1rem',
                 }}
                 endIcon={<AddShoppingCartIcon />}
                 onClick={() => signUptoOrder()}
@@ -315,14 +318,16 @@ const Cart = ({ cartOpen, handleClose }) => {
             <Button
               variant="contained"
               sx={{
-                color: 'black',
-                backgroundColor: 'white',
-                '&:hover': {
-                  backgroundColor: 'lightgrey',
-                },
+                color: 'white',
+                fontWeight: 'bold',
+                backgroundColor: '#00ADB5',
                 borderRadius: 0,
-                width: 180,
-                height: 50,
+                '&:hover': {
+                  backgroundColor: '#00ADB5',
+                },
+                width: 230,
+                height: 60,
+                fontSize: '1rem',
               }}
               endIcon={<AddShoppingCartIcon />}
               onClick={handleCheckout}
@@ -449,14 +454,16 @@ const Cart = ({ cartOpen, handleClose }) => {
             <Button
               variant="contained"
               sx={{
-                color: 'black',
-                backgroundColor: 'white',
-                '&:hover': {
-                  backgroundColor: 'lightgrey',
-                },
+                color: 'white',
+                fontWeight: 'bold',
+                backgroundColor: '#00ADB5',
                 borderRadius: 0,
-                width: 180,
-                height: 50,
+                '&:hover': {
+                  backgroundColor: '#00ADB5',
+                },
+                width: 230,
+                height: 60,
+                fontSize: '1rem',
               }}
               endIcon={<AddShoppingCartIcon />}
               onClick={handleCheckout}

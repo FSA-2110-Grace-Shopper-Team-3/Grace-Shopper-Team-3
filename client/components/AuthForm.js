@@ -22,12 +22,6 @@ const AuthForm = (props) => {
   if (match.path === '/' || match.path === '/signup') {
     return (
       <div className="su">
-        {/* <div className="bg">
-          <div className="bg-wrap">
-            <BackGround />
-          </div>
-        </div> */}
-
         <div className="su-form">
           <div>
             <h2>REGISTER</h2>
@@ -69,19 +63,18 @@ const AuthForm = (props) => {
                 onChange={(event) => setConfPwVal(event.target.value)}
               />
             </div>
-
             <div>
               <Button
                 type="submit"
                 variant="contained"
                 sx={{
                   color: 'white',
-                  backgroundColor: 'black',
-                  '&:hover': {
-                    backgroundColor: 'white',
-                    color: 'black',
-                  },
+                  fontWeight: 'bold',
+                  backgroundColor: '#00ADB5',
                   borderRadius: 0,
+                  '&:hover': {
+                    backgroundColor: '#00ADB5',
+                  },
                   width: 180,
                   height: 50,
                 }}
@@ -129,12 +122,12 @@ const AuthForm = (props) => {
                 variant="contained"
                 sx={{
                   color: 'white',
-                  backgroundColor: 'black',
-                  '&:hover': {
-                    backgroundColor: 'white',
-                    color: 'black',
-                  },
+                  fontWeight: 'bold',
+                  backgroundColor: '#00ADB5',
                   borderRadius: 0,
+                  '&:hover': {
+                    backgroundColor: '#00ADB5',
+                  },
                   width: 180,
                   height: 50,
                 }}

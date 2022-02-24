@@ -18,8 +18,11 @@ const Product = db.define('product', {
     allowNull: false,
   },
   price: {
-    type: DECIMAL(10, 2),
+    type: DECIMAL,
     allowNull: false,
+    validate: {
+      isDecimal: true,
+    },
   },
   img: {
     type: STRING,

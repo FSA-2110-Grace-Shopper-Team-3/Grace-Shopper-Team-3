@@ -16,7 +16,7 @@ const MyTextField = ({ label, type, ...props }) => {
       helperText={errorText}
       error={!!errorText}
       className="textfield"
-      style={{ width: 320 }}
+      style={{ width: 500 }}
       id="outlined-basic"
       label={label}
       variant="outlined"
@@ -29,7 +29,7 @@ const validationSchema = yup.object({
   username: yup.string().required('username is required').max(20),
   password: yup.string().min(3).max(15),
   email: yup.string().required('email is required').max(25),
-  img: yup.string().max(25),
+  img: yup.string().max(100),
 });
 
 const EditUser = () => {
@@ -44,87 +44,100 @@ const EditUser = () => {
 
   return (
     <div className="formik-user">
-      <Formik
-        initialValues={{
-          id: currUser.id || 1,
-          username: currUser.username || '',
-          email: currUser.email || '',
-          phone: '',
-          img: currUser.img || 'https://i.pravatar.cc/300',
-          password: '',
-          confirmPassword: '',
-        }}
-        validationSchema={validationSchema}
-        validate={(values) => {
-          const errors = {};
+      <div className="formik-left">
+        <div>
+          <h1>Welcome, {currUser.username}</h1>
+        </div>
+        <img src={currUser.img} />
+      </div>
+      <div className="formik-right">
+        {' '}
+        <Formik
+          initialValues={{
+            id: currUser.id || 1,
+            username: currUser.username || '',
+            email: currUser.email || '',
+            phone: '',
+            img: currUser.img || 'https://i.pravatar.cc/300',
+            password: '',
+            confirmPassword: '',
+          }}
+          validationSchema={validationSchema}
+          validate={(values) => {
+            const errors = {};
 
-          values.password !== values.confirmPassword
-            ? (errors.confirmPassword = 'Passwords do not match')
-            : '';
+            values.password !== values.confirmPassword
+              ? (errors.confirmPassword = 'Passwords do not match')
+              : '';
 
-          return errors;
-        }}
-        onSubmit={(data, { setSubmitting }) => {
-          setSubmitting(true); // before async call
+            return errors;
+          }}
+          onSubmit={(data, { setSubmitting }) => {
+            setSubmitting(true); // before async call
 
-          if (data.password === '') {
-            dispatch(updateUser({ ...data, password: currPassword }));
-          } else {
-            dispatch(updateUser(data));
-          }
+            if (data.password === '') {
+              dispatch(updateUser({ ...data, password: currPassword }));
+            } else {
+              dispatch(updateUser(data));
+            }
 
-          setSubmitting(false); //after async call
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form className="edit-user">
-            <div>
-              <h4>Edit User Info</h4>
-            </div>
-            <Grid container direction={'column'} spacing={3}>
-              <Grid item>
-                <MyTextField label="Username" name="username" type="input" />
-              </Grid>
-              <Grid item>
-                <MyTextField label="Email" name="email" type="input" />
-              </Grid>
-              <Grid item>
-                <MyTextField label="Phone" name="phone" type="input" />
-              </Grid>
-              <Grid item>
-                <MyTextField label="Photo URL" name="img" type="input" />
-              </Grid>
-              <Grid item>
-                <MyTextField
-                  label="New Password"
-                  name="password"
-                  type="password"
-                />
-              </Grid>
-              <Grid item>
-                <MyTextField
-                  label="Confirm New Password"
-                  name="confirmPassword"
-                  type="password"
-                />
-              </Grid>
+            setSubmitting(false); //after async call
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form className="edit-user">
+              <div>
+                <h1>EDIT PROFILE</h1>
+              </div>
+              <Grid container direction={'column'} spacing={3}>
+                <Grid item>
+                  <MyTextField label="Username" name="username" type="input" />
+                </Grid>
+                <Grid item>
+                  <MyTextField label="Email" name="email" type="input" />
+                </Grid>
+                <Grid item>
+                  <MyTextField label="Phone" name="phone" type="input" />
+                </Grid>
+                <Grid item>
+                  <MyTextField label="Photo URL" name="img" type="input" />
+                </Grid>
+                <Grid item>
+                  <MyTextField
+                    label="New Password"
+                    name="password"
+                    type="password"
+                  />
+                </Grid>
+                <Grid item>
+                  <MyTextField
+                    label="Confirm New Password"
+                    name="confirmPassword"
+                    type="password"
+                  />
+                </Grid>
 
-              <Grid item className="edit-user-btns">
-                <Button disabled={isSubmitting} type="submit" color="primary">
-                  SUBMIT
-                </Button>
-                <Button
-                  type="button"
-                  onClick={() => history.push('/products')}
-                  color="primary"
-                >
-                  CANCEL
-                </Button>
+                <Grid item className="edit-user-btns">
+                  <Button
+                    disabled={isSubmitting}
+                    type="submit"
+                    sx={{ color: 'black' }}
+                  >
+                    SUBMIT
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => history.push('/products')}
+                    sx={{ color: 'black' }}
+                  >
+                    CANCEL
+                  </Button>
+                </Grid>
               </Grid>
-            </Grid>
-          </Form>
-        )}
-      </Formik>
+            </Form>
+          )}
+        </Formik>
+      </div>
     </div>
   );
 };
