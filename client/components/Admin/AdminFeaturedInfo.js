@@ -1,14 +1,21 @@
 import React from 'react';
 import { ArrowUpward } from '@material-ui/icons';
+import { useSelector } from 'react-redux';
 import './admin.css';
 
 export default function AdminFeaturedInfo() {
+  const orders = useSelector((state) =>
+    state.orders.filter((order) => order.isOrdered === true)
+  );
+
+  const total = orders.reduce((acc, order) => (acc += order.totalPrice * 1), 0);
+
   return (
     <div className="ad-ft">
       <div className="ad-ft-item">
         <span className="ad-ft-title">Sales</span>
         <div className="ad-ft-mny-ctnr">
-          <span className="ad-ft-mny">$2,415</span>
+          <span className="ad-ft-mny">${total}</span>
           <span className="ad-ft-mny-rt">
             <ArrowUpward className="ad-ft-icon" />
           </span>
