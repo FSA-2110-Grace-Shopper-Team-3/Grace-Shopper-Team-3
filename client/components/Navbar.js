@@ -131,10 +131,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <div className="navbar-user-itemLeft">
               <SearchBar placeholder={'Search for rock!'} data={products} />
             </div>
-            <div
-              className="navbar-user-itemLeft"
-              onClick={() => dispatch(emptyGuestOrderItem())}
-            >
+            <div className="navbar-user-itemLeft">
               <Link className="react-link" to="/products">
                 Products
               </Link>
@@ -154,11 +151,6 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                 Login
               </Link>
             </div>
-            {/* <div className="navbar-user-itemRight">
-              <Link className="react-link" to={`/editprofile/${userId}`}>
-                <PersonIcon />
-              </Link>
-            </div> */}
             <div className="navbar-user-itemRight">
               <a
                 href="#"
