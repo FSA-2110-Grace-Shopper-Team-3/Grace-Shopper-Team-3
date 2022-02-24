@@ -158,21 +158,36 @@ ul {
   z-index: 2;
   width: 100%;
   color: black;
+  align-items: center;
+}
+
+.navbar-admin {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  background: white;
+  z-index: 2;
+  width: 100%;
+  color: black;
+  align-items: center;
 }
 
 .navbar-wrap {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid lightgray;
+  align-items: center;
 }
 
 .navbar-user-itemLeft {
   margin-left: 30px;
   text-decoration: none;
+  align-items: center;
 }
 
 .navbar-user-itemRight {
   margin-right: 30px;
+  align-items: center;
 }
 
 .navbar-user-left {
@@ -180,28 +195,33 @@ ul {
   display: flex;
   padding: 0.9rem;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .navbar-logo {
   flex: 1;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .navbar-user-right {
   flex: 1;
   display: flex;
   padding: 0.9rem;
+  align-items: center;
 }
 
 .navbar-user-right p {
   margin: 0;
+  align-items: center;
 }
 
 .navbar-wrap img {
   width: 320px;
   height: 100px;
   object-fit: contain;
+  align-items: center;
 }
 
 /* ---------------Footer.js CSS--------------- */
@@ -496,6 +516,7 @@ ul {
   min-width: 250px;
   height: 355px;
   flex-direction: column;
+  flex-wrap: wrap;
   padding: 1rem;
   margin: 1rem;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
@@ -928,6 +949,338 @@ ul {
   display: flex;
   justify-content: space-around;
 }
+/*
+.ad-container {
+  display: flex;
+}
+
+.ad-sidebar {
+  height: calc(100vh - 50px);
+  background-color: rgb(238, 238, 238);
+  position: sticky;
+  top: 50px;
+}
+
+
+.ad-sidebar-wrapper {
+  padding: 20px;
+}
+
+.ad-sidebar-menu {
+  margin-bottom: 5px;
+  margin-left: 20px;
+}
+
+.ad-sidebar-title {
+  font-size: 14px;
+  color: rgb(70, 70, 70);
+}
+
+.ad-sidebar-list {
+  list-style: none;
+  padding: 5px;
+}
+
+.ad-sidebar-listitem {
+  padding: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  color: rgb(70, 70, 70);
+}
+
+.ad-sidebar-listitem.active,
+.ad-sidebar-listitem:hover {
+  background-color: rgb(215, 215, 250);
+}
+
+.ad-sidebar-icon {
+  margin-right: 5px;
+  font-size: 20px;
+}
+
+.ad-others {
+  flex: 4;
+}
+
+.ad-topbar {
+  width: 100%;
+  height: 50px;
+  background-color: white;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.ad-topbar-wrapper {
+  height: 100%;
+  padding: 0px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ad-logo {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ad-topbar-iconcontainer {
+  position: relative;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.ad-topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.ad-topbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.ad-topicon-badge {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: -5px;
+  right: 0px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+}
+
+.ad-top-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.ad-home {
+  flex: 4;
+  justify-content: space-between;
+}
+
+.ad-home-wgt {
+  display: flex;
+  margin: 10px;
+}
+
+.ad-ft {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.ad-ft-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 200px;
+  width: 200px;
+  margin: 10px 20px;
+  padding: 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
+  box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
+}
+
+.ad-ft-title {
+  font-size: 18px;
+}
+
+.ad-ft-mny-ctnr {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.ad-ft-mny {
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.ad-ft-mny-rt {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.ad-ft-icon {
+  font-size: 10px;
+  color: green;
+}
+
+.ad-ft-sub {
+  font-size: 15px;
+  color: rgb(102, 102, 102);
+}
+
+.ad-wgt-sm {
+  flex: 0.5;
+  -webkit-box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
+  box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
+  padding: 20px;
+  margin: 10px 20px 20px 40px;
+  border-radius: 10px;
+}
+
+.ad-wgt-sm-tle {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ad-wgt-sm-lst {
+  margin: 0px;
+  padding: 0;
+  list-style: none;
+}
+
+.ad-wgt-sm-lst-itm {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0px;
+  padding: 3px;
+}
+
+.ad-wgt-sm-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.ad-wgt-sm-usr {
+  display: flex;
+  flex-direction: column;
+}
+
+.ad-wgt-sm-usrnm {
+  font-weight: 400;
+  margin: 12px;
+}
+
+.ad-wgt-sm-btn {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  padding: 7px 10px;
+  background-color: rgb(235, 233, 233);
+  color: #555;
+  cursor: pointer;
+}
+
+.ad-wgt-sm-icn {
+  font-size: 15px !important;
+  margin-right: 5px;
+}
+
+.ad-wgt-lg {
+  flex: 2;
+  -webkit-box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
+  box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
+  padding: 20px;
+  margin: 10px 20px 20px 20px;
+  border-radius: 10px;
+}
+
+.ad-wgt-lg-tle {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.ad-wgt-lg-tbl {
+  width: 100%;
+  border-spacing: 20px;
+}
+
+.ad-wgt-lg-th {
+  text-align: left;
+}
+
+.ad-wgt-lg-usr {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.ad-wgt-lg-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.ad-wgt-lg-dte,
+.ad-wgt-lg-amt {
+  font-weight: 300;
+}
+
+.ad-wgt-lg-btn {
+  padding: 5px 7px;
+  border: none;
+  border-radius: 10px;
+}
+
+.ad-wgt-lg-btn.Confirmed {
+  background-color: #e5faf2;
+  color: #3bb077;
+}
+
+.ad-wgt-lg-btn.Pending {
+  background-color: #ebf1fe;
+  color: #2a7ade;
+}
+
+.ad-usr-lst {
+  flex: 4;
+}
+
+.ad-usrlst-usr {
+  display: flex;
+  align-items: center;
+}
+
+.ad-usrlst-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.ad-usrlst-edit {
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #43a8cf;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.ad-usrlst-dlt {
+  cursor: pointer;
+  color: rgb(112, 112, 112);
+}
+*/
 
 /* -------------PAGINATE CSS---------------*/
 

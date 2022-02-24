@@ -2,9 +2,15 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+require('dotenv').config();
+const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
 
 const app = express();
 module.exports = app;
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(cors({ origin: true }));
 
@@ -21,6 +27,33 @@ app.use('/api', require('./api'));
 app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 );
+
+//nodemailer
+// app.post('/send_mail', cors(), async (req, res) => {
+//   let { text } = req.body;
+//   const transport = nodemailer.createTransport({
+//     service: 'gmail',
+//     host: process.env.MAIL_HOST,
+//     port: 587,
+//     secure: true,
+//     secureConnection: false,
+//     auth: {
+//       user: 'unplgdgraceshopper@gmail.com',
+//       pass: 'Unplgdgr@ce',
+//     },
+//     tls: {
+//       rejectUnauthorized: true,
+//     },
+//   });
+//   await transport.sendMail({
+//     from: 'unplgdgraceshopper@gmail.com',
+//     to: 'kzammito@gmail.com',
+//     html: `<div>
+//     <h1>HERE'S THE EMAIL</h1>
+//     <p>${text}</p>
+//     </div>`,
+//   });
+// });
 
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));

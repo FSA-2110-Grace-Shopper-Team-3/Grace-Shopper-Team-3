@@ -11,6 +11,9 @@ import PersonIcon from '@material-ui/icons/Person';
 import Cart from './Cart';
 import Logo1 from '../../public/images/UNPLGD-nav-logo.png';
 import Logo1White from '../../public/images/UNPLGD-logo1_white.png';
+import AdminTopBar from './Admin/AdminTopBar';
+import AdminSideBar from './Admin/AdminSideBar';
+import AdminHome from './Admin/AdminHome';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   const dispatch = useDispatch();
@@ -58,15 +61,22 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   return (
     <div className="navbar">
       {isLoggedIn && currUser.isAdmin === true ? (
-        <div className="navbar-admin">
+        // <div className="navbar-admin">
+        //   <a href="#" onClick={handleClick}>
+        //     Logout
+        //   </a>
+        //   <Link to="/admin/addproduct">Add Product</Link>
+        //   <Link to="/admin/inventory">Product Inventory</Link>
+        //   <Link to="/admin/users">Users</Link>
+        //   <Link to="/admin/orders">Orders</Link>
+        //   <Link to="/admin/analytics">Analytics</Link>
+        // </div>
+        <div>
+          <AdminTopBar handleClick={handleClick} />
           <a href="#" onClick={handleClick}>
             Logout
           </a>
-          <Link to="/admin/addproduct">Add Product</Link>
-          <Link to="/admin/inventory">Product Inventory</Link>
-          <Link to="/admin/users">Users</Link>
-          <Link to="/admin/orders">Orders</Link>
-          <Link to="/admin/analytics">Analytics</Link>
+          {/* <AdminSideBar /> */}
         </div>
       ) : isLoggedIn && currUser.isAdmin === false ? (
         <div className="navbar-wrap">
@@ -149,11 +159,6 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <div className="navbar-user-itemRight">
               <Link to="/login" className="react-link">
                 Login
-              </Link>
-            </div>
-            <div className="navbar-user-itemRight">
-              <Link className="react-link" to={`/editprofile/${userId}`}>
-                <PersonIcon />
               </Link>
             </div>
             <div className="navbar-user-itemRight">

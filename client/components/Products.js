@@ -13,6 +13,7 @@ import PageviewIcon from '@material-ui/icons/Pageview';
 import { ToastContainer, Slide, toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import ReactPaginate from 'react-paginate';
+import Email from './Email';
 
 const Products = () => {
   const notify = () => toast.success('added to cart!');
@@ -236,6 +237,7 @@ const Products = () => {
       <div className="pds-filter">
         <h2>PRODUCTS</h2>
       </div>
+      {/* <Email /> */}
       <div className="pds-ctg">
         <div className="pds-ctg-wrap">
           <div className="pds-single-ctg">

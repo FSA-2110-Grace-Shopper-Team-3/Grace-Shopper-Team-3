@@ -15,6 +15,10 @@ import EditProduct from './components/EditProduct';
 import OrderHistory from './components/OrderHistory';
 import AddProduct from './components/AddProduct';
 import FrontPage from './components/FrontPage/FrontPage';
+import Navbar from './components/Navbar';
+import AdminUserList from './components/Admin/AdminUserList';
+import AdminUser from './components/Admin/AdminUser';
+import AdminInventory from './components/Admin/AdminInventory';
 
 import {
   me,
@@ -56,9 +60,9 @@ class Routes extends Component {
       <div>
         {isLoggedIn && currUser.isAdmin === true ? (
           <Switch>
-            <Route exact path="/admin/users" component={Users} />
+            <Route exact path="/admin/users" component={AdminUserList} />
             <Route exact path="/admin/users/:id" component={EditUser} />
-            <Route exact path="/admin/inventory" component={ProductInventory} />
+            <Route exact path="/admin/inventory" component={AdminInventory} />
             <Route
               exact
               path="/admin/inventory/sort/:sortBy"
@@ -66,9 +70,9 @@ class Routes extends Component {
             />
             <Route exact path="/admin/inventory/:id" component={EditProduct} />
             <Route exact path="/admin/addproduct" component={EditProduct} />
-            <Route exact path="/admin/analytics" component={Analytics} />
+            <Route exact path="/admin" component={Analytics} />
             <Route exact path="/admin/orders" component={Orders} />
-            <Redirect to="/admin/inventory" />
+            <Redirect to="/admin" />
           </Switch>
         ) : isLoggedIn && currUser.isAdmin === false ? (
           <Switch>
