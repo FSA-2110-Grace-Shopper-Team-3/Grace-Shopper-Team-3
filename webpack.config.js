@@ -17,7 +17,6 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
         use: [
           {
             loader: 'style-loader',
@@ -29,9 +28,11 @@ module.exports = {
       },
       {
         test: /\.(jpg|png)$/,
-        use: {
-          loader: 'url-loader',
-        },
+        use: [
+          {
+            loader: 'url-loader',
+          },
+        ],
       },
       {
         test: /\.scss$/,
@@ -44,6 +45,20 @@ module.exports = {
           },
           {
             loader: 'sass-loader',
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'babel-loader',
+          },
+          {
+            loader: 'react-svg-loader',
+            options: {
+              jsx: true,
+            },
           },
         ],
       },

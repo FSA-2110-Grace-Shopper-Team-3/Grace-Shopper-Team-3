@@ -86,7 +86,7 @@ const Cart = ({ cartOpen, handleClose }) => {
       line_items: lineItems,
       mode: 'payment',
       success_url: `http://localhost:8080/orderplaced/?success=true`,
-      cancel_url: `http://localhost:8080/cart/?cancelled=true`,
+      cancel_url: `http://localhost:8080/products`,
     };
     const response = await axios.post('/api/create-checkout-session', data);
     window.location = response.data.url;
@@ -99,18 +99,23 @@ const Cart = ({ cartOpen, handleClose }) => {
     setIsCartOpen(cartOpen);
   }, [cartOpen]);
 
+  //-------------------Spinner Loading Functionality---------------------//
+  const [loading, setLoading] = useState(false);
+
   return (
     <div className="ct">
       {injectStyle()}
       {!userId ? (
         !guestCart.length ? (
           <Drawer
+            disableRestoreFocus
             anchor="right"
             open={isCartOpen}
             onClose={() => {
               setIsCartOpen(false);
               handleClose();
             }}
+            className="ct-drawer"
           >
             <div className="ct-uc-header">
               <h3>GUEST CART</h3>
@@ -129,14 +134,16 @@ const Cart = ({ cartOpen, handleClose }) => {
               <Button
                 variant="contained"
                 sx={{
-                  color: 'black',
-                  backgroundColor: 'white',
-                  '&:hover': {
-                    backgroundColor: 'lightgrey',
-                  },
+                  color: 'white',
+                  fontWeight: 'bold',
+                  backgroundColor: '#00ADB5',
                   borderRadius: 0,
-                  width: 180,
-                  height: 50,
+                  '&:hover': {
+                    backgroundColor: '#00ADB5',
+                  },
+                  width: 230,
+                  height: 60,
+                  fontSize: '1rem',
                 }}
                 endIcon={<AddShoppingCartIcon />}
                 onClick={() => signUptoOrder()}
@@ -147,6 +154,7 @@ const Cart = ({ cartOpen, handleClose }) => {
           </Drawer>
         ) : (
           <Drawer
+            disableRestoreFocus
             sx={{ width: 1000 }}
             anchor="right"
             open={isCartOpen}
@@ -154,6 +162,7 @@ const Cart = ({ cartOpen, handleClose }) => {
               setIsCartOpen(false);
               handleClose();
             }}
+            className="ct-drawer"
           >
             <div className="ct-uc">
               <div className="ct-uc-header">
@@ -262,14 +271,16 @@ const Cart = ({ cartOpen, handleClose }) => {
               <Button
                 variant="contained"
                 sx={{
-                  color: 'black',
-                  backgroundColor: 'white',
-                  '&:hover': {
-                    backgroundColor: 'lightgrey',
-                  },
+                  color: 'white',
+                  fontWeight: 'bold',
+                  backgroundColor: '#00ADB5',
                   borderRadius: 0,
-                  width: 180,
-                  height: 50,
+                  '&:hover': {
+                    backgroundColor: '#00ADB5',
+                  },
+                  width: 230,
+                  height: 60,
+                  fontSize: '1rem',
                 }}
                 endIcon={<AddShoppingCartIcon />}
                 onClick={() => signUptoOrder()}
@@ -281,12 +292,14 @@ const Cart = ({ cartOpen, handleClose }) => {
         )
       ) : !matchingOrderItems.length ? (
         <Drawer
+          disableRestoreFocus
           anchor="right"
           open={isCartOpen}
           onClose={() => {
             setIsCartOpen(false);
             handleClose();
           }}
+          className="ct-drawer"
         >
           <div className="ct-uc-header">
             <h3>YOUR CART</h3>
@@ -305,14 +318,16 @@ const Cart = ({ cartOpen, handleClose }) => {
             <Button
               variant="contained"
               sx={{
-                color: 'black',
-                backgroundColor: 'white',
-                '&:hover': {
-                  backgroundColor: 'lightgrey',
-                },
+                color: 'white',
+                fontWeight: 'bold',
+                backgroundColor: '#00ADB5',
                 borderRadius: 0,
-                width: 180,
-                height: 50,
+                '&:hover': {
+                  backgroundColor: '#00ADB5',
+                },
+                width: 230,
+                height: 60,
+                fontSize: '1rem',
               }}
               endIcon={<AddShoppingCartIcon />}
               onClick={handleCheckout}
@@ -323,6 +338,7 @@ const Cart = ({ cartOpen, handleClose }) => {
         </Drawer>
       ) : (
         <Drawer
+          disableRestoreFocus
           sx={{ width: 1000 }}
           anchor="right"
           open={isCartOpen}
@@ -330,6 +346,7 @@ const Cart = ({ cartOpen, handleClose }) => {
             setIsCartOpen(false);
             handleClose();
           }}
+          className="ct-drawer"
         >
           <div className="ct-uc">
             <div className="ct-uc-header">
@@ -437,14 +454,16 @@ const Cart = ({ cartOpen, handleClose }) => {
             <Button
               variant="contained"
               sx={{
-                color: 'black',
-                backgroundColor: 'white',
-                '&:hover': {
-                  backgroundColor: 'lightgrey',
-                },
+                color: 'white',
+                fontWeight: 'bold',
+                backgroundColor: '#00ADB5',
                 borderRadius: 0,
-                width: 180,
-                height: 50,
+                '&:hover': {
+                  backgroundColor: '#00ADB5',
+                },
+                width: 230,
+                height: 60,
+                fontSize: '1rem',
               }}
               endIcon={<AddShoppingCartIcon />}
               onClick={handleCheckout}

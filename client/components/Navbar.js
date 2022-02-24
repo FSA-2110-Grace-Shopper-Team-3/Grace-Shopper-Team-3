@@ -123,7 +123,10 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
               <a
                 href="#"
                 className="react-link"
-                onClick={() => setCartDrawer(true)}
+                onClick={(ev) => {
+                  ev.preventDefault();
+                  setCartDrawer(true);
+                }}
               >
                 <Badge color="secondary" badgeContent={cartTotal}>
                   <ShoppingCartIcon />{' '}
@@ -138,19 +141,16 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <div className="navbar-user-itemLeft">
               <SearchBar placeholder={'Search for rock!'} data={products} />
             </div>
-            <div
-              className="navbar-user-itemLeft"
-              onClick={() => dispatch(emptyGuestOrderItem())}
-            >
+            <div className="navbar-user-itemLeft">
               <Link className="react-link" to="/products">
                 Products
               </Link>
             </div>
           </div>
           <div className="navbar-logo">
-            <div>
+            <Link className="react-link" to="/home">
               <img src={Logo1} />
-            </div>
+            </Link>
           </div>
           <div className="navbar-user-right">
             <div className="navbar-user-itemRight">
@@ -165,7 +165,10 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
               <a
                 href="#"
                 className="react-link"
-                onClick={() => setCartDrawer(true)}
+                onClick={(ev) => {
+                  ev.preventDefault();
+                  setCartDrawer(true);
+                }}
               >
                 <Badge color="secondary" badgeContent={guestCartTotal}>
                   <ShoppingCartIcon />{' '}

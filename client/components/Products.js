@@ -10,6 +10,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PageviewIcon from '@material-ui/icons/Pageview';
+import Rating from '@material-ui/lab/Rating';
 import { ToastContainer, Slide, toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import ReactPaginate from 'react-paginate';
@@ -31,10 +32,9 @@ const Products = () => {
     orders.find((order) => order.userId === id && order.isOrdered === false) ||
     {};
 
-  const match = useRouteMatch();
-  console.log('here the match', match);
-  const location = useLocation();
-  console.log('heres the location bud', location.pathname);
+  let match = useRouteMatch();
+
+  let location = useLocation();
 
   //-------------------Guest Cart Functionality---------------------//
 
@@ -70,9 +70,13 @@ const Products = () => {
 
   let currentInstruments = !instruments.length ? products : instruments;
 
-  const [pageNumber, setPageNumber] = useState(0);
+  let [pageNumber, setPageNumber] = useState(0);
 
-  const prodsPerPage = 6;
+  useEffect(() => {
+    setPageNumber(0);
+  }, []);
+
+  const prodsPerPage = 16;
   const pagesVisited = pageNumber * prodsPerPage;
 
   const saveInstrument = (event) => {
@@ -104,10 +108,6 @@ const Products = () => {
   const celloPageCount = Math.ceil(cellos.length / prodsPerPage);
   const pianoPageCount = Math.ceil(pianos.length / prodsPerPage);
   const accesoriesPageCount = Math.ceil(accesories.length / prodsPerPage);
-
-  const changePage = ({ selected }) => {
-    setPageNumber(selected);
-  };
 
   if (match.params.sortBy) {
     const field = match.params.sortBy;
@@ -146,6 +146,10 @@ const Products = () => {
     }
   }
 
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
+
   // PAGINATE START
   const displayProducts = currentInstruments
     .slice(pagesVisited, pagesVisited + prodsPerPage)
@@ -162,9 +166,14 @@ const Products = () => {
               </div>
               <div className="pds-product-brand">{product.brand}</div>
               <div className="pds-product-price">${product.price}</div>
+              <Rating
+                name="disabled"
+                value={product.rating}
+                disabled
+                className="rating"
+              />
             </div>
           </div>
-
           <div className="pds-product-cover">
             <div className="pds-product-icon">
               <ShoppingCartIcon
@@ -219,7 +228,7 @@ const Products = () => {
                 }}
               />
             </div>
-            <Link to={`/products/${product.id}`}>
+            <Link to={`/products/${product.id}`} className="react-link">
               <div className="pds-product-icon">
                 <PageviewIcon />
               </div>
@@ -235,37 +244,37 @@ const Products = () => {
     <div className="pds">
       {injectStyle()}
       <div className="pds-filter">
-        <h2>PRODUCTS</h2>
+        <h1>PRODUCTS</h1>
       </div>
       {/* <Email /> */}
       <div className="pds-ctg">
         <div className="pds-ctg-wrap">
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/`}>
               <h3>All</h3>
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/guitars`}>
               <h3>Guitars</h3>
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/drums`}>
               <h3>Drums</h3>{' '}
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/cellos`}>
               <h3>Cellos</h3>{' '}
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/pianos`}>
               <h3>Pianos</h3>{' '}
             </Link>
           </div>
-          <div className="pds-single-ctg">
+          <div className="pds-single-ctg" onClick={() => setPageNumber(0)}>
             <Link to={`/products/sort/accessories`}>
               <h3>Accessories</h3>{' '}
             </Link>
@@ -302,81 +311,8 @@ const Products = () => {
           nextLinkClassName={'nextBttn'}
           disabledClassName={'paginationDisabled'}
           activeClassName={'paginationActive'}
+          forcePage={pageNumber}
         />
-        {/* {currentInstruments.map((product) => {
-          return (
-            <div key={product.id} className="pds-product">
-              <div className="pds-product-wrapper">
-                <div>
-                  <img src={product.img} />
-                </div>
-                <div className="pds-product-name">
-                  <div className="pds-product-model">
-                    <h3>{product.model}</h3>
-                  </div>
-                  <div className="pds-product-brand">{product.brand}</div>
-                  <div className="pds-product-price">${product.price}</div>
-                </div>
-              </div>
-              <div className="pds-product-cover">
-                <div className="pds-product-icon">
-                  <ShoppingCartIcon
-                    onClick={() => {
-                      {
-                        notify();
-                      }
-                      if (!id) {
-                        const guestOrderItem = guestCart.find(
-                          (orderItem) =>
-                            orderItem.productId === product.id &&
-                            orderItem.userId === null
-                        );
-                        guestOrderItem
-                          ? dispatch(
-                              editGuestOrderItem({
-                                ...guestOrderItem,
-                                id: guestOrderItem.id,
-                                quantity: guestOrderItem.quantity + 1,
-                              })
-                            )
-                          : dispatch(
-                              addGuestOrderItem({
-                                productId: product.id,
-                                userId: null,
-                                id: uuidv4(),
-                                quantity: 1,
-                              })
-                            );
-                      } else {
-                        const orderItem = orderItems.find(
-                          (orderItem) =>
-                            orderItem.productId === product.id &&
-                            orderItem.orderId === matchOrder.id
-                        );
-                        orderItem
-                          ? dispatch(
-                              editOrderItem({
-                                id: orderItem.id,
-                                quantity: orderItem.quantity + 1,
-                                userId: id,
-                              })
-                            )
-                          : dispatch(
-                              addOrderItem({
-                                productId: product.id,
-                                orderId: matchOrder.id,
-                                userId: id,
-                              })
-                            );
-                      }
-                    }}
-                  />
-                </div>
-                <Link to={`/products/${product.id}`}>
-                  <div className="pds-product-icon">
-                    <PageviewIcon />
-                  </div>
-                </Link> */}
       </div>
       <ToastContainer
         position="bottom-center"

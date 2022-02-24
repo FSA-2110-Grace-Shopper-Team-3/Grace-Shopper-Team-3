@@ -7,6 +7,7 @@ const users = [
     phoneNumber: '555-555-5555',
     paymentInfo: '1234 6789 0191 7474',
     img: 'https://ca.slack-edge.com/T024FPYBQ-U02HYG009RN-bccc430102ac-512',
+
   },
   {
     username: 'david',
@@ -16,6 +17,7 @@ const users = [
     phoneNumber: '123-123-1234',
     paymentInfo: '1234 6675 0861 4747',
     img: 'https://ca.slack-edge.com/T024FPYBQ-U02H5SBRT61-d97460719996-512',
+
   },
   {
     username: 'kenny',
@@ -25,6 +27,7 @@ const users = [
     phoneNumber: '222-234-2323',
     paymentInfo: '1234 6655 5656 5656',
     img: 'https://ca.slack-edge.com/T024FPYBQ-U02HB2E2YEQ-8ee79484eba7-512',
+
   },
   {
     username: 'moe',
@@ -52,6 +55,7 @@ const users = [
     address: '789 admin court',
     phoneNumber: '911-119-9191',
     paymentInfo: '1234 6655 5656 5657',
+    img: 'https://robohash.org/7751cd1ef13a51d01275541c34c2e304?set=set1&bgset=&size=800x800',
     isAdmin: true,
   },
 ];
