@@ -54,7 +54,6 @@ const SearchBar = ({ placeholder, data }) => {
               >
                 <p>
                   {value.brand} {value.model}
-                  <br></br>
                 </p>
               </a>
             );
