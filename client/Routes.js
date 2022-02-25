@@ -22,6 +22,7 @@ import AdminUser from './components/Admin/AdminUser';
 import AdminInventory from './components/Admin/AdminInventory';
 import AdminOrders from './components/Admin/AdminOrders';
 import AdminUserOrder from './components/Admin/AdminUserOrder';
+import { ToastContainer, Slide } from 'react-toastify';
 
 import ScrollToTop from './components/ScrollToTop';
 
@@ -104,6 +105,18 @@ class Routes extends Component {
             {/* <Redirect to="/products" /> */}
           </Switch>
         )}
+        <ToastContainer
+          position="bottom-center"
+          autoClose={1500}
+          hideProgressBar
+          newestOnTop={true}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          transition={Slide}
+          limit={5}
+        />
       </div>
     );
   }

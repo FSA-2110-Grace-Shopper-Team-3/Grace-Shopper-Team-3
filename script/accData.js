@@ -26,7 +26,7 @@ const accesories = [
   {
     brand: 'Remp ET-7110-00',
     model: 'Lollipop',
-    price: 1000000.99,
+    price: 999999.99,
     description:
       'This is the best product ever! Only real ones get our special edition lollipop, but only if you can afford it!',
     category: 'Accessory',
@@ -46,7 +46,7 @@ const accesories = [
   {
     brand: 'Dunlop Guitar Picks',
     model: 'PVP101',
-    price: 19.99,
+    price: 20,
     description:
       'The Dunlop PVP101 Pick Variety Pack is ideal if you are always losing picks, or just looking to try out a decent selection of picks.',
     category: 'Accessory',

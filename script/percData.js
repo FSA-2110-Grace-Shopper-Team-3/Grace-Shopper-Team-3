@@ -86,7 +86,7 @@ const percussion = [
   {
     brand: 'Pearl',
     model: 'Masterworks',
-    price: 18092.99,
+    price: 18092.96,
     description:
       "For arena rock, nothing tops the classic maple drum kit. The sharp crack. The warm, singing sustain. The dry, musical decay. That's why the handbuilt Pearl Masterworks Stadium Sonic Select shell pack is masterfully built and finished from only the choicest plies of 100% maple.",
     category: 'Drum',
@@ -136,7 +136,7 @@ const percussion = [
   {
     brand: 'Sonor',
     model: 'SQ2',
-    price: 19092.99,
+    price: 19092.96,
     description:
       "With this pre-configured Sonor SQ2 maple shell pack from Sweetwater, your dream kit is just a click or call away. The SQ2 series represents the pinnacle of Sonor's more than 140 years of drum expertise.",
     category: 'Drum',
