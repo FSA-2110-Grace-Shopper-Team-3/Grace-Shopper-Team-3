@@ -15,7 +15,7 @@ import EditProduct from './components/EditProduct';
 import OrderHistory from './components/OrderHistory';
 import AddProduct from './components/AddProduct';
 import FrontPage from './components/FrontPage/FrontPage';
-
+import PageNotFound from './components/PageNotFound';
 import Navbar from './components/Navbar';
 import AdminUserList from './components/Admin/AdminUserList';
 import AdminUser from './components/Admin/AdminUser';
@@ -79,31 +79,32 @@ class Routes extends Component {
             <Redirect to="/admin" />
           </Switch>
         ) : isLoggedIn && currUser.isAdmin === false ? (
-          <Switch>
-            <ScrollToTop>
-              <Route exact path="/home" component={FrontPage} />
-              <Route exact path="/products" component={Products} />
-              <Route exact path="/orderplaced" component={OrderPlaced} />
-              <Route exact path="/orderhistory" component={OrderHistory} />
-              <Route exact path="/editprofile/:id" component={EditUser} />
-              <Route exact path="/products/sort/:sortBy" component={Products} />
-              <Route exact path="/products/:id" component={SingleProduct} />
-              {/* <Redirect to="/products" /> */}
-            </ScrollToTop>
-          </Switch>
-        ) : (
-          <Switch>
-            <ScrollToTop>
+          <ScrollToTop>
+            <Switch>
+              <Route path="/products/sort/:sortBy" component={Products} />
+              <Route path="/products/:id" component={SingleProduct} />
+              <Route path="/editprofile/:id" component={EditUser} />
+              <Route path="/products" component={Products} />
+              <Route path="/orderplaced" component={OrderPlaced} />
+              <Route path="/orderhistory" component={OrderHistory} />
+              <Route path="/home" component={FrontPage} />
               <Route exact path="/" component={FrontPage} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/home" component={FrontPage} />
-              <Route exact path="/products" component={Products} />
-              <Route exact path="/products/sort/:sortBy" component={Products} />
-              <Route exact path="/products/:id" component={SingleProduct} />
-            </ScrollToTop>
-            {/* <Redirect to="/products" /> */}
-          </Switch>
+              <Route path="*" component={PageNotFound} />
+            </Switch>
+          </ScrollToTop>
+        ) : (
+          <ScrollToTop>
+            <Switch>
+              <Route path="/products/sort/:sortBy" component={Products} />
+              <Route path="/products/:id" component={SingleProduct} />
+              <Route path="/products" component={Products} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route path="/home" component={FrontPage} />
+              <Route exact path="/" component={FrontPage} />
+              <Route path="*" component={PageNotFound} />
+            </Switch>
+          </ScrollToTop>
         )}
         <ToastContainer
           position="bottom-center"
