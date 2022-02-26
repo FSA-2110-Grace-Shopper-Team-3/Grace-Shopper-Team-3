@@ -1,15 +1,13 @@
-//COMBINE FORMS --> NEED TO ADD SELECT OPTIONS DROPDOWN FOR ADD PRODUCT & CENTER ON PAGE, KEEP EDIT PRODUCT AS IS.
-//MAKE BOTH FORMS DROPDOWN FOR CATEGORY?
-
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProd, createProd } from '../store';
 import { useHistory, useParams, useRouteMatch } from 'react-router';
-import { Formik, Form, useField, FieldArray } from 'formik';
+import { Formik, Form, useField, FieldArray, Field } from 'formik';
 import { TextField, Button, Grid } from '@material-ui/core';
 import { ToastContainer, toast, Slide } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import * as yup from 'yup';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const MyTextField = ({ label, ...props }) => {
   const [field, meta] = useField(props);
@@ -29,24 +27,6 @@ const MyTextField = ({ label, ...props }) => {
   );
 };
 
-// const MySelect = ({ label, ...props }) => {
-//   const [field, meta] = useField(props);
-//   const errorText = meta.error && meta.touched ? meta.error : '';
-//   return (
-//     <TextField
-//       fullWidth={true}
-//       {...field}
-//       helperText={errorText}
-//       error={!!errorText}
-//       className="textfield"
-//       style={{ width: 320 }}
-//       id="outlined-basic"
-//       label={label}
-//       variant="outlined"
-//     />
-//   );
-// };
-
 const validationSchema = yup.object({
   category: yup.string().required('category is required'),
   brand: yup.string().required('brand is required'),
@@ -57,7 +37,7 @@ const validationSchema = yup.object({
   img: yup.string(),
 });
 
-const EditProduct = () => {
+const ProductForm = () => {
   const { id } = useParams();
   const routeMatch = useRouteMatch();
 
@@ -74,19 +54,24 @@ const EditProduct = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const prodDefaultImg =
+    'https://www.nogapinsulation.com.au/wp-content/uploads/2019/12/product-coming-soon-no-gap-insulation.jpg';
+
   const notify = () =>
     toast.success(productExists ? 'product updated' : 'product added');
 
   const productExists = routeMatch.params.id;
-
-  // console.log('CATEGORIES', allCategories);
 
   return (
     <div className="sp">
       {injectStyle()}
       <div className="sp-left">
         <div>
-          <img className="sp-img" src={product.img} />
+          <img
+            className="sp-img"
+            src={productExists ? product.img : prodDefaultImg}
+            style={{ width: 350 }}
+          />
         </div>
       </div>
       <div className="sp-right">
@@ -95,17 +80,14 @@ const EditProduct = () => {
             <div className="formik">
               <Formik
                 initialValues={{
-                  id: productExists ? product.id : 1,
-                  category: productExists ? product.category : allCategories,
+                  id: product.id,
+                  category: product.category || '',
                   brand: productExists ? product.brand : '',
                   model: productExists ? product.model : '',
                   price: productExists ? product.price : '',
                   description: productExists ? product.description : '',
                   quantity: productExists ? product.quantity : 1,
-                  img: productExists
-                    ? product.img ||
-                      'https://nayemdevs.com/wp-content/uploads/2020/03/default-product-image.png'
-                    : '',
+                  img: productExists ? product.img : prodDefaultImg,
                 }}
                 validationSchema={validationSchema}
                 onSubmit={(data, { setSubmitting }) => {
@@ -155,7 +137,24 @@ const EditProduct = () => {
                         />
                       </Grid>
                       <Grid item>
-                        <FieldArray name="Category"></FieldArray>
+                        <Field
+                          name="category"
+                          as={TextField}
+                          select
+                          fullWidth={true}
+                          className="textfield"
+                          style={{ width: 320 }}
+                          id="outlined-basic"
+                          variant="outlined"
+                        >
+                          {allCategories.map((category, idx) => {
+                            return (
+                              <MenuItem key={idx} value={category}>
+                                {category}
+                              </MenuItem>
+                            );
+                          })}
+                        </Field>
                       </Grid>
                       <Grid item>
                         <Button
@@ -197,4 +196,4 @@ const EditProduct = () => {
   );
 };
 
-export default EditProduct;
+export default ProductForm;

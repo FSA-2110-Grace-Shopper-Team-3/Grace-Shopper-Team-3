@@ -184,7 +184,7 @@ input:focus {
   align-items: center;
 }
 
-.navbar-admin {
+/* .navbar-admin {
   position: fixed;
   overflow: hidden;
   top: 0;
@@ -193,7 +193,7 @@ input:focus {
   width: 100%;
   color: black;
   align-items: center;
-}
+} */
 
 .navbar-wrap {
   display: flex;
@@ -1447,6 +1447,7 @@ input:focus {
 }
 
 
+
 .textfield {
 }
 
@@ -1482,6 +1483,7 @@ input:focus {
   margin-top: 125px;
 
 }
+
 
 /* ---------------Admin CSS--------------- */
 

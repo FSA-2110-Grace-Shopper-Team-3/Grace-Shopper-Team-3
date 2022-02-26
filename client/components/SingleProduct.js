@@ -44,6 +44,7 @@ const SingleProduct = () => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
 
+  console.log('SINGLE PROD', singleProduct.quantity);
   //-------------------Guest to Login Cart Functionality---------------------//
 
   const guestToUserCart =
@@ -73,8 +74,10 @@ const SingleProduct = () => {
   //-------------------Adding to Cart Functionality---------------------//
   const [quantity, setQuantity] = useState(1);
 
-  return (
-    <div className="sp">
+      return (
+
+        
+        <div className="sp">
       {injectStyle()}
       <div className="sp-left">
         <div className="sp-left-img">
@@ -105,7 +108,7 @@ const SingleProduct = () => {
               <IconButton
                 style={{ color: 'black' }}
                 onClick={() => setQuantity(quantity - 1)}
-                disabled={quantity === 1}
+                disabled={quantity === 1 || singleProduct.quantity === 0}
               >
                 <RemoveIcon />
               </IconButton>
@@ -113,7 +116,7 @@ const SingleProduct = () => {
               <IconButton
                 style={{ color: 'black' }}
                 onClick={() => setQuantity(quantity + 1)}
-                disabled={quantity === 10}
+               disabled={quantity === 10 || singleProduct.quantity === 0}
               >
                 <AddIcon />
               </IconButton>
@@ -133,11 +136,13 @@ const SingleProduct = () => {
                   height: 60,
                   fontSize: '1.2rem',
                 }}
+                
                 endIcon={
                   <AddShoppingCartIcon
                     style={{ fontSize: '1.2rem', fontWeight: 'bold' }}
                   />
                 }
+                disabled={singleProduct.quantity === 0 ? true : false}
                 onClick={() => {
                   notify();
                   if (!currentUserId) {
@@ -187,7 +192,7 @@ const SingleProduct = () => {
                   }
                 }}
               >
-                ADD TO CART
+                {singleProduct.quantity === 0 ? 'OUT OF STOCK' : 'ADD TO CART'}
               </Button>
               <Button
                 variant="text"

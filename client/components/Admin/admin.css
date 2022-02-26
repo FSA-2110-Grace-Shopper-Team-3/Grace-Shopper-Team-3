@@ -8,7 +8,7 @@
   height: calc(100vh - 50px);
   background-color: rgb(238, 238, 238);
   position: sticky;
-  top: 50px;
+  top: 70px;
 }
 
 .ad-sidebar-wrapper {
@@ -57,12 +57,13 @@
 
 .ad-topbar {
   width: 100%;
-  height: 50px;
+  height: 45px;
   background-color: white;
   padding: 20px;
   position: sticky;
   top: 0;
   z-index: 999;
+  border-bottom: 0.5px solid rgb(190, 190, 190);
 }
 
 .ad-topbar-wrapper {
@@ -83,7 +84,7 @@
 .ad-topbar-iconcontainer {
   position: relative;
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .ad-topbar-right {
@@ -130,6 +131,7 @@
 
 .ad-ft {
   width: 100%;
+  margin-top: 80px;
   display: flex;
   justify-content: space-around;
 }
@@ -140,10 +142,12 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: 200px;
-  width: 200px;
-  margin: 10px 20px;
-  padding: 40px;
+  height: 280px;
+  width: 280px;
+  margin-left: 20px;
+  margin-top: 30px;
+  padding: 35px;
+
   border-radius: 10px;
   cursor: pointer;
   -webkit-box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
@@ -151,7 +155,9 @@
 }
 
 .ad-ft-title {
-  font-size: 18px;
+  font-size: 22px;
+  font-weight: 600;
+  padding-bottom: 10px;
 }
 
 .ad-ft-mny-ctnr {
@@ -172,13 +178,18 @@
 }
 
 .ad-ft-icon {
-  font-size: 10px;
+  font-size: 20px;
   color: green;
 }
 
+.ad-ft-icon-usr {
+  color: rgb(3, 85, 179);
+}
+
 .ad-ft-sub {
-  font-size: 15px;
+  font-size: 16px;
   color: rgb(102, 102, 102);
+  padding-top: 10px;
 }
 
 .ad-wgt-sm {
@@ -247,7 +258,7 @@
   -webkit-box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
   box-shadow: 7px 5px 21px -5px rgba(0, 0, 0, 0.21);
   padding: 20px;
-  margin: 10px 50px 20px 50px;
+  margin: 10px 20px;
   border-radius: 10px;
 }
 
@@ -318,6 +329,20 @@
 }
 
 .ad-usrlst-edit {
+  display: flex;
+  align-items: center;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background-color: #e47f65;
+  color: white;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.ad-usrlst-dsply {
+  display: flex;
+  align-items: center;
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
@@ -350,11 +375,11 @@
 }
 
 .ad-prd-lst {
+  display: flex;
   flex: 4;
 }
 
 .ad-prdlst-prd {
-  display: flex;
   align-items: center;
 }
 
@@ -367,20 +392,40 @@
 }
 
 .ad-prdlst-edit {
+  display: flex;
+  align-items: center;
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
-  background-color: #43a8cf;
+  background-color: #e47f65;
   color: white;
   cursor: pointer;
   margin-right: 20px;
 }
 
 .ad-prdlst-edit-dsbld {
+  display: flex;
+  align-items: center;
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
   margin-right: 20px;
+}
+
+.ad-prdlst-add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  /* padding: 5px 5px; */
+  background-color: #42dd9d;
+  color: white;
+  cursor: pointer;
+  margin-left: 5px;
+  font-size: 13px;
+  width: 120px;
+  height: 30px;
 }
 
 .ad-prdlst-dlt {

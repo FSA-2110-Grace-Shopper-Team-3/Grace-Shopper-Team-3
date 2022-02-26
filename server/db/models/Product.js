@@ -1,3 +1,4 @@
+const { Tune } = require('@material-ui/icons');
 const Sequelize = require('sequelize');
 const db = require('../db');
 
@@ -16,6 +17,7 @@ const Product = db.define('product', {
   model: {
     type: STRING,
     allowNull: false,
+    unique: true,
   },
   price: {
     type: DECIMAL(10, 2),
@@ -26,7 +28,8 @@ const Product = db.define('product', {
   },
   img: {
     type: STRING,
-    defaultValue: '',
+    defaultValue:
+      'https://www.nogapinsulation.com.au/wp-content/uploads/2019/12/product-coming-soon-no-gap-insulation.jpg',
   },
   description: {
     type: TEXT,
@@ -36,7 +39,7 @@ const Product = db.define('product', {
   },
   quantity: {
     type: INTEGER,
-    defaultValue: 10,
+    defaultValue: 5,
     validate: {
       min: 0,
     },

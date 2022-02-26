@@ -1,6 +1,7 @@
 import React from 'react';
-import { ArrowUpward } from '@material-ui/icons';
+import { ArrowUpward, Group } from '@material-ui/icons';
 import { useSelector } from 'react-redux';
+import AdminAnalytics from './AdminAnalytics';
 import './admin.css';
 
 export default function AdminFeaturedInfo() {
@@ -10,12 +11,16 @@ export default function AdminFeaturedInfo() {
 
   const total = orders.reduce((acc, order) => (acc += order.totalPrice * 1), 0);
 
+  const users = useSelector((state) =>
+    state.users.filter((user) => user.username !== 'admin')
+  );
+
   return (
     <div className="ad-ft">
       <div className="ad-ft-item">
         <span className="ad-ft-title">Sales</span>
         <div className="ad-ft-mny-ctnr">
-          <span className="ad-ft-mny">${total}</span>
+          <span className="ad-ft-mny">${2450 + total}</span>
           <span className="ad-ft-mny-rt">
             <ArrowUpward className="ad-ft-icon" />
           </span>
@@ -26,9 +31,20 @@ export default function AdminFeaturedInfo() {
         <span className="ad-ft-title">Sales by Product Type</span>
         <div className="ad-ft-mny-ctnr">
           <span className="ad-ft-mny"></span>
-          <span className="ad-ft-mny-rt">*ADD PIE CHART HERE*</span>
+          <span className="ad-ft-mny-rt">
+            <AdminAnalytics />
+          </span>
         </div>
-        <span className="ad-ft-sub"></span>
+      </div>
+      <div className="ad-ft-item">
+        <span className="ad-ft-title">Active Users</span>
+        <div className="ad-ft-mny-ctnr">
+          <span className="ad-ft-mny">{users.length}</span>
+          <span className="ad-ft-mny-rt">
+            <Group className="ad-ft-icon-usr" />
+          </span>
+        </div>
+        <span className="ad-ft-sub">Compared to last week</span>
       </div>
     </div>
   );

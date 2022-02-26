@@ -8,23 +8,26 @@ import SingleProduct from './components/SingleProduct';
 import OrderPlaced from './components/OrderPlaced';
 import Users from './components/Users';
 import ProductInventory from './components/ProductInventory';
-import Analytics from './components/Analytics';
 import Orders from './components/Orders';
 import EditUser from './components/EditUser';
-import EditProduct from './components/EditProduct';
+import ProductForm from './components/ProductForm';
 import OrderHistory from './components/OrderHistory';
-import AddProduct from './components/AddProduct';
 import FrontPage from './components/FrontPage/FrontPage';
+
 import PageNotFound from './components/PageNotFound';
 import Navbar from './components/Navbar';
+
 import AdminUserList from './components/Admin/AdminUserList';
-import AdminUser from './components/Admin/AdminUser';
 import AdminInventory from './components/Admin/AdminInventory';
 import AdminOrders from './components/Admin/AdminOrders';
 import AdminUserOrder from './components/Admin/AdminUserOrder';
+
 import { ToastContainer, Slide } from 'react-toastify';
 
+
 import ScrollToTop from './components/ScrollToTop';
+import AdminAnalytics from './components/Admin/AdminAnalytics';
+import Admin from './components/Admin';
 
 import {
   me,
@@ -33,7 +36,6 @@ import {
   getOrders,
   getUsers,
   getGuestOrderItems,
-  emptyGuestOrderItem,
 } from './store';
 
 /**
@@ -66,15 +68,11 @@ class Routes extends Component {
             <Route exact path="/admin/users" component={AdminUserList} />
             <Route exact path="/admin/users/:id" component={EditUser} />
             <Route exact path="/admin/inventory" component={AdminInventory} />
-            <Route
-              exact
-              path="/admin/inventory/sort/:sortBy"
-              component={ProductInventory}
-            />
-            <Route exact path="/admin/inventory/:id" component={EditProduct} />
-            <Route exact path="/admin/addproduct" component={EditProduct} />
-            <Route exact path="/admin" component={Analytics} />
+            <Route exact path="/admin/inventory/:id" component={ProductForm} />
+            <Route exact path="/admin/addproduct" component={ProductForm} />
+            <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/orders" component={AdminOrders} />
+            <Route exact path="/admin/analytics" component={AdminAnalytics} />
             <Route exact path="/admin/orders/:id" component={AdminUserOrder} />
             <Redirect to="/admin" />
           </Switch>

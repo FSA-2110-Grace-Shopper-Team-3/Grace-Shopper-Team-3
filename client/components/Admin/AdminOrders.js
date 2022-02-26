@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import dateFormat from 'dateformat';
 import { DataGrid } from '@mui/x-data-grid';
-import { DeleteOutline } from '@material-ui/icons';
+import { DeleteOutline, Visibility } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import './admin.css';
@@ -24,8 +24,6 @@ const AdminOrders = () => {
       status: order.isOrdered ? 'confirmed' : 'pending',
     };
   });
-
-  console.log(orders);
 
   const columns = [
     { field: 'id', headerName: 'Order ID', width: 320 },
@@ -62,11 +60,12 @@ const AdminOrders = () => {
               <button
                 className={
                   params.row.orderDate !== ''
-                    ? 'ad-prdlst-edit'
+                    ? 'ad-usrlst-dsply'
                     : 'ad-prdlst-edit-dsbld'
                 }
                 disabled={params.row.orderDate === '' ? true : false}
               >
+                <Visibility className="ad-wgt-sm-icn" />
                 View Order
               </button>
             </Link>

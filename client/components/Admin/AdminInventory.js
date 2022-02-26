@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useSelector } from 'react-redux';
-import { DeleteOutline } from '@material-ui/icons';
+import { DeleteOutline, Edit, Add } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteProd } from '../../store';
+import Rating from '@mui/material/Rating';
+import dateFormat from 'dateformat';
 import './admin.css';
 
 const AdminInventory = () => {
@@ -12,6 +14,9 @@ const AdminInventory = () => {
   const products = useSelector((state) => state.products);
 
   const rows = products.map((product) => {
+    const date = new Date(product.updatedAt);
+    const formattedDate = dateFormat(date, 'paddedShortDate');
+    const formattedTime = dateFormat(date, 'shortTime');
     return {
       id: product.id,
       category: product.category,
@@ -20,6 +25,8 @@ const AdminInventory = () => {
       model: product.model,
       price: product.price,
       quantity: product.quantity,
+      rating: product.rating,
+      updatedAt: `${formattedDate} - ${formattedTime}`,
     };
   });
 
@@ -46,25 +53,44 @@ const AdminInventory = () => {
       width: 100,
     },
     {
+      field: 'rating',
+      headerName: 'Rating',
+      type: 'number',
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <>
+            <Rating
+              name="read-only"
+              value={params.row.rating}
+              size="small"
+              readOnly
+            />
+          </>
+        );
+      },
+    },
+    {
       field: 'quantity',
       headerName: 'Quantity',
       type: 'number',
       width: 100,
     },
     { field: 'id', headerName: 'Product ID', width: 300 },
+    { field: 'updatedAt', headerName: 'Modified', width: 200 },
     {
       field: 'action',
       headerName: 'Action',
-      width: 220,
+      width: 120,
       renderCell: (params) => {
         return (
           <>
             <Link to={`/admin/inventory/${params.row.id}`}>
-              <button className="ad-prdlst-edit">Edit</button>
+              <button className="ad-prdlst-edit">
+                <Edit className="ad-wgt-sm-icn" />
+                Edit
+              </button>
             </Link>
-            {/* <Link to={`/admin/users/${params.row.id}`}>
-              <button className="ad-prdlst-edit">View Orders</button>
-            </Link> */}
             <DeleteOutline
               className="ad-prdlst-dlt"
               onClick={() => dispatch(deleteProd(params.row.id))}
@@ -72,6 +98,20 @@ const AdminInventory = () => {
           </>
         );
       },
+    },
+    {
+      field: 'create',
+      headerName: (
+        <Link to={`/admin/addproduct`}>
+          <button className="ad-prdlst-add">
+            <Add />
+            Add Product
+          </button>
+        </Link>
+      ),
+      width: 190,
+      sortable: false,
+      filter: false,
     },
   ];
 
