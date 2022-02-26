@@ -65,7 +65,7 @@ const guitars = [
   },
   {
     brand: 'Martin',
-    model: '000-42 Modern Deluxe',
+    model: '000-42 Modern',
     price: 7199.99,
     description:
       "Martin's 000-42 Modern Deluxe is a refreshing take on the classic auditorium body style, blending old-world style with modern refinements. Its Sitka spruce Vintage Tone System (VTS) top has been torrefied for maximum projection and harmonic excitement. The dovetail neck joint reinforces the classic Martin tone.",
@@ -75,7 +75,7 @@ const guitars = [
   },
   {
     brand: 'Martin',
-    model: '000-18 Modern Deluxe',
+    model: '000-18 Modern',
     price: 3599.99,
     description:
       "Martin's 000-18 Modern Deluxe is a refreshing take on the classic auditorium body style, blending old-world style with modern refinements. Its Sitka spruce Vintage Tone System (VTS) top has been torrefied for maximum projection and harmonic excitement.",

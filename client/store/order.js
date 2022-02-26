@@ -64,7 +64,6 @@ export const orders = (state = [], action) => {
       return state.map((order) =>
         order.id === action.order.id ? action.order : order
       );
-
     default:
       return state;
   }

@@ -100,117 +100,117 @@ const SingleProduct = () => {
             <div className="sp-desc-price">
               <h3>${singleProduct.price}</h3>
             </div>
-          </div>
-          <div className="sp-buttons">
-            <span>QTY:</span>
-            <IconButton
-              style={{ color: 'black' }}
-              onClick={() => setQuantity(quantity - 1)}
-              disabled={quantity === 1}
-            >
-              <RemoveIcon />
-            </IconButton>
-            <div className="sp-quantity">{quantity}</div>
-            <IconButton
-              style={{ color: 'black' }}
-              onClick={() => setQuantity(quantity + 1)}
-              disabled={quantity === 10}
-            >
-              <AddIcon />
-            </IconButton>
-          </div>
-          <div className="sp-other-btns">
-            <Button
-              variant="contained"
-              sx={{
-                color: 'white',
-                fontWeight: 'bold',
-                backgroundColor: '#00ADB5',
-                borderRadius: 0,
-                '&:hover': {
+            <div className="sp-buttons">
+              <span>QTY:</span>
+              <IconButton
+                style={{ color: 'black' }}
+                onClick={() => setQuantity(quantity - 1)}
+                disabled={quantity === 1}
+              >
+                <RemoveIcon />
+              </IconButton>
+              <div className="sp-quantity">{quantity}</div>
+              <IconButton
+                style={{ color: 'black' }}
+                onClick={() => setQuantity(quantity + 1)}
+                disabled={quantity === 10}
+              >
+                <AddIcon />
+              </IconButton>
+            </div>
+            <div className="sp-other-btns">
+              <Button
+                variant="contained"
+                sx={{
+                  color: 'white',
+                  fontWeight: 'bold',
                   backgroundColor: '#00ADB5',
-                },
-                width: 230,
-                height: 60,
-                fontSize: '1.2rem',
-              }}
-              endIcon={
-                <AddShoppingCartIcon
-                  style={{ fontSize: '1.2rem', fontWeight: 'bold' }}
-                />
-              }
-              onClick={() => {
-                notify();
-                if (!currentUserId) {
-                  const guestOrderItem = guestCart.find(
-                    (orderItem) =>
-                      orderItem.productId === singleProduct.id &&
-                      orderItem.userId === null
-                  );
-                  guestOrderItem
-                    ? dispatch(
-                        editGuestOrderItem({
-                          ...guestOrderItem,
-                          id: guestOrderItem.id,
-                          quantity: guestOrderItem.quantity + quantity,
-                        })
-                      )
-                    : dispatch(
-                        addGuestOrderItem({
-                          productId: singleProduct.id,
-                          userId: null,
-                          id: uuidv4(),
-                          quantity: quantity,
-                        })
-                      );
-                } else {
-                  const orderItem = orderItems.find(
-                    (orderItem) =>
-                      orderItem.productId === singleProduct.id &&
-                      orderItem.orderId === matchOrder.id
-                  );
-                  orderItem
-                    ? dispatch(
-                        editOrderItem({
-                          id: orderItem.id,
-                          quantity: orderItem.quantity + quantity,
-                          userId: currentUserId,
-                        })
-                      )
-                    : dispatch(
-                        addOrderItem({
-                          productId: singleProduct.id,
-                          orderId: matchOrder.id,
-                          userId: currentUserId,
-                          quantity: quantity,
-                        })
-                      );
+                  borderRadius: 0,
+                  '&:hover': {
+                    backgroundColor: '#00ADB5',
+                  },
+                  width: 230,
+                  height: 60,
+                  fontSize: '1.2rem',
+                }}
+                endIcon={
+                  <AddShoppingCartIcon
+                    style={{ fontSize: '1.2rem', fontWeight: 'bold' }}
+                  />
                 }
-              }}
-            >
-              ADD TO CART
-            </Button>
-            <Button
-              variant="text"
-              disableRipple
-              sx={{
-                color: 'black',
-                fontWeight: 'bold',
-                backgroundColor: 'white',
-                '&:hover': {
+                onClick={() => {
+                  notify();
+                  if (!currentUserId) {
+                    const guestOrderItem = guestCart.find(
+                      (orderItem) =>
+                        orderItem.productId === singleProduct.id &&
+                        orderItem.userId === null
+                    );
+                    guestOrderItem
+                      ? dispatch(
+                          editGuestOrderItem({
+                            ...guestOrderItem,
+                            id: guestOrderItem.id,
+                            quantity: guestOrderItem.quantity + quantity,
+                          })
+                        )
+                      : dispatch(
+                          addGuestOrderItem({
+                            productId: singleProduct.id,
+                            userId: null,
+                            id: uuidv4(),
+                            quantity: quantity,
+                          })
+                        );
+                  } else {
+                    const orderItem = orderItems.find(
+                      (orderItem) =>
+                        orderItem.productId === singleProduct.id &&
+                        orderItem.orderId === matchOrder.id
+                    );
+                    orderItem
+                      ? dispatch(
+                          editOrderItem({
+                            id: orderItem.id,
+                            quantity: orderItem.quantity + quantity,
+                            userId: currentUserId,
+                          })
+                        )
+                      : dispatch(
+                          addOrderItem({
+                            productId: singleProduct.id,
+                            orderId: matchOrder.id,
+                            userId: currentUserId,
+                            quantity: quantity,
+                          })
+                        );
+                  }
+                }}
+              >
+                ADD TO CART
+              </Button>
+              <Button
+                variant="text"
+                disableRipple
+                sx={{
+                  color: 'black',
+                  fontWeight: 'bold',
                   backgroundColor: 'white',
-                },
-                width: 250,
-                height: 70,
-                fontSize: '1rem',
-                padding: 0,
-                justifyContent: 'flex-start',
-              }}
-              startIcon={<ArrowBackIcon />}
-              onClick={() => history.push('/products')}
-            >
-              BACK TO PRODUCTS
-            </Button>
+                  '&:hover': {
+                    backgroundColor: 'white',
+                  },
+                  width: 250,
+                  height: 70,
+                  fontSize: '1rem',
+                  padding: 0,
+                  justifyContent: 'flex-start',
+                }}
+                startIcon={<ArrowBackIcon />}
+                onClick={() => history.push('/products')}
+              >
+                BACK TO PRODUCTS
+              </Button>
+            </div>
           </div>
         </div>
       </div>

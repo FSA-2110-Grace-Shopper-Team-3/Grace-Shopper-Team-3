@@ -108,7 +108,6 @@ const Cart = ({ cartOpen, handleClose }) => {
       {!userId ? (
         !guestCart.length ? (
           <Drawer
-            disableRestoreFocus
             anchor="right"
             open={isCartOpen}
             onClose={() => {
@@ -154,7 +153,6 @@ const Cart = ({ cartOpen, handleClose }) => {
           </Drawer>
         ) : (
           <Drawer
-            disableRestoreFocus
             sx={{ width: 1000 }}
             anchor="right"
             open={isCartOpen}
@@ -206,7 +204,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                             </div>
                             <div className="ct-uc-arrows">
                               <IconButton
-                                disableRipple={true}
+                                disableRipple
                                 onClick={() =>
                                   dispatch(
                                     editGuestOrderItem({
@@ -223,7 +221,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                               </IconButton>
                               <IconButton
                                 disabled={orderItem.quantity === 1}
-                                disableRipple={true}
+                                disableRipple
                                 onClick={() =>
                                   dispatch(
                                     editGuestOrderItem({
@@ -292,7 +290,6 @@ const Cart = ({ cartOpen, handleClose }) => {
         )
       ) : !matchingOrderItems.length ? (
         <Drawer
-          disableRestoreFocus
           anchor="right"
           open={isCartOpen}
           onClose={() => {
@@ -338,7 +335,6 @@ const Cart = ({ cartOpen, handleClose }) => {
         </Drawer>
       ) : (
         <Drawer
-          disableRestoreFocus
           sx={{ width: 1000 }}
           anchor="right"
           open={isCartOpen}
@@ -391,7 +387,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                           </div>
                           <div className="ct-uc-arrows">
                             <IconButton
-                              disableRipple={true}
+                              disableRipple
                               onClick={() =>
                                 dispatch(
                                   editOrderItem({
@@ -407,7 +403,7 @@ const Cart = ({ cartOpen, handleClose }) => {
                             </IconButton>
                             <IconButton
                               disabled={orderItem.quantity === 1}
-                              disableRipple={true}
+                              disableRipple
                               onClick={() =>
                                 dispatch(
                                   editOrderItem({
