@@ -121,10 +121,12 @@ const SingleProduct = () => {
               <IconButton
                 style={{ color: 'black' }}
                 onClick={() => setQuantity(quantity + 1)}
+
                 disabled={
                   quantity === singleProduct.quantity ||
                   singleProduct.quantity === 0
                 }
+
               >
                 <AddIcon />
               </IconButton>
