@@ -3,7 +3,6 @@
 }
 
 .ad-sidebar {
-  /* flex: 0.75; */
   width: 200px;
   height: calc(100vh - 50px);
   background-color: rgb(238, 238, 238);
@@ -368,12 +367,6 @@
   justify-content: space-between;
 }
 
-.ad-usr-tle {
-}
-
-.ad-usr-add-btn {
-}
-
 .ad-prd-lst {
   display: flex;
   flex: 4;
@@ -442,12 +435,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.ad-prd-tle {
-}
-
-.ad-prd-add-btn {
 }
 
 .ad-inv {

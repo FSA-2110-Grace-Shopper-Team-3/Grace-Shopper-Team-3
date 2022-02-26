@@ -7,7 +7,6 @@ import AdminHome from './Admin/AdminHome';
 const Admin = () => {
   return (
     <div>
-      {/* <AdminTopBar /> */}
       <div className="ad-container">
         <AdminSideBar />
         <AdminHome />

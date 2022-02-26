@@ -20,13 +20,14 @@ const AdminAnalytics = () => {
         lineWidth={100}
         label={({ x, y, dx, dy, dataEntry }) => (
           <text
+            key={Math.random()}
             className="text"
             x={x}
             y={y}
             dx={dx}
             dy={dy}
-            dominant-baseline="central"
-            text-anchor="middle"
+            dominantBaseline="central"
+            textAnchor="middle"
             style={{
               fontSize: 5,
               fontFamily: 'arial',

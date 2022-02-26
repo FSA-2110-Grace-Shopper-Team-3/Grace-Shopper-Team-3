@@ -20,7 +20,16 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { IconButton } from '@material-ui/core';
 
 const SingleProduct = () => {
-  const notify = () => toast.success('added to cart!');
+  const toastId = React.useRef(null);
+  const notify = () => (toastId.current = toast.success('added to cart!'));
+
+  const updateToast = () =>
+    toast.update(toastId.current, {
+      type: toast.TYPE.INFO,
+      render: 'you have reached the stock limit for this item',
+      autoClose: 5000,
+    });
+
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -43,8 +52,6 @@ const SingleProduct = () => {
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
-
-  console.log('SINGLE PROD', singleProduct.quantity);
   //-------------------Guest to Login Cart Functionality---------------------//
 
   const guestToUserCart =
@@ -74,10 +81,8 @@ const SingleProduct = () => {
   //-------------------Adding to Cart Functionality---------------------//
   const [quantity, setQuantity] = useState(1);
 
-      return (
-
-        
-        <div className="sp">
+  return (
+    <div className="sp">
       {injectStyle()}
       <div className="sp-left">
         <div className="sp-left-img">
@@ -116,7 +121,10 @@ const SingleProduct = () => {
               <IconButton
                 style={{ color: 'black' }}
                 onClick={() => setQuantity(quantity + 1)}
-               disabled={quantity === 10 || singleProduct.quantity === 0}
+                disabled={
+                  quantity === singleProduct.quantity ||
+                  singleProduct.quantity === 0
+                }
               >
                 <AddIcon />
               </IconButton>
@@ -136,7 +144,6 @@ const SingleProduct = () => {
                   height: 60,
                   fontSize: '1.2rem',
                 }}
-                
                 endIcon={
                   <AddShoppingCartIcon
                     style={{ fontSize: '1.2rem', fontWeight: 'bold' }}

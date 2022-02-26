@@ -38,9 +38,6 @@ const AdminTopBar = () => {
           </div>
         </div>
       </div>
-      {/* <div className="ad-container">
-        <AdminSideBar />
-      </div> */}
     </>
   );
 };

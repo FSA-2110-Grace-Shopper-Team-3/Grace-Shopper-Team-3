@@ -172,17 +172,6 @@ const ProductForm = () => {
                         >
                           CANCEL
                         </Button>
-                        <ToastContainer
-                          position="top-center"
-                          autoClose={1500}
-                          hideProgressBar
-                          newestOnTop={true}
-                          closeOnClick
-                          rtl={false}
-                          pauseOnFocusLoss
-                          draggable
-                          transition={Slide}
-                        />
                       </Grid>
                     </Grid>
                   </Form>

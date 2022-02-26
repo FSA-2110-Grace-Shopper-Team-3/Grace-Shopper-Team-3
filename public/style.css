@@ -1446,11 +1446,6 @@ input:focus {
   justify-content: space-around;
 }
 
-
-
-.textfield {
-}
-
 @media only screen and (max-width: 920px) {
   .formik-user {
     flex-direction: column;
@@ -1467,7 +1462,7 @@ input:focus {
   .textfield {
     width: 200px;
   }
-
+}
 /* ------------ PageNotFound.js ---------------*/
 
 .errorDiv {
@@ -1475,15 +1470,13 @@ input:focus {
   font-size: 75px;
   justify-content: center;
 }
-  
+
 .errorImg {
   height: auto;
   width: 700px;
   margin: 50px;
   margin-top: 125px;
-
 }
-
 
 /* ---------------Admin CSS--------------- */
 
