@@ -44,6 +44,7 @@ const SingleProduct = () => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
 
+  console.log('SINGLE PROD', singleProduct.quantity);
   //-------------------Guest to Login Cart Functionality---------------------//
 
   const guestToUserCart =
@@ -106,7 +107,7 @@ const SingleProduct = () => {
             <IconButton
               style={{ color: 'black' }}
               onClick={() => setQuantity(quantity - 1)}
-              disabled={quantity === 1}
+              disabled={quantity === 1 || singleProduct.quantity === 0}
             >
               <RemoveIcon />
             </IconButton>
@@ -114,13 +115,14 @@ const SingleProduct = () => {
             <IconButton
               style={{ color: 'black' }}
               onClick={() => setQuantity(quantity + 1)}
-              disabled={quantity === 10}
+              disabled={quantity === 10 || singleProduct.quantity === 0}
             >
               <AddIcon />
             </IconButton>
           </div>
           <div className="sp-other-btns">
             <Button
+              disabled={singleProduct.quantity === 0 ? true : false}
               variant="contained"
               sx={{
                 color: 'white',
@@ -188,7 +190,7 @@ const SingleProduct = () => {
                 }
               }}
             >
-              ADD TO CART
+              {singleProduct.quantity === 0 ? 'OUT OF STOCK' : 'ADD TO CART'}
             </Button>
             <Button
               variant="text"

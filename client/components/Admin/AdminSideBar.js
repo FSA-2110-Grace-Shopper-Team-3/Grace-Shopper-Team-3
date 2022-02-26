@@ -42,10 +42,12 @@ export default function AdminSideBar() {
                 Orders
               </li>
             </Link>
-            <li className="ad-sidebar-listitem">
-              <Timeline className="ad-sidebar-icon" />
-              Analytics
-            </li>
+            {/* <Link to="/admin/analytics">
+              <li className="ad-sidebar-listitem">
+                <Timeline className="ad-sidebar-icon" />
+                Analytics
+              </li>
+            </Link> */}
             {/* <li className="ad-sidebar-listitem">
               <TrendingUp className="ad-sidebar-icon" />
               Sales

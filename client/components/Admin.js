@@ -4,10 +4,10 @@ import AdminTopBar from './Admin/AdminTopBar';
 import AdminSideBar from './Admin/AdminSideBar';
 import AdminHome from './Admin/AdminHome';
 
-const Analytics = () => {
+const Admin = () => {
   return (
     <div>
-      <AdminTopBar />
+      {/* <AdminTopBar /> */}
       <div className="ad-container">
         <AdminSideBar />
         <AdminHome />
@@ -16,4 +16,4 @@ const Analytics = () => {
   );
 };
 
-export default Analytics;
+export default Admin;

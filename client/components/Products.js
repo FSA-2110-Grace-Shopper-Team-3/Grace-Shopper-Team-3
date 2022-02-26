@@ -14,7 +14,6 @@ import Rating from '@material-ui/lab/Rating';
 import { ToastContainer, Slide, toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import ReactPaginate from 'react-paginate';
-import Email from './Email';
 
 const Products = () => {
   const notify = () => toast.success('added to cart!');

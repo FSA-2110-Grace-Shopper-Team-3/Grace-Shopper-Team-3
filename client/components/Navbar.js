@@ -61,22 +61,8 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
   return (
     <div className="navbar">
       {isLoggedIn && currUser.isAdmin === true ? (
-        // <div className="navbar-admin">
-        //   <a href="#" onClick={handleClick}>
-        //     Logout
-        //   </a>
-        //   <Link to="/admin/addproduct">Add Product</Link>
-        //   <Link to="/admin/inventory">Product Inventory</Link>
-        //   <Link to="/admin/users">Users</Link>
-        //   <Link to="/admin/orders">Orders</Link>
-        //   <Link to="/admin/analytics">Analytics</Link>
-        // </div>
         <div>
-          <AdminTopBar handleClick={handleClick} />
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-          {/* <AdminSideBar /> */}
+          <AdminTopBar />
         </div>
       ) : isLoggedIn && currUser.isAdmin === false ? (
         <div className="navbar-wrap">

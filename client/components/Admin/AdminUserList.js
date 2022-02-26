@@ -5,6 +5,8 @@ import { DeleteOutline } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteUser } from '../../store';
+import { Visibility, Edit } from '@material-ui/icons';
+import dateFormat from 'dateformat';
 import './admin.css';
 
 const AdminUserList = () => {
@@ -15,12 +17,17 @@ const AdminUserList = () => {
   );
 
   const rows = users.map((user) => {
+    const date = new Date(user.updatedAt);
+    const formattedDate = dateFormat(date, 'paddedShortDate');
+    const formattedTime = dateFormat(date, 'shortTime');
+
     return {
       id: user.id,
       username: user.username,
       avatar: user.img,
       email: user.email,
       status: 'active',
+      updatedAt: `${formattedDate} - ${formattedTime}`,
     };
   });
 
@@ -45,15 +52,25 @@ const AdminUserList = () => {
       width: 100,
     },
     { field: 'id', headerName: 'User ID', width: 320 },
+    { field: 'updatedAt', headerName: 'Modified', width: 200 },
     {
       field: 'action',
       headerName: 'Action',
-      width: 220,
+      width: 260,
       renderCell: (params) => {
         return (
           <>
+            {/* <Link> */}
+            <button className="ad-usrlst-dsply" style={{ marginRight: 25 }}>
+              <Visibility className="ad-wgt-sm-icn" />
+              View Orders
+            </button>
+            {/* </Link> */}
             <Link to={`/admin/users/${params.row.id}`}>
-              <button className="ad-usrlst-edit">Edit</button>
+              <button className="ad-usrlst-edit">
+                <Edit className="ad-wgt-sm-icn" />
+                Edit
+              </button>
             </Link>
             <DeleteOutline
               className="ad-usrlst-dlt"
