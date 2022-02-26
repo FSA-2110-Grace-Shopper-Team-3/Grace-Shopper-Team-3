@@ -1217,6 +1217,21 @@ input:focus {
   display: flex;
   justify-content: space-around;
 }
+
+/* ------------ PageNotFound.js ---------------*/
+
+.errorDiv {
+  display: flex;
+  font-size: 75px;
+  justify-content: center;
+}
+.errorImg {
+  height: auto;
+  width: 700px;
+  margin: 50px;
+  margin-top: 125px;
+}
+
 /*
 .ad-container {
   display: flex;
