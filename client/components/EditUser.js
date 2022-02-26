@@ -30,7 +30,7 @@ const validationSchema = yup.object({
   username: yup.string().required('username is required').max(20),
   password: yup.string().min(3).max(15),
   email: yup.string().required('email is required').max(25),
-  img: yup.string().max(100),
+  img: yup.string().max(200),
 });
 
 const EditUser = () => {
@@ -41,7 +41,17 @@ const EditUser = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
+  const users = useSelector((state) => state.users) || '';
+
   const currPassword = currUser.password;
+
+  const auth = useSelector((state) => state.auth.id);
+
+  const loggedInUser =
+    useSelector((state) => state.users.find((user) => user.id === auth)) || {};
+
+  // console.log('AUTH', auth);
+  // console.log('USER', admin);
 
   return (
     <div className="formik-user">
@@ -128,7 +138,11 @@ const EditUser = () => {
                   </Button>
                   <Button
                     type="button"
-                    onClick={() => history.push('/products')}
+                    onClick={() =>
+                      loggedInUser.isAdmin === true
+                        ? history.push('/admin')
+                        : history.push('/products')
+                    }
                     sx={{ color: 'black' }}
                   >
                     CANCEL
