@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { updateUser } from '../store/users';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
@@ -9,6 +9,7 @@ import * as yup from 'yup';
 const MyTextField = ({ label, type, ...props }) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : '';
+
   return (
     <TextField
       fullWidth={true}
@@ -16,7 +17,7 @@ const MyTextField = ({ label, type, ...props }) => {
       helperText={errorText}
       error={!!errorText}
       className="textfield"
-      style={{ width: 500 }}
+      style={{ width: 350 }}
       id="outlined-basic"
       label={label}
       variant="outlined"

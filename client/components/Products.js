@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PageviewIcon from '@material-ui/icons/Pageview';
 import Rating from '@material-ui/lab/Rating';
-import { ToastContainer, Slide, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import ReactPaginate from 'react-paginate';
 
@@ -78,21 +78,6 @@ const Products = () => {
   const prodsPerPage = 16;
   const pagesVisited = pageNumber * prodsPerPage;
 
-  const saveInstrument = (event) => {
-    if (event.target.value === 'lowToHigh') {
-      currentInstruments = [...currentInstruments].sort((a, b) => {
-        return a.price - b.price;
-      });
-      console.log(currentInstruments);
-    }
-    if (event.target.value === 'highToLow') {
-      currentInstruments = [...currentInstruments].sort((a, b) => {
-        return b.price - a.price;
-      });
-      console.log(currentInstruments);
-    }
-  };
-
   const guitars = products.filter((product) => product.category === 'Guitar');
   const drums = products.filter((product) => product.category === 'Drum');
   const cellos = products.filter((product) => product.category === 'Cello');
@@ -115,31 +100,26 @@ const Products = () => {
         (product) => product.category === 'Guitar'
       );
       pageCount = guitarPageCount;
-      // setInstruments(guitars);
     } else if (field === 'drums') {
       currentInstruments = [...products].filter(
         (product) => product.category === 'Drum'
       );
       pageCount = drumPageCount;
-      // setInstruments(drums);
     } else if (field === 'cellos') {
       currentInstruments = [...products].filter(
         (product) => product.category === 'Cello'
       );
       pageCount = celloPageCount;
-      // setInstruments(cellos);
     } else if (field === 'accessories') {
       currentInstruments = [...products].filter(
         (product) => product.category === 'Accessory'
       );
       pageCount = accesoriesPageCount;
-      // setInstruments(accs);
     } else if (field === 'pianos') {
       currentInstruments = [...products].filter(
         (product) => product.category === 'Piano'
       );
       pageCount = pianoPageCount;
-      // setInstruments(pianos);
     } else {
       currentInstruments = [...products];
     }
@@ -279,24 +259,6 @@ const Products = () => {
             </Link>
           </div>
         </div>
-        {/* <form>
-          <select onChange={saveInstrument}>
-            <option value="all">All</option>
-            <option value="drums">drums</option>
-            <option value="guitars">guitars</option>
-            <option value="cellos">cellos</option>
-            <option value="pianos">pianos</option>
-            <option value="accessories">accesories</option>
-          </select>
-        </form> */}
-        <div className="pds-ctg-select">
-          <form>
-            <select onChange={saveInstrument}>
-              <option value="lowToHigh">Sort by price - low to high</option>
-              <option value="highToLow">Sort by price - high to low</option>
-            </select>
-          </form>
-        </div>
       </div>
       <div className="pds-list">
         {displayProducts}
@@ -313,18 +275,6 @@ const Products = () => {
           forcePage={pageNumber}
         />
       </div>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={1500}
-        hideProgressBar
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        transition={Slide}
-        limit={5}
-      />
     </div>
   );
 };
