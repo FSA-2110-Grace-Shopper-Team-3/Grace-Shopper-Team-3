@@ -51,44 +51,52 @@ class Routes extends Component {
       <div>
         {isLoggedIn && currUser.isAdmin === true ? (
           <Switch>
-            <Route exact path="/admin" component={Admin} />
-            <Route exact path="/admin/users" component={AdminUserList} />
-            <Route exact path="/admin/users/:id" component={EditUser} />
-            <Route exact path="/admin/inventory" component={AdminInventory} />
-            <Route exact path="/admin/inventory/:id" component={ProductForm} />
-            <Route exact path="/admin/addproduct" component={ProductForm} />
-            <Route exact path="/admin/orders" component={AdminOrders} />
-            <Route exact path="/admin/analytics" component={AdminAnalytics} />
-            <Route exact path="/admin/orders/:id" component={AdminUserOrder} />
-            <Redirect to="/admin" />
+            <ScrollToTop>
+              <Route exact path="/admin" component={Admin} />
+              <Route exact path="/admin/users" component={AdminUserList} />
+              <Route exact path="/admin/users/:id" component={EditUser} />
+              <Route exact path="/admin/inventory" component={AdminInventory} />
+              <Route
+                exact
+                path="/admin/inventory/:id"
+                component={ProductForm}
+              />
+              <Route exact path="/admin/addproduct" component={ProductForm} />
+              <Route exact path="/admin/orders" component={AdminOrders} />
+              <Route exact path="/admin/analytics" component={AdminAnalytics} />
+              <Route
+                exact
+                path="/admin/orders/:id"
+                component={AdminUserOrder}
+              />
+              <Redirect to="/admin" />
+            </ScrollToTop>
           </Switch>
         ) : isLoggedIn && currUser.isAdmin === false ? (
-          <ScrollToTop>
-            <Switch>
-              <Route path="/products/sort/:sortBy" component={Products} />
-              <Route path="/products/:id" component={SingleProduct} />
-              <Route path="/editprofile/:id" component={EditUser} />
-              <Route path="/products" component={Products} />
-              <Route path="/orderplaced" component={OrderPlaced} />
-              <Route path="/orderhistory" component={OrderHistory} />
-              <Route path="/home" component={FrontPage} />
+          <Switch>
+            <ScrollToTop>
+              <Route exact path="/products/sort/:sortBy" component={Products} />
+              <Route exact path="/products/:id" component={SingleProduct} />
+              <Route exact path="/editprofile/:id" component={EditUser} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/orderplaced" component={OrderPlaced} />
+              <Route exact path="/orderhistory" component={OrderHistory} />
+              <Route exact path="/home" component={FrontPage} />
               <Route exact path="/" component={FrontPage} />
-              <Route path="*" component={PageNotFound} />
-            </Switch>
-          </ScrollToTop>
+            </ScrollToTop>
+          </Switch>
         ) : (
-          <ScrollToTop>
-            <Switch>
-              <Route path="/products/sort/:sortBy" component={Products} />
-              <Route path="/products/:id" component={SingleProduct} />
-              <Route path="/products" component={Products} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/home" component={FrontPage} />
+          <Switch>
+            <ScrollToTop>
+              <Route exact path="/products/sort/:sortBy" component={Products} />
+              <Route exact path="/products/:id" component={SingleProduct} />
+              <Route exact path="/products" component={Products} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/home" component={FrontPage} />
               <Route exact path="/" component={FrontPage} />
-              <Route path="*" component={PageNotFound} />
-            </Switch>
-          </ScrollToTop>
+            </ScrollToTop>
+          </Switch>
         )}
         <ToastContainer
           position="bottom-center"

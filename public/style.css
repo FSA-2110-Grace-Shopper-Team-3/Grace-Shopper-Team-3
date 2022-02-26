@@ -16,7 +16,6 @@ body {
   margin: 0px;
   padding: 0px;
   position: relative;
-  overflow-x: hidden;
   --def: white;
   --inv: black;
 }

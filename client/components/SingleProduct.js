@@ -49,9 +49,16 @@ const SingleProduct = () => {
       (order) => order.userId === currentUserId && order.isOrdered === false
     ) || {};
 
+  const matchOrderItems = matchOrder.orderitems || [];
+
+  const singleMatchItem =
+    matchOrderItems.find((item) => item.productId === singleProduct.id) || {};
+
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
+
+  // console.log('MATCH ', singleMatchItem);
   //-------------------Guest to Login Cart Functionality---------------------//
 
   const guestToUserCart =
