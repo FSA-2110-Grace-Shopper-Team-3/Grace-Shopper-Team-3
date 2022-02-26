@@ -9,7 +9,7 @@ import {
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
-import { ToastContainer, Slide, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
@@ -214,18 +214,6 @@ const SingleProduct = () => {
           </div>
         </div>
       </div>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={1500}
-        hideProgressBar
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        transition={Slide}
-        limit={5}
-      />
     </div>
   );
 };

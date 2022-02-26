@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from 'uuid';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PageviewIcon from '@material-ui/icons/Pageview';
 import Rating from '@material-ui/lab/Rating';
-import { ToastContainer, Slide, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 import ReactPaginate from 'react-paginate';
 import Email from './Email';
@@ -276,18 +276,6 @@ const Products = () => {
           forcePage={pageNumber}
         />
       </div>
-      <ToastContainer
-        position="bottom-center"
-        autoClose={1500}
-        hideProgressBar
-        newestOnTop={true}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        transition={Slide}
-        limit={5}
-      />
     </div>
   );
 };
