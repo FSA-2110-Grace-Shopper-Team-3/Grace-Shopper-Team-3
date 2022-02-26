@@ -74,10 +74,8 @@ const SingleProduct = () => {
   //-------------------Adding to Cart Functionality---------------------//
   const [quantity, setQuantity] = useState(1);
 
-      return (
-
-        
-        <div className="sp">
+  return (
+    <div className="sp">
       {injectStyle()}
       <div className="sp-left">
         <div className="sp-left-img">
@@ -116,7 +114,7 @@ const SingleProduct = () => {
               <IconButton
                 style={{ color: 'black' }}
                 onClick={() => setQuantity(quantity + 1)}
-               disabled={quantity === 10 || singleProduct.quantity === 0}
+                disabled={quantity === 10 || singleProduct.quantity === 0}
               >
                 <AddIcon />
               </IconButton>
@@ -136,7 +134,6 @@ const SingleProduct = () => {
                   height: 60,
                   fontSize: '1.2rem',
                 }}
-                
                 endIcon={
                   <AddShoppingCartIcon
                     style={{ fontSize: '1.2rem', fontWeight: 'bold' }}
