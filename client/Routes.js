@@ -1,30 +1,20 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
 import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
 import OrderPlaced from './components/OrderPlaced';
-import Users from './components/Users';
-import ProductInventory from './components/ProductInventory';
-import Orders from './components/Orders';
 import EditUser from './components/EditUser';
 import ProductForm from './components/ProductForm';
 import OrderHistory from './components/OrderHistory';
 import FrontPage from './components/FrontPage/FrontPage';
-
 import PageNotFound from './components/PageNotFound';
-import Navbar from './components/Navbar';
-
 import AdminUserList from './components/Admin/AdminUserList';
 import AdminInventory from './components/Admin/AdminInventory';
 import AdminOrders from './components/Admin/AdminOrders';
 import AdminUserOrder from './components/Admin/AdminUserOrder';
-
 import { ToastContainer, Slide } from 'react-toastify';
-
-
 import ScrollToTop from './components/ScrollToTop';
 import AdminAnalytics from './components/Admin/AdminAnalytics';
 import Admin from './components/Admin';
@@ -37,10 +27,6 @@ import {
   getUsers,
   getGuestOrderItems,
 } from './store';
-
-/**
- * COMPONENT
- */
 
 class Routes extends Component {
   componentDidMount() {
@@ -65,12 +51,12 @@ class Routes extends Component {
       <div>
         {isLoggedIn && currUser.isAdmin === true ? (
           <Switch>
+            <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/users" component={AdminUserList} />
             <Route exact path="/admin/users/:id" component={EditUser} />
             <Route exact path="/admin/inventory" component={AdminInventory} />
             <Route exact path="/admin/inventory/:id" component={ProductForm} />
             <Route exact path="/admin/addproduct" component={ProductForm} />
-            <Route exact path="/admin" component={Admin} />
             <Route exact path="/admin/orders" component={AdminOrders} />
             <Route exact path="/admin/analytics" component={AdminAnalytics} />
             <Route exact path="/admin/orders/:id" component={AdminUserOrder} />
@@ -121,13 +107,8 @@ class Routes extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = (state) => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
-    // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
     isLoggedIn: !!state.auth.id,
     ...state,
   };
@@ -146,6 +127,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));

@@ -56,16 +56,10 @@ const AdminUserList = () => {
     {
       field: 'action',
       headerName: 'Action',
-      width: 260,
+      width: 130,
       renderCell: (params) => {
         return (
           <>
-            {/* <Link> */}
-            <button className="ad-usrlst-dsply" style={{ marginRight: 25 }}>
-              <Visibility className="ad-wgt-sm-icn" />
-              View Orders
-            </button>
-            {/* </Link> */}
             <Link to={`/admin/users/${params.row.id}`}>
               <button className="ad-usrlst-edit">
                 <Edit className="ad-wgt-sm-icn" />

@@ -1446,8 +1446,6 @@ input:focus {
   justify-content: space-around;
 }
 
-.textfield {
-}
 
 @media only screen and (max-width: 920px) {
   .formik-user {
@@ -1479,7 +1477,9 @@ input:focus {
   height: auto;
   width: 700px;
   margin: 50px;
+
   margin-top: 200px;
+
 }
 @media only screen and (max-width: 600px) {
   .errorDiv {
@@ -1487,6 +1487,7 @@ input:focus {
     font-size: 75px;
     justify-content: center;
   }
+
 
   .errorImg {
     height: auto;

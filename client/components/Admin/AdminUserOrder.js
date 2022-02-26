@@ -12,10 +12,10 @@ const AdminUserOrder = () => {
   const currentUserId = currentOrder.userId;
   const orderItems = useSelector((state) => state.orderItems) || [];
   const products = useSelector((state) => state.products) || [];
-  const matchingOrders =
+  const matchingOrder =
     useSelector((state) =>
       state.orders.filter(
-        (order) => order.userId === currentUserId && order.isOrdered === true
+        (order) => order.id === id && order.isOrdered === true
       )
     ) || [];
 
@@ -25,7 +25,7 @@ const AdminUserOrder = () => {
         <h1>ORDER HISTORY</h1>
       </div>
       <div className="oh-list">
-        {matchingOrders.map((matchingOrder) => {
+        {matchingOrder.map((matchingOrder) => {
           const matchingOrderItems =
             orderItems.filter(
               (orderItem) => orderItem.orderId === matchingOrder.id

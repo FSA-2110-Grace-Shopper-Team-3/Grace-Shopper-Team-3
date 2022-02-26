@@ -39,7 +39,7 @@ const Product = db.define('product', {
   },
   quantity: {
     type: INTEGER,
-    defaultValue: 5,
+    defaultValue: 10,
     validate: {
       min: 0,
     },

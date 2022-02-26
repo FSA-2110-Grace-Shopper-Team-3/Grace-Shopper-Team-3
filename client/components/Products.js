@@ -6,6 +6,7 @@ import {
   editOrderItem,
   addGuestOrderItem,
   editGuestOrderItem,
+  updateProd,
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -16,7 +17,16 @@ import { injectStyle } from 'react-toastify/dist/inject-style';
 import ReactPaginate from 'react-paginate';
 
 const Products = () => {
-  const notify = () => toast.success('added to cart!');
+  const toastId = React.useRef(null);
+  const notify = () => (toastId.current = toast.success('added to cart!'));
+
+  const updateToast = () =>
+    toast.update(toastId.current, {
+      type: toast.TYPE.INFO,
+      render: 'you have reached the stock limit for this item',
+      autoClose: 5000,
+    });
+
   const username = useSelector((state) => state.auth.username) || '';
   let products = useSelector((state) => state.products) || [];
   const orderItems = useSelector((state) => state.orderItems) || [];
@@ -158,7 +168,7 @@ const Products = () => {
               <ShoppingCartIcon
                 onClick={() => {
                   {
-                    notify();
+                    // notify();
                   }
                   if (!id) {
                     const guestOrderItem = guestCart.find(
@@ -167,21 +177,25 @@ const Products = () => {
                         orderItem.userId === null
                     );
                     guestOrderItem
-                      ? dispatch(
-                          editGuestOrderItem({
-                            ...guestOrderItem,
-                            id: guestOrderItem.id,
-                            quantity: guestOrderItem.quantity + 1,
-                          })
-                        )
-                      : dispatch(
+                      ? guestOrderItem.quantity < product.quantity
+                        ? (dispatch(
+                            editGuestOrderItem({
+                              ...guestOrderItem,
+                              id: guestOrderItem.id,
+                              quantity: guestOrderItem.quantity + 1,
+                            })
+                          ),
+                          notify())
+                        : updateToast()
+                      : (dispatch(
                           addGuestOrderItem({
                             productId: product.id,
                             userId: null,
                             id: uuidv4(),
                             quantity: 1,
                           })
-                        );
+                        ),
+                        notify());
                   } else {
                     const orderItem = orderItems.find(
                       (orderItem) =>
@@ -189,20 +203,24 @@ const Products = () => {
                         orderItem.orderId === matchOrder.id
                     );
                     orderItem
-                      ? dispatch(
-                          editOrderItem({
-                            id: orderItem.id,
-                            quantity: orderItem.quantity + 1,
-                            userId: id,
-                          })
-                        )
-                      : dispatch(
+                      ? orderItem.quantity < product.quantity
+                        ? (dispatch(
+                            editOrderItem({
+                              id: orderItem.id,
+                              quantity: orderItem.quantity + 1,
+                              userId: id,
+                            })
+                          ),
+                          notify())
+                        : updateToast()
+                      : (dispatch(
                           addOrderItem({
                             productId: product.id,
                             orderId: matchOrder.id,
                             userId: id,
                           })
-                        );
+                        ),
+                        notify());
                   }
                 }}
               />

@@ -15,11 +15,12 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
-import { ToastContainer, Slide, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 
 const Cart = ({ cartOpen, handleClose }) => {
   const notify = () => toast.error('removed from cart');
+
   const signUptoOrder = () =>
     toast.error(
       'Please login or create an account to place an order with UNPLGD',
@@ -205,6 +206,11 @@ const Cart = ({ cartOpen, handleClose }) => {
                             <div className="ct-uc-arrows">
                               <IconButton
                                 disableRipple
+                                disabled={
+                                  cartItem.quantity === orderItem.quantity
+                                    ? true
+                                    : false
+                                }
                                 onClick={() =>
                                   dispatch(
                                     editGuestOrderItem({
@@ -388,6 +394,11 @@ const Cart = ({ cartOpen, handleClose }) => {
                           <div className="ct-uc-arrows">
                             <IconButton
                               disableRipple
+                              disabled={
+                                cartItem.quantity === orderItem.quantity
+                                  ? true
+                                  : false
+                              }
                               onClick={() =>
                                 dispatch(
                                   editOrderItem({
