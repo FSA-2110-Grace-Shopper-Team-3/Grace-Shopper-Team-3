@@ -37,7 +37,7 @@ const Categories = () => {
       <div className="cats-title">
         <h1>CATEGORIES</h1>
       </div>
-      <div className="cats-title">
+      <div className="cats-btn">
         <Button
           variant="contained"
           sx={{

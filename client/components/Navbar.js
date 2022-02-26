@@ -10,7 +10,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PersonIcon from '@material-ui/icons/Person';
 import Cart from './Cart';
 import Logo1 from '../../public/images/UNPLGD-nav-logo.png';
-import Logo1White from '../../public/images/UNPLGD-logo1_white.png';
+import Logo2 from '../../public/images/UNPLGD-logo2v2.png';
 import AdminTopBar from './Admin/AdminTopBar';
 import AdminSideBar from './Admin/AdminSideBar';
 import AdminHome from './Admin/AdminHome';
@@ -84,17 +84,23 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <div className="navbar-user-itemLeft">
               <SearchBar placeholder={'Search for rock!'} data={products} />
             </div>
+            <div className="navbar-user-itemLeft-img">
+              {' '}
+              <Link className="react-link" to="/home">
+                <img src={Logo2} />
+              </Link>
+            </div>
             <div
               className="navbar-user-itemLeft"
               onClick={() => dispatch(emptyGuestOrderItem())}
             >
               <Link className="react-link" to="/products">
-                Products
+                <span className="nb-underline">PRODUCTS</span>
               </Link>
             </div>
             <div className="navbar-user-itemLeft">
               <Link className="react-link" to="/orderhistory">
-                Past Orders
+                <span className="nb-underline">ORDERS</span>
               </Link>
             </div>
           </div>
@@ -106,12 +112,12 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             </div>
           </div>
           <div className="navbar-user-right">
-            <div className="navbar-user-itemRight">
-              <p>Welcome, {currUser.username}</p>
+            <div className="navbar-user-itemRight-name">
+              <p>WELCOME, {currUser.username}</p>
             </div>
             <div className="navbar-user-itemRight">
               <a href="" className="react-link" onClick={handleClick}>
-                Logout
+                <span className="nb-underline">LOGOUT</span>
               </a>
             </div>
             <div className="navbar-user-itemRight">
@@ -141,9 +147,15 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             <div className="navbar-user-itemLeft">
               <SearchBar placeholder={'Search for rock!'} data={products} />
             </div>
+            <div className="navbar-user-itemLeft-img">
+              {' '}
+              <Link className="react-link" to="/home">
+                <img src={Logo2} />
+              </Link>
+            </div>
             <div className="navbar-user-itemLeft">
               <Link className="react-link" to="/products">
-                Products
+                <span className="nb-underline">PRODUCTS</span>
               </Link>
             </div>
           </div>
@@ -153,12 +165,12 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
             </Link>
           </div>
           <div className="navbar-user-right">
-            <div className="navbar-user-itemRight">
-              <p>Welcome, Guest</p>
+            <div className="navbar-user-itemRight-name">
+              <p>WELCOME, GUEST</p>
             </div>
             <div className="navbar-user-itemRight">
               <Link to="/login" className="react-link">
-                Login
+                <span className="nb-underline">LOGIN</span>
               </Link>
             </div>
             <div className="navbar-user-itemRight">

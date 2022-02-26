@@ -33,9 +33,9 @@ const PopularItems = () => {
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
-        {items.map((item) => {
+        {items.map((item, idx) => {
           return (
-            <SwiperSlide className="pi-slide">
+            <SwiperSlide className="pi-slide" key={idx}>
               {' '}
               <div className="pds-product-wrapper">
                 <Link to={`/products/${item.id}`} className="react-link">
