@@ -9,11 +9,13 @@ const AdminWidgetSmall = () => {
     state.users.filter((user) => user.isAdmin === false)
   );
 
+  const newestUsers = users.slice(-5);
+
   return (
     <div className="ad-wgt-sm">
       <span className="ad-wgt-sm-tle">New Users</span>
       <ul className="ad-wgt-sm-lst">
-        {users.map((user) => {
+        {newestUsers.map((user) => {
           return (
             <li className="ad-wgt-sm-lst-itm" key={user.id}>
               <img src={user.img} className="ad-wgt-sm-img" />

@@ -6,10 +6,9 @@ import Products from './components/Products';
 import SingleProduct from './components/SingleProduct';
 import OrderPlaced from './components/OrderPlaced';
 import EditUser from './components/EditUser';
-import ProductForm from './components/ProductForm';
+import ProductForm from './components/Admin/ProductForm';
 import OrderHistory from './components/OrderHistory';
 import FrontPage from './components/FrontPage/FrontPage';
-import PageNotFound from './components/PageNotFound';
 import AdminUserList from './components/Admin/AdminUserList';
 import AdminInventory from './components/Admin/AdminInventory';
 import AdminOrders from './components/Admin/AdminOrders';
@@ -17,8 +16,15 @@ import AdminUserOrder from './components/Admin/AdminUserOrder';
 import { ToastContainer, Slide } from 'react-toastify';
 import ScrollToTop from './components/ScrollToTop';
 import AdminAnalytics from './components/Admin/AdminAnalytics';
-import Admin from './components/Admin';
-import { me, getProd, getOrderItems, getOrders, getUsers, getGuestOrderItems } from './store';
+import Admin from './components/Admin/Admin';
+import {
+  me,
+  getProd,
+  getOrderItems,
+  getOrders,
+  getUsers,
+  getGuestOrderItems,
+} from './store';
 
 class Routes extends Component {
   componentDidMount() {

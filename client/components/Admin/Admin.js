@@ -1,8 +1,6 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import AdminTopBar from './Admin/AdminTopBar';
-import AdminSideBar from './Admin/AdminSideBar';
-import AdminHome from './Admin/AdminHome';
+import AdminSideBar from './AdminSideBar';
+import AdminHome from './AdminHome';
 
 const Admin = () => {
   return (

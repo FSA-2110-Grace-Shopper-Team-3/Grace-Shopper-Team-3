@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  LineStyle,
-  Timeline,
-  TrendingUp,
-  People,
-  Storefront,
-  AttachMoney,
-} from '@material-ui/icons';
+import { LineStyle, People, Storefront, AttachMoney } from '@material-ui/icons';
 
 import { Link } from 'react-router-dom';
 import './admin.css';
@@ -42,16 +35,6 @@ export default function AdminSideBar() {
                 Orders
               </li>
             </Link>
-            {/* <Link to="/admin/analytics">
-              <li className="ad-sidebar-listitem">
-                <Timeline className="ad-sidebar-icon" />
-                Analytics
-              </li>
-            </Link> */}
-            {/* <li className="ad-sidebar-listitem">
-              <TrendingUp className="ad-sidebar-icon" />
-              Sales
-            </li> */}
           </ul>
         </div>
       </div>

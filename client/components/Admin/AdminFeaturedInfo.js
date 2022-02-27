@@ -20,7 +20,7 @@ export default function AdminFeaturedInfo() {
       <div className="ad-ft-item">
         <span className="ad-ft-title">Sales</span>
         <div className="ad-ft-mny-ctnr">
-          <span className="ad-ft-mny">${2450 + total.toFixed(2)}</span>
+          <span className="ad-ft-mny">${1 + total.toFixed(2)}</span>
           <span className="ad-ft-mny-rt">
             <ArrowUpward className="ad-ft-icon" />
           </span>
