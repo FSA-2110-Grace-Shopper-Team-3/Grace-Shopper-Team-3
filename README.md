@@ -28,8 +28,15 @@ npm run start:dev:seed
 ## Products
 <img width="1438" alt="Screen Shot 2022-02-26 at 9 56 34 PM" src="https://user-images.githubusercontent.com/88349865/155896155-c8ec78c1-9c12-483b-a40e-1ccc8d30eb91.png">
 
+## Single Product
+<img width="1438" alt="Screen Shot 2022-02-27 at 2 14 58 PM" src="https://user-images.githubusercontent.com/88349865/155896413-6be499ec-288b-4105-9cd6-694fec8396dd.png">
+
 ## Log In
 <img width="1438" alt="Screen Shot 2022-02-26 at 9 58 59 PM" src="https://user-images.githubusercontent.com/88349865/155896171-cac1a743-bb06-4a09-8d81-9df6f967314e.png">
 
 ## Cart
 <img width="1438" alt="Screen Shot 2022-02-27 at 2 12 17 PM" src="https://user-images.githubusercontent.com/88349865/155896316-13f51beb-ec67-40a2-83e2-6a41cd698457.png">
+
+## Order History
+<img width="1438" alt="Screen Shot 2022-02-27 at 2 13 50 PM" src="https://user-images.githubusercontent.com/88349865/155896380-3f3b9482-c75b-4543-a4ca-1c35485df063.png">
+
