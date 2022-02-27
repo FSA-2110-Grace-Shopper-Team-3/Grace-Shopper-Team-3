@@ -18,15 +18,7 @@ import { ToastContainer, Slide } from 'react-toastify';
 import ScrollToTop from './components/ScrollToTop';
 import AdminAnalytics from './components/Admin/AdminAnalytics';
 import Admin from './components/Admin';
-
-import {
-  me,
-  getProd,
-  getOrderItems,
-  getOrders,
-  getUsers,
-  getGuestOrderItems,
-} from './store';
+import { me, getProd, getOrderItems, getOrders, getUsers, getGuestOrderItems } from './store';
 
 class Routes extends Component {
   componentDidMount() {
@@ -44,7 +36,6 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn, users } = this.props;
-
     const currUser = users.find((user) => user.id === this.props.auth.id) || {};
 
     return (

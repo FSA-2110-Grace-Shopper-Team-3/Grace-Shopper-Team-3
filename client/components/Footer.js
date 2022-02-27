@@ -72,36 +72,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-{
-  /* <div className="pds-single-ctg">
-<Link to={`/products/`}>
-  <h3>All</h3>
-</Link>
-</div>
-<div className="pds-single-ctg">
-<Link to={`/products/sort/guitars`}>
-  <h3>Guitars</h3>
-</Link>
-</div>
-<div className="pds-single-ctg">
-<Link to={`/products/sort/drums`}>
-  <h3>Drums</h3>{' '}
-</Link>
-</div>
-<div className="pds-single-ctg">
-<Link to={`/products/sort/cellos`}>
-  <h3>Cellos</h3>{' '}
-</Link>
-</div>
-<div className="pds-single-ctg">
-<Link to={`/products/sort/pianos`}>
-  <h3>Pianos</h3>{' '}
-</Link>
-</div>
-<div className="pds-single-ctg">
-<Link to={`/products/sort/accessories`}>
-  <h3>Accessories</h3>{' '}
-</Link>
-</div> */
-}

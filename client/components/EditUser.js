@@ -9,7 +9,6 @@ import * as yup from 'yup';
 const MyTextField = ({ label, type, ...props }) => {
   const [field, meta] = useField(props);
   const errorText = meta.error && meta.touched ? meta.error : '';
-
   return (
     <TextField
       fullWidth={true}
@@ -35,23 +34,15 @@ const validationSchema = yup.object({
 
 const EditUser = () => {
   const { id } = useParams();
-  const currUser = useSelector(
-    (state) => state.users.find((user) => user.id === id) || {}
-  );
+  const currUser = useSelector((state) => state.users.find((user) => user.id === id) || {});
   const history = useHistory();
   const dispatch = useDispatch();
 
+  //-------------------Finding Logged In User---------------------//
   const users = useSelector((state) => state.users) || '';
-
   const currPassword = currUser.password;
-
   const auth = useSelector((state) => state.auth.id);
-
-  const loggedInUser =
-    useSelector((state) => state.users.find((user) => user.id === auth)) || {};
-
-  // console.log('AUTH', auth);
-  // console.log('USER', admin);
+  const loggedInUser = useSelector((state) => state.users.find((user) => user.id === auth)) || {};
 
   return (
     <div className="formik-user">
@@ -76,22 +67,18 @@ const EditUser = () => {
           validationSchema={validationSchema}
           validate={(values) => {
             const errors = {};
-
             values.password !== values.confirmPassword
               ? (errors.confirmPassword = 'Passwords do not match')
               : '';
-
             return errors;
           }}
           onSubmit={(data, { setSubmitting }) => {
             setSubmitting(true); // before async call
-
             if (data.password === '') {
               dispatch(updateUser({ ...data, password: currPassword }));
             } else {
               dispatch(updateUser(data));
             }
-
             setSubmitting(false); //after async call
           }}
         >

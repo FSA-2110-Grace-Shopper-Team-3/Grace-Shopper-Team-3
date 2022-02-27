@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
-import {
-  addOrderItem,
-  editOrderItem,
-  addGuestOrderItem,
-  editGuestOrderItem,
-} from '../store';
+import { addOrderItem, editOrderItem, addGuestOrderItem, editGuestOrderItem } from '../store';
 import { v4 as uuidv4 } from 'uuid';
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
@@ -20,6 +15,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { IconButton } from '@material-ui/core';
 
 const SingleProduct = () => {
+  //-------------------Toast Functionality---------------------//
   const toastId = React.useRef(null);
   const notify = () => (toastId.current = toast.success('added to cart!'));
 
@@ -30,35 +26,27 @@ const SingleProduct = () => {
       autoClose: 5000,
     });
 
+  //-------------------Mapping State---------------------//
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
   const currentUserId = useSelector((state) => state.auth.id) || '';
-  const singleProduct =
-    useSelector((state) =>
-      state.products.find((product) => product.id === id)
-    ) || {};
+  const singleProduct = useSelector((state) => state.products.find((product) => product.id === id)) || {};
 
   const orders = useSelector((state) => state.orders);
   const orderItems = useSelector((state) => state.orderItems);
   const singleProductRating = singleProduct.rating || 0;
 
   const guestCart = useSelector((state) => state.guestOrderItems);
-  const matchOrder =
-    orders.find(
-      (order) => order.userId === currentUserId && order.isOrdered === false
-    ) || {};
-
+  const matchOrder = orders.find((order) => order.userId === currentUserId && order.isOrdered === false) || {};
   const matchOrderItems = matchOrder.orderitems || [];
 
-  const singleMatchItem =
-    matchOrderItems.find((item) => item.productId === singleProduct.id) || {};
+  const singleMatchItem = matchOrderItems.find((item) => item.productId === singleProduct.id) || {};
 
   useEffect(() => {
     localStorage.setItem('orderitems', JSON.stringify(guestCart));
   }, [guestCart]);
 
-  // console.log('MATCH ', singleMatchItem);
   //-------------------Guest to Login Cart Functionality---------------------//
 
   const guestToUserCart =
@@ -77,10 +65,7 @@ const SingleProduct = () => {
         const itemFound = orderItems.find(
           (orderItem) => orderItem.id === guestCartItem.id
         );
-
-        if (!itemFound) {
-          dispatch(addOrderItem(guestCartItem));
-        }
+        if (!itemFound) dispatch(addOrderItem(guestCartItem));
       });
     }
   }, []);

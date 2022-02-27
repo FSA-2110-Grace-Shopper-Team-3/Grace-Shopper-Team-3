@@ -16,25 +16,16 @@ import AdminSideBar from './Admin/AdminSideBar';
 import AdminHome from './Admin/AdminHome';
 
 const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
+  //-------------------Mapping State---------------------//
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.id) || '';
+  const currUser = useSelector((state) => state.users.find((user) => user.id === userId)) || {};
 
-  const currUser =
-    useSelector((state) => state.users.find((user) => user.id === userId)) ||
-    {};
-
-  const matchingOrder =
-    useSelector((state) =>
-      state.orders.find(
-        (order) => order.userId === userId && order.isOrdered === false
-      )
-    ) || {};
-
-  const matchingOrderItems =
-    orderItems.filter((orderItem) => orderItem.orderId === matchingOrder.id) ||
-    [];
-
+  const matchingOrder = useSelector((state) => 
+    state.orders.find((order) => order.userId === userId && order.isOrdered === false)) || {};
+  const matchingOrderItems = orderItems.filter((orderItem) => orderItem.orderId === matchingOrder.id) || [];
   const products = useSelector((state) => state.products);
+  
   //-------------------Guest Cart Functionadivty---------------------//
 
   const guestCart = useSelector((state) => state.guestOrderItems) || [];
@@ -202,33 +193,4 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(Navbar);
-//-------------------------------------------------------------
 
-// REACT-TOASTIFY
-
-// import React from "react";
-
-// function Toastify() {
-//   const notify = () => toast.success("item added to cart");
-
-//   return (
-//     <div className="App">
-//       <Button variant="contained" color="secondary" onClick={notify}>
-//         Toastify!
-//       </Button>
-//       <ToastContainer
-//         position="top-right"
-//         autoClose={1500}
-//         hideProgressBar
-//         newestOnTop={true}
-//         closeonClick
-//         rtl={false}
-//         pauseOnFocusLoss
-//         draggable
-//         transition={Sdivde}
-//       />
-//     </div>
-//   );
-// }
-
-// export default Toastify;

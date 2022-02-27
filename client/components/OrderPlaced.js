@@ -5,40 +5,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import Band from '../../public/images/band.png';
 
 const OrderPlaced = () => {
+  //-------------------Matching OrderItems --------------------//
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.id) || '';
   const orders = useSelector((state) => state.orders) || [];
   const orderItems = useSelector((state) => state.orderItems) || [];
   const products = useSelector((state) => state.products) || [];
 
-  const matchingOrder =
-    orders.find(
-      (order) => order.userId === userId && order.isOrdered === false
-    ) || {};
-  const matchingOrderItems =
-    orderItems.filter((orderItem) => orderItem.orderId === matchingOrder.id) ||
-    [];
+  const matchingOrder = orders.find((order) => 
+    order.userId === userId && order.isOrdered === false) || {};
+
+  const matchingOrderItems = orderItems.filter((orderItem) => 
+    orderItem.orderId === matchingOrder.id) || [];
 
   const userCartPriceTotal = matchingOrderItems.reduce((acc, curr) => {
-    const currentProduct =
-      products.find((product) => product.id === curr.productId) || {};
+    const currentProduct = products.find((product) => product.id === curr.productId) || {};
     acc += currentProduct.price * curr.quantity;
     return acc;
   }, 0);
 
   const matchingOrderItemsQty = matchingOrderItems.map((item) => item.quantity);
 
-  const matchingProducts =
-    products.filter((product) =>
-      matchingOrderItems.find((item) => item.productId === product.id)
-    ) || [];
+  const matchingProducts = products.filter((product) => 
+    matchingOrderItems.find((item) => item.productId === product.id)) || [];
 
   //-------------------Checkout Functionality---------------------//
 
   const url = new URLSearchParams(window.location.search);
 
   useEffect(() => {
-    console.log('useEffect called!!');
+    
     if (matchingOrder.id && matchingOrderItems.length > 0) {
       if (url.get('success')) {
         dispatch(
