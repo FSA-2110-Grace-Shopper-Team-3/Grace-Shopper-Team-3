@@ -72,8 +72,8 @@ const Cart = ({ cartOpen, handleClose }) => {
     const data = {
       line_items: lineItems,
       mode: 'payment',
-      success_url: `http://localhost:8080/orderplaced/?success=true`,
-      cancel_url: `http://localhost:8080/products`,
+      success_url: `https://graceshopper-unplgd.herokuapp.com/orderplaced/?success=true`,
+      cancel_url: `https://graceshopper-unplgd.herokuapp.com/products`,
     };
     const response = await axios.post('/api/create-checkout-session', data);
     window.location = response.data.url;

@@ -28,33 +28,6 @@ app.get('/', (req, res) =>
   res.sendFile(path.join(__dirname, '..', 'public/index.html'))
 );
 
-//nodemailer
-// app.post('/send_mail', cors(), async (req, res) => {
-//   let { text } = req.body;
-//   const transport = nodemailer.createTransport({
-//     service: 'gmail',
-//     host: process.env.MAIL_HOST,
-//     port: 587,
-//     secure: true,
-//     secureConnection: false,
-//     auth: {
-//       user: 'unplgdgraceshopper@gmail.com',
-//       pass: 'Unplgdgr@ce',
-//     },
-//     tls: {
-//       rejectUnauthorized: true,
-//     },
-//   });
-//   await transport.sendMail({
-//     from: 'unplgdgraceshopper@gmail.com',
-//     to: 'kzammito@gmail.com',
-//     html: `<div>
-//     <h1>HERE'S THE EMAIL</h1>
-//     <p>${text}</p>
-//     </div>`,
-//   });
-// });
-
 // static file-serving middleware
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
