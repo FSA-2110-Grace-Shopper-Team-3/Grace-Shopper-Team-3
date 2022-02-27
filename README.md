@@ -32,4 +32,4 @@ npm run start:dev:seed
 <img width="1438" alt="Screen Shot 2022-02-26 at 9 58 59 PM" src="https://user-images.githubusercontent.com/88349865/155896171-cac1a743-bb06-4a09-8d81-9df6f967314e.png">
 
 ## Cart
-<img width="1438" alt="Screen Shot 2022-02-26 at 9 58 03 PM" src="https://user-images.githubusercontent.com/88349865/155896177-b60efcef-6158-40d7-a57c-150ff57f686a.png">
+<img width="1438" alt="Screen Shot 2022-02-27 at 2 12 17 PM" src="https://user-images.githubusercontent.com/88349865/155896316-13f51beb-ec67-40a2-83e2-6a41cd698457.png">
