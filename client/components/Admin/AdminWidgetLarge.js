@@ -1,10 +1,13 @@
 import React from 'react';
+import dateFormat from 'dateformat';
 import './admin.css';
 
 const AdminWidgetLarge = () => {
   const Button = ({ type }) => {
     return <button className={'ad-wgt-lg-btn ' + type}>{type}</button>;
   };
+  const date = new Date();
+  const formattedDate = dateFormat(date, 'mediumDate');
 
   return (
     <div className="ad-wgt-lg">
@@ -27,7 +30,7 @@ const AdminWidgetLarge = () => {
               />
               <span className="ad-wgt-lg-nme">Jack White</span>
             </td>
-            <td className="ad-wgt-lg-dte">Feb 22 2022</td>
+            <td className="ad-wgt-lg-dte">{formattedDate}</td>
             <td className="ad-wgt-lg-amt">$974.95</td>
             <td className="ad-wgt-lg-sts">
               <Button type="Confirmed" />
@@ -43,7 +46,7 @@ const AdminWidgetLarge = () => {
               />
               <span className="ad-wgt-lg-nme">Jimmy Page</span>
             </td>
-            <td className="ad-wgt-lg-dte">Feb 22 2022</td>
+            <td className="ad-wgt-lg-dte">{formattedDate}</td>
             <td className="ad-wgt-lg-amt">$5674.95</td>
             <td className="ad-wgt-lg-sts">
               <Button type="Pending" />
@@ -59,7 +62,7 @@ const AdminWidgetLarge = () => {
               />
               <span className="ad-wgt-lg-nme">Freddy Mercury</span>
             </td>
-            <td className="ad-wgt-lg-dte">Feb 22 2022</td>
+            <td className="ad-wgt-lg-dte">{formattedDate}</td>
             <td className="ad-wgt-lg-amt">$2374.95</td>
             <td className="ad-wgt-lg-sts">
               <Button type="Confirmed" />
@@ -75,7 +78,7 @@ const AdminWidgetLarge = () => {
               />
               <span className="ad-wgt-lg-nme">Paul McCartney</span>
             </td>
-            <td className="ad-wgt-lg-dte">Feb 22 2022</td>
+            <td className="ad-wgt-lg-dte">{formattedDate}</td>
             <td className="ad-wgt-lg-amt">$16884.95</td>
             <td className="ad-wgt-lg-sts">
               <Button type="Confirmed" />

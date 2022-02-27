@@ -7,11 +7,16 @@ import { useDispatch } from 'react-redux';
 import { deleteProd } from '../../store';
 import Rating from '@mui/material/Rating';
 import dateFormat from 'dateformat';
+import { toast } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 import './admin.css';
 
 const AdminInventory = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
+
+  const notify = () => toast.success('product deleted');
+  const handleDelete = (id) => dispatch(deleteProd(id), notify());
 
   const rows = products.map((product) => {
     const date = new Date(product.updatedAt);
@@ -31,12 +36,12 @@ const AdminInventory = () => {
   });
 
   const columns = [
-    { field: 'category', headerName: 'Category', width: 130 },
-    { field: 'brand', headerName: 'Brand', width: 130 },
+    { field: 'category', headerName: 'Category', width: 100 },
+    { field: 'brand', headerName: 'Brand', width: 100 },
     {
       field: 'model',
       headerName: 'Model',
-      width: 200,
+      width: 180,
       renderCell: (params) => {
         return (
           <div className="ad-prdlst-prd">
@@ -74,7 +79,7 @@ const AdminInventory = () => {
       field: 'quantity',
       headerName: 'Quantity',
       type: 'number',
-      width: 100,
+      width: 80,
     },
     { field: 'id', headerName: 'Product ID', width: 300 },
     { field: 'updatedAt', headerName: 'Modified', width: 200 },
@@ -85,6 +90,7 @@ const AdminInventory = () => {
       renderCell: (params) => {
         return (
           <>
+            {injectStyle()}
             <Link to={`/admin/inventory/${params.row.id}`}>
               <button className="ad-prdlst-edit">
                 <Edit className="ad-wgt-sm-icn" />
@@ -93,7 +99,7 @@ const AdminInventory = () => {
             </Link>
             <DeleteOutline
               className="ad-prdlst-dlt"
-              onClick={() => dispatch(deleteProd(params.row.id))}
+              onClick={() => handleDelete(params.row.id)}
             />
           </>
         );
@@ -109,7 +115,7 @@ const AdminInventory = () => {
           </button>
         </Link>
       ),
-      width: 190,
+      width: 160,
       sortable: false,
       filter: false,
     },

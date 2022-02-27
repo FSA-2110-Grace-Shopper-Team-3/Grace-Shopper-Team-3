@@ -5,8 +5,10 @@ import { DeleteOutline } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteUser } from '../../store';
-import { Visibility, Edit } from '@material-ui/icons';
+import { Edit } from '@material-ui/icons';
 import dateFormat from 'dateformat';
+import { toast } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 import './admin.css';
 
 const AdminUserList = () => {
@@ -15,6 +17,10 @@ const AdminUserList = () => {
   const users = useSelector((state) =>
     state.users.filter((user) => user.isAdmin === false)
   );
+
+  const notify = () => toast.success('user deleted');
+
+  const handleDelete = (id) => dispatch(deleteUser(id), notify());
 
   const rows = users.map((user) => {
     const date = new Date(user.updatedAt);
@@ -60,6 +66,7 @@ const AdminUserList = () => {
       renderCell: (params) => {
         return (
           <>
+            {injectStyle()}
             <Link to={`/admin/users/${params.row.id}`}>
               <button className="ad-usrlst-edit">
                 <Edit className="ad-wgt-sm-icn" />
@@ -68,7 +75,7 @@ const AdminUserList = () => {
             </Link>
             <DeleteOutline
               className="ad-usrlst-dlt"
-              onClick={() => dispatch(deleteUser(params.row.id))}
+              onClick={() => handleDelete(params.row.id)}
             />
           </>
         );

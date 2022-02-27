@@ -3,11 +3,11 @@ import { PieChart } from 'react-minimal-pie-chart';
 import './admin.css';
 
 const data = [
-  { title: 'Guitars', value: 10, color: '#483D8B' },
+  { title: 'Guitars', value: 9, color: '#483D8B' },
   { title: 'Drums', value: 3, color: '#1E90FF' },
-  { title: 'Cellos', value: 2, color: '#48D1CC' },
+  { title: 'Acc.', value: 2, color: '#48D1CC' },
   { title: 'Pianos', value: 5, color: '#008080' },
-  { title: 'Acc.', value: 7, color: '#4682B4' },
+  { title: 'Cellos', value: 7, color: '#4682B4' },
 ];
 
 const AdminAnalytics = () => {

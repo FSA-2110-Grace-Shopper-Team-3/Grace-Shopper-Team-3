@@ -2,7 +2,6 @@ import React from 'react';
 import { NotificationsNone, Settings, ExitToApp } from '@material-ui/icons';
 import AdminLogo from '../../../public/images/UNPLGD Admin-logos_black.png';
 import { Link } from 'react-router-dom';
-import AdminSideBar from './AdminSideBar';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../store';
 import './admin.css';

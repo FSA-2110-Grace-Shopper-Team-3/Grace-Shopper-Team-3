@@ -2,19 +2,26 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import dateFormat from 'dateformat';
 import { DataGrid } from '@mui/x-data-grid';
-import { DeleteOutline, Visibility } from '@material-ui/icons';
+import { Visibility } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import './admin.css';
 
 const AdminOrders = () => {
-  const orders = useSelector((state) => state.orders);
-  const users = useSelector((state) => state.users);
+  const adminId = useSelector((state) => state.auth.id);
+
+  const users = useSelector((state) =>
+    state.users.filter((user) => user.id !== adminId)
+  );
+
+  const orders = useSelector((state) =>
+    state.orders.filter((order) => order.userId !== adminId)
+  );
 
   const rows = orders.map((order) => {
     const date = new Date(order.updatedAt);
     const formattedDate = dateFormat(date, 'paddedShortDate');
     const user = users.find((user) => user.id === order.userId) || {};
+
     return {
       id: order.id,
       user: user.username,
@@ -33,7 +40,7 @@ const AdminOrders = () => {
       width: 200,
       renderCell: (params) => {
         return (
-          <div className="ad-prdlst-prd">
+          <div className="ad-usrlst-usr">
             <img className="ad-prdlst-img" src={params.row.userImg} alt="" />
             {params.row.user}
           </div>
