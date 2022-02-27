@@ -40,3 +40,6 @@ npm run start:dev:seed
 ## Order History
 <img width="1438" alt="Screen Shot 2022-02-27 at 2 13 50 PM" src="https://user-images.githubusercontent.com/88349865/155896380-3f3b9482-c75b-4543-a4ca-1c35485df063.png">
 
+## Admin Page
+![Screen Shot 2022-02-27 at 2 18 10 PM](https://user-images.githubusercontent.com/88349865/155896525-21c1edf2-b876-4a31-a60c-67eeab6860df.png)
+
