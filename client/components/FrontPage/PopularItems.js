@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 const PopularItems = () => {
+  //-------------------Getting Products---------------------//
   const products = useSelector((state) => state.products) || [];
   const guitarProd = products.find((product) => product.model === 'Dove') || {};
   const drumsProd =
@@ -15,6 +16,7 @@ const PopularItems = () => {
   const celloProd = products.find((product) => product.model === '154S') || {};
   const pianoProd = products.find((product) => product.model === 'Arias') || {};
   const items = [guitarProd, drumsProd, celloProd, pianoProd];
+  
   return (
     <div className="pi">
       <div>

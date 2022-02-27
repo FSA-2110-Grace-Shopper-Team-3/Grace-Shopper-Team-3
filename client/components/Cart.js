@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  deleteOrderItem,
-  editOrderItem,
-  deleteGuestOrderItem,
-  editGuestOrderItem,
-} from '../store';
+import { deleteOrderItem, editOrderItem, deleteGuestOrderItem, editGuestOrderItem } from '../store';
 import { Link, useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Drawer from '@mui/material/Drawer';
@@ -19,6 +14,7 @@ import { toast } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
 
 const Cart = ({ cartOpen, handleClose }) => {
+  //-------------------Toast Message Functionality---------------------//
   const notify = () => toast.error('removed from cart');
 
   const signUptoOrder = () =>
@@ -29,26 +25,18 @@ const Cart = ({ cartOpen, handleClose }) => {
         limit: 1,
       }
     );
+
+  //-------------------Matching Order Items and Cart Total---------------------//
   const dispatch = useDispatch();
   const history = useHistory();
   const orderItems = useSelector((state) => state.orderItems);
   const products = useSelector((state) => state.products);
   const userId = useSelector((state) => state.auth.id);
-
-  const matchingOrder =
-    useSelector((state) =>
-      state.orders.find(
-        (order) => order.userId === userId && order.isOrdered === false
-      )
-    ) || {};
-
-  const matchingOrderItems = orderItems.filter(
-    (orderItem) => orderItem.orderId === matchingOrder.id
-  );
+  const matchingOrder = useSelector((state) => state.orders.find((order) => order.userId === userId && order.isOrdered === false)) || {};
+  const matchingOrderItems = orderItems.filter((orderItem) => orderItem.orderId === matchingOrder.id);
 
   const userCartPriceTotal = matchingOrderItems.reduce((acc, curr) => {
-    const currentProduct =
-      products.find((product) => product.id === curr.productId) || {};
+    const currentProduct = products.find((product) => product.id === curr.productId) || {};
     acc += currentProduct.price * curr.quantity;
     return acc;
   }, 0);
@@ -58,8 +46,7 @@ const Cart = ({ cartOpen, handleClose }) => {
   const guestCart = useSelector((state) => state.guestOrderItems);
 
   const guestCartPriceTotal = guestCart.reduce((acc, curr) => {
-    const currentProduct =
-      products.find((product) => product.id === curr.productId) || {};
+    const currentProduct = products.find((product) => product.id === curr.productId) || {};
     acc += currentProduct.price * curr.quantity;
     return acc;
   }, 0);
@@ -71,8 +58,7 @@ const Cart = ({ cartOpen, handleClose }) => {
   //-------------------Checkout Functionality---------------------//
 
   const lineItems = matchingOrderItems.map((orderItem) => {
-    const currentProduct =
-      products.find((product) => product.id === orderItem.productId) || {};
+    const currentProduct = products.find((product) => product.id === orderItem.productId) || {};
     return {
       name: `${currentProduct.brand} - ${currentProduct.model}`,
       amount: currentProduct.price * 100,

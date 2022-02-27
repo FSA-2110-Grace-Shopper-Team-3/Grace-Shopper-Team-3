@@ -4,15 +4,12 @@ import { Link } from 'react-router-dom';
 import dateFormat from 'dateformat';
 
 const OrderHistory = () => {
+  //-------------------Getting Matching Orders---------------------//
   const currentUserId = useSelector((state) => state.auth.id) || '';
   const orderItems = useSelector((state) => state.orderItems) || [];
   const products = useSelector((state) => state.products) || [];
-  const matchingOrders =
-    useSelector((state) =>
-      state.orders.filter(
-        (order) => order.userId === currentUserId && order.isOrdered === true
-      )
-    ) || [];
+  const matchingOrders = useSelector((state) => state.orders.filter(
+    (order) => order.userId === currentUserId && order.isOrdered === true)) || [];
 
   return (
     <div className="oh">

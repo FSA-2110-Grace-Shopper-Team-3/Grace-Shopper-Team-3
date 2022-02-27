@@ -17,6 +17,7 @@ import { injectStyle } from 'react-toastify/dist/inject-style';
 import ReactPaginate from 'react-paginate';
 
 const Products = () => {
+  //-------------------Toast Functionadivty---------------------//
   const toastId = React.useRef(null);
   const notify = () => (toastId.current = toast.success('added to cart!'));
 
@@ -27,22 +28,17 @@ const Products = () => {
       autoClose: 5000,
     });
 
+  //-------------------Mapping State Functionadivty---------------------//
   const username = useSelector((state) => state.auth.username) || '';
   let products = useSelector((state) => state.products) || [];
   const orderItems = useSelector((state) => state.orderItems) || [];
 
-  const dispatch = useDispatch();
-
   const id = useSelector((state) => state.auth.id) || '';
-
   const orders = useSelector((state) => state.orders) || [];
+  const matchOrder = orders.find((order) => order.userId === id && order.isOrdered === false) || {};
 
-  const matchOrder =
-    orders.find((order) => order.userId === id && order.isOrdered === false) ||
-    {};
-
+  const dispatch = useDispatch();
   let match = useRouteMatch();
-
   let location = useLocation();
 
   //-------------------Guest Cart Functionality---------------------//
@@ -64,17 +60,13 @@ const Products = () => {
   useEffect(() => {
     if (id) {
       guestToUserCart.forEach((guestCartItem) => {
-        const itemFound = orderItems.find(
-          (orderItem) => orderItem.id === guestCartItem.id
-        );
-
-        if (!itemFound) {
-          dispatch(addOrderItem(guestCartItem));
-        }
+        const itemFound = orderItems.find((orderItem) => orderItem.id === guestCartItem.id);
+        if (!itemFound) dispatch(addOrderItem(guestCartItem));
       });
     }
   }, []);
 
+  //-------------------Products View Functionality---------------------//
   const [instruments, setInstruments] = useState(products);
 
   let currentInstruments = !instruments.length ? products : instruments;
@@ -85,6 +77,8 @@ const Products = () => {
     setPageNumber(0);
   }, []);
 
+  //-------------------Pagination Functionality---------------------//
+
   const prodsPerPage = 16;
   const pagesVisited = pageNumber * prodsPerPage;
 
@@ -92,9 +86,9 @@ const Products = () => {
   const drums = products.filter((product) => product.category === 'Drum');
   const cellos = products.filter((product) => product.category === 'Cello');
   const pianos = products.filter((product) => product.category === 'Piano');
-  const accesories = products.filter(
-    (product) => product.category === 'Accessory'
-  );
+  const accesories = products.filter((product) => product.category === 'Accessory');
+
+  //-------------------Page Count---------------------//
 
   let pageCount = Math.ceil(products.length / prodsPerPage);
   const guitarPageCount = Math.ceil(guitars.length / prodsPerPage);
@@ -106,29 +100,19 @@ const Products = () => {
   if (match.params.sortBy) {
     const field = match.params.sortBy;
     if (field === 'guitars') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Guitar'
-      );
+      currentInstruments = [...products].filter((product) => product.category === 'Guitar');
       pageCount = guitarPageCount;
     } else if (field === 'drums') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Drum'
-      );
+      currentInstruments = [...products].filter((product) => product.category === 'Drum');
       pageCount = drumPageCount;
     } else if (field === 'cellos') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Cello'
-      );
+      currentInstruments = [...products].filter((product) => product.category === 'Cello');
       pageCount = celloPageCount;
     } else if (field === 'accessories') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Accessory'
-      );
+      currentInstruments = [...products].filter((product) => product.category === 'Accessory');
       pageCount = accesoriesPageCount;
     } else if (field === 'pianos') {
-      currentInstruments = [...products].filter(
-        (product) => product.category === 'Piano'
-      );
+      currentInstruments = [...products].filter((product) => product.category === 'Piano');
       pageCount = pianoPageCount;
     } else {
       currentInstruments = [...products];
@@ -139,7 +123,7 @@ const Products = () => {
     setPageNumber(selected);
   };
 
-  // PAGINATE START
+  //-------------------Pagination---------------------//
   const displayProducts = currentInstruments
     .slice(pagesVisited, pagesVisited + prodsPerPage)
     .map((product) => {
@@ -178,8 +162,7 @@ const Products = () => {
                     );
                     guestOrderItem
                       ? guestOrderItem.quantity < product.quantity
-                        ? (dispatch(
-                            editGuestOrderItem({
+                        ? (dispatch(editGuestOrderItem({
                               ...guestOrderItem,
                               id: guestOrderItem.id,
                               quantity: guestOrderItem.quantity + 1,
@@ -234,8 +217,6 @@ const Products = () => {
         </div>
       );
     });
-
-  //PAGINATE END
 
   return (
     <div className="pds">
