@@ -14,7 +14,6 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 const AuthForm = (props) => {
   const { displayName, handleLogin, handleSignup, error, name, match } = props;
   const history = useHistory();
-  console.log('rendered');
 
   const [pwVal, setPwVal] = useState('');
   const [confPwVal, setConfPwVal] = useState('');

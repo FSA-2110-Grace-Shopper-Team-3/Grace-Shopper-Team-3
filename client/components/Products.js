@@ -6,6 +6,7 @@ import {
   editOrderItem,
   addGuestOrderItem,
   editGuestOrderItem,
+  deleteGuestOrderItem,
   updateProd,
 } from '../store';
 import { v4 as uuidv4 } from 'uuid';
@@ -61,7 +62,10 @@ const Products = () => {
     if (id) {
       guestToUserCart.forEach((guestCartItem) => {
         const itemFound = orderItems.find((orderItem) => orderItem.id === guestCartItem.id);
-        if (!itemFound) dispatch(addOrderItem(guestCartItem));
+        if (!itemFound) {
+          dispatch(addOrderItem(guestCartItem))
+          dispatch(deleteGuestOrderItem(guestCartItem.id))
+        };
       });
     }
   }, []);
