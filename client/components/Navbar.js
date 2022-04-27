@@ -5,7 +5,7 @@ import SearchBar from './SearchBar';
 import { logout, emptyGuestOrderItem } from '../store';
 import { ToastContainer, toast, Sdivde } from 'react-toastify';
 import { injectStyle } from 'react-toastify/dist/inject-style';
-import Badge from '@material-ui/core/Badge';
+import { Badge } from '@mui/material';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PersonIcon from '@material-ui/icons/Person';
 import Cart from './Cart';
@@ -111,7 +111,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                   setCartDrawer(true);
                 }}
               >
-                <Badge color="secondary" badgeContent={cartTotal}>
+                <Badge color='error' badgeContent={cartTotal}>
                   <ShoppingCartIcon />{' '}
                 </Badge>
               </a>
@@ -159,7 +159,7 @@ const Navbar = ({ handleClick, isLoggedIn, orderItems }) => {
                   setCartDrawer(true);
                 }}
               >
-                <Badge color="secondary" badgeContent={guestCartTotal}>
+                <Badge color='error' badgeContent={guestCartTotal}>
                   <ShoppingCartIcon />{' '}
                 </Badge>
               </a>
