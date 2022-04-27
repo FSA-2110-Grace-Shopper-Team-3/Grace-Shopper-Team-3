@@ -40,7 +40,7 @@ const OrderHistory = () => {
                 {matchingOrderItems.map((matchingOrderItem) => {
                   const productItem = products.find(
                     (product) => product.id === matchingOrderItem.productId
-                  );
+                  ) || {};
                   return (
                     <div key={matchingOrderItem.id} className="oh-order-item">
                       <div className="oh-order-item-img">
