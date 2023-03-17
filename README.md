@@ -1,7 +1,5 @@
 # UNPLGD
 
-## [Live Link](http://graceshopper-unplgd.herokuapp.com/)
-
 UNPLGD is an fullstack e-commerce website which focuses on selling acoustic instruments like guitars, drums, cellos and pianos.
 
 Developers: Louis Rabeno, David Woo, and Kenny Zammito
